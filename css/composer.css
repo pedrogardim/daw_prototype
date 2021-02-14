@@ -1,0 +1,51 @@
+#rightcolumn{
+    width:40%;
+    right:0px;
+    bottom:0;
+    height:85%;
+
+
+}
+
+#scorecolumn{
+    width:60%;
+    right:40%;
+    bottom:0;
+    height:85%;
+}
+
+#headcomposer {
+    height: 15%;
+    top: 0;
+    border:solid 1px tomato;
+
+  }
+
+#score{
+    position:absolute;
+    border:solid 1px tomato;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    
+}
+
+.line{
+    border:solid 1px rgb(33, 87, 8);
+    height:60px;
+    width: 60%;
+    right:0;
+    margin-top:20px;
+    margin-right:20px;
+    position:absolute;
+
+}
+
+.measure{
+    position:relative;
+    width:25%;
+    border:solid 1px rgb(147, 149, 146);
+    float:left
+
+
+}

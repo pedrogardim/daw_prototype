@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Musa</title>
+        <!--libs-->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+        <!--pages-->
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="libs/jqueryui/jquery-ui.css">
+
+        <link rel="stylesheet" href="css/drumsequencer.css">
+        <link rel="stylesheet" href="css/composer.css">
+
+
+    </head>
+    <body>
+        <span id="pauseInd" class="material-icons stateIndicator hidden">pause</span>
+        <span id="playInd" class="material-icons stateIndicator hidden">play_arrow</span>
+        <div class="loader"></div>
+        <div id="tooltip" class="hidden"></div>
+        
+        <span id="menuicon" class="material-icons">menu</span>
+        <div id="sidemenu" class="shadow">
+            <div id="sidemenubackgound"></div>
+            <div id="sidemenucontainer">
+
+                <span class="title">MUSA</span><br><br>
+                <span class="pagemenu" id="sequencerpagelink">Drum Sequencer</span><br>
+                <span class="pagemenu" id="composerpagelink">Composer</span><br>
+            </div>
+        </div>
+        <div id="workspace"></div>
+
+        <!--Core-->
+
+        <script src="libs/jquery-3.5.1.min.js"></script>]
+        <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+
+        <script src="libs/Tone.js"></script>
+        <script src="libs/anime.min.js"></script>
+        <script src="libs/p5.js"></script>
+
+
+        <script src="libs/jquery.scrollTo.js"></script>
+        <script src="libs/input-knobs.js"></script>
+        <script src="libs/jqueryui/jquery-ui.js"></script>
+
+
+
+        <script src="js/musacore.js"></script>
+       
+        <script src="js/setup.js"></script>
+
+
+    </body>
+</html>
