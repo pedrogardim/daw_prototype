@@ -13,7 +13,6 @@
 
 var selectedDrumPattern = 0;
 var currentBeat = 1;
-var isPlaying = false;
 var sessionbpm = sessionData.drumPatterns[selectedDrumPattern].bpm;
 var drumSeq = sessionData.drumPatterns[selectedDrumPattern].seq;
 var drumSeqName = sessionData.drumPatterns[selectedDrumPattern].name;

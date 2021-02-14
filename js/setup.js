@@ -24,16 +24,15 @@ $("#sidemenu").hover(
 
 //MENUCLICK ================================================
 
-//$(".pagemenu").click(function (e) {
+$(".pagemenu").click(function (e) {
   if (isPlaying == true) Tone.Transport.dispose();
 
-  //var link = $(this).attr("id");
-  //link = link.replace("link", "");
-  var link = "composerpage"
+  var link = $(this).attr("id");
+  link = link.replace("link", "");
   $("#workspace").html("");
   $("#workspace").load("pages/" + link + ".html", pageSetup(link));
   loadedPage = link;
-//});
+});
 
 //LOADER ================================================
 

@@ -85,6 +85,8 @@ var sessionData = {
 }
 
 var loadedPage;
+var isPlaying = false;
+
 
 
 
