@@ -19,7 +19,6 @@ var drumSeq = sessionData.drumPatterns[selectedDrumPattern].seq;
 var drumSeqName = sessionData.drumPatterns[selectedDrumPattern].name;
 var loadedDrumSound = sessionData.drumPatterns[selectedDrumPattern].sound;
 
-
 var drumIsLoaded = false;
 var drumSounds = [];
 
@@ -42,7 +41,7 @@ var drumlabels = [
 
 //all necesaries functions to load sequencer page
 
-
+sequencerSetup();
 
 function sequencerSetup() {
   loadDrums(loadedDrumSound);

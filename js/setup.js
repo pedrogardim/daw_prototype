@@ -40,15 +40,14 @@ $("#sidemenu").hover(
 function pageSetup(link) {
   if (link == "sequencerpage") {
     setTimeout(() => {
-      sequencerSetup();
-      console.log();
+
     }, 100);
     return;
   } 
   if (link == "composerpage") {
     setTimeout(() => {
       composerSetup();
-      console.log();
+
     }, 100);
     return;
   } 
