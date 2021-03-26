@@ -8,51 +8,146 @@
         <!--pages-->
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="libs/jqueryui/jquery-ui.css">
-
         <link rel="stylesheet" href="css/drumsequencer.css">
         <link rel="stylesheet" href="css/composer.css">
-
+        <link rel="stylesheet" href="css/timeline.css">
+        <link rel="stylesheet" href="css/melodyeditor.css">
 
     </head>
     <body>
+    <!--
         <span id="pauseInd" class="material-icons stateIndicator hidden">pause</span>
         <span id="playInd" class="material-icons stateIndicator hidden">play_arrow</span>
+    -->
         <div class="loader"></div>
-        <div id="tooltip" class="hidden"></div>
-        
-        <span id="menuicon" class="material-icons">menu</span>
-        <div id="sidemenu" class="shadow">
-            <div id="sidemenubackgound"></div>
-            <div id="sidemenucontainer">
+        <header>
+            <span class="title" id="logo">MUSA</span>
+            <span class="title" id="sessiontitle"></span>
+            <div id="tabnav">
+                <a class="tabitem" data-nav="1">
+                    <!-- <img src="assets/icons/1.svg"> -->
+                    <span class="material-icons">donut_large</span>
+                </a>
+                <a class="tabitem" data-nav="2">
+                    <!-- <img src="assets/icons/2.svg"> -->
+                    <span class="material-icons">grid_on</span>
+                </a>
+                <a class="tabitem" data-nav="3">
+                    <!-- <img src="assets/icons/3.svg"> -->
+                    <span class="material-icons">piano</span>
+                </a>
+                <a class="tabitem" data-nav="4">
+                    <!-- <img src="assets/icons/4.svg"> -->
+                    <span class="material-icons">music_note</span>
+                </a>
 
-                <span class="title">MUSA</span><br><br>
-                <span class="pagemenu" id="sequencerpagelink">Drum Sequencer</span><br>
-                <span class="pagemenu" id="composerpagelink">Composer</span><br>
             </div>
+        </header>
+        
+        <!--<div id="navbar"></div>-->
+        <div id="optionscolumn" class="">
+            <div class="optionrow">
+                <span>SESSION SETTINGS</span>
+            </div>
+            <div class="optionrow">
+                <span>BPM</span>
+                <input type="number" min="40" max="300">
+            </div>
+            <div class="optionrow">
+                <span>TIME SIG</span>
+                <span>4/4</span>
+            </div>
+            <div class="optionrow">
+                <span>SIZE</span>
+                <input type="number" min="1" max="16">
+
+            </div>
+            <div class="optionrow">
+                <span>SWING</span>
+                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+            </div>
+            <hr>
+            <div class="optionrow"></div>
         </div>
-        <div id="workspace"></div>
+        <div id="workspace">
+            <!--timeline view-->
+            <div id="timelinepage" class="page hidden">
+                <div id="tlchannelscont"></div>
+            </div>
+            <!--Circles view-->
+            <div id="circlescont" class="page visible">
+                <div id="rhythmcircle" class="visible"></div>
+                <div id="chordcircle"></div>
+                <div id="chordcirclecenter"></div>
+                <div id="statuscursor" class="statuscursor"><div></div></div>
+            </div>
+            <!--Drumstudio-->
+            <div id="drumpage" class="page hidden">
+                <div id="stepseq"></div>
+                <div id="bottomscore" class="score"></div>
+            </div>  
+            <!--Chords-->
+            <div id="chordeditor" class="page hidden">
+                <input id="floatinginput" type="text" class="hidden">
+                <div id="centerscore" class="score"></div>
+                <div id="rhythmeditor"></div>
+                <div id="chordbuttoncontainer" title="Chords fitted to the scale">
+                    <div class="chordbtn" id="chordbtn0"></div>
+                    <div class="chordbtn" id="chordbtn1"></div>
+                    <div class="chordbtn" id="chordbtn2"></div>
+                    <div class="chordbtn" id="chordbtn3"></div>
+                    <div class="chordbtn" id="chordbtn4"></div>
+                    <div class="chordbtn" id="chordbtn5"></div>
+                    <div class="chordbtn" id="chordbtn6"></div>
+                </div>
+                <div id="chordpiano"></div>
+            </div>  
+            <div id="melodyeditor" class="page hidden">
+                <div id="melodylist" class="column"></div>
+                <div id="pianoroll" class="column">
+                    <div id="prcursor"></div>
+                    <div id="prheader">
+                        <div id="headerkey" class="prkey"></div>
+                    </div>
+                    <div id="prcont">
+                        <div id="pianorollgrid"></div>
+                        <div id="pianorollkeys"></div>
+                    </div>
+                    <div id="prscrollbar">
+                        <div id="prscrollthumb"></div>
+                    </div>
+                </div>
+            </div>  
+        </div>
+        <a href="#" id="openedit" class="float">
+            <i class="fa fa-plus my-float material-icons">settings</i>
+          </a> 
 
         <!--Core-->
 
-        <script src="libs/jquery-3.5.1.min.js"></script>]
-        <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
-        <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
-
+        <script src="libs/jquery-3.5.1.min.js"></script>
         <script src="libs/Tone.js"></script>
         <script src="libs/anime.min.js"></script>
         <script src="libs/p5.js"></script>
-
-
         <script src="libs/jquery.scrollTo.js"></script>
         <script src="libs/input-knobs.js"></script>
         <script src="libs/jqueryui/jquery-ui.js"></script>
-
-
-
+        <script src="libs/jquery.klavier.min.js"></script>
+        
+        <script src="js/instruments.js"></script>
         <script src="js/musacore.js"></script>
-       
         <script src="js/setup.js"></script>
 
+        <script src="js/drumstudio.js"></script>
+        <script src="js/playback.js"></script>
+        <script src="js/circleview.js"></script>
+        <script src="js/timeline.js"></script>
+
+        <script src="js/chordeditor.js"></script>
+        <script src="js/melodyeditor.js"></script>
+
+
+        <script src="js/nav.js"></script>
 
     </body>
 </html>

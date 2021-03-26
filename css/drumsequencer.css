@@ -8,12 +8,82 @@
 /* ========================RHYTHM CIRCLE=========================*/
 
 #rhythmcircle {
-  height: 100%;
+  height: 300px;
+  width: 300px;
   border-radius: 99999px;
-  border: solid 1px var(--brightest-color);
+  border: solid 1px var(--dark-color);
   position: absolute;
   left: 50%;
+  margin-left:-150px;
+  margin-top:-150px;
+  top:50%;
+  z-index:2;
+  cursor:pointer;
+
 }
+
+#rhythmcircle:hover {
+  filter: contrast(80%) brightness(120%);
+  transition:0.2s;
+  
+  
+}
+
+#statuscursor {
+  position: absolute;
+  left:50%;
+  margin-left:-180px;
+  top:50%;
+  margin-top:-180px;
+  height:360px;
+  width:360px;
+  border-radius: 50%;
+  transition:0s;
+
+}
+
+#statuscursor div{
+  position:absolute;
+  top:-50px;
+  left:50%;
+  height:30px;
+  width:4px;
+  margin-left:-2px;
+  background: var(--contrast-color);
+
+}
+
+#chordcircle{
+  position: absolute;
+  left:50%;
+  margin-left:-230px;
+  top:50%;
+  margin-top:-230px;
+  height:460px;
+  width:460px;
+  border-radius: 50%;
+  transition: filter 0.2s;
+  cursor:pointer;
+  image-rendering: -webkit-optimize-contrast;
+  -ms-interpolation-mode: nearest-neighbor;
+  background-size: cover;
+} 
+
+#chordcircle:hover{
+  filter: contrast(80%) brightness(120%);
+} 
+
+#chordcirclecenter{
+  position: absolute;
+  left:50%;
+  margin-left:-200px;
+  top:50%;
+  margin-top:-200px;
+  height:400px;
+  width:400px;
+  background: var(--brightest-color);
+  border-radius: 50%;
+  } 
 
 #indcenter {
   height: 400px;
@@ -31,89 +101,94 @@
   transform: rotate(45deg);
 }
 
+.seqtile > .ce {
+  left:-30px;
+  top:50%;
+}
+
 .cestyle1 {
-  height: 50px;
-  width: 50px;
+  height: 40px;
+  width: 40px;
   border-radius: 99999px;
   background: linear-gradient(45deg, var(--darkest-color), #031e3a);
-  margin-left: -25px;
-  margin-top: -25px;
+  margin-left: -20px;
+  margin-top: -20px;
 }
 
 .cestyle2 {
-  height: 26px;
-  width: 26px;
-  border: solid 4px var(--brightest-color);
+  height: 20px;
+  width: 20px;
+  border: solid 2px var(--dark-color);
   background: var(--bright-color);
-  margin-left: -17px;
-  margin-top: -17px;
+  margin-left: -11px;
+  margin-top: -11px;
 }
 
 .cestyle3 {
-  height: 26px;
-  width: 26px;
-  border: solid 4px var(--bright-color);
+  height: 20px;
+  width: 20px;
+  border: solid 2px var(--bright-color);
   background: linear-gradient(
     45deg,
-    var(--brightest-color),
-    var(--brightest-color)
+    var(--dark-color),
+    var(--dark-color)
   );
+  margin-left: -11px;
+  margin-top: -11px;
+}
+
+.cestyle4 {
+  height: 8px;
+  width: 8px;
+  background: var(--dark-color);
+  margin-left: -4px;
+  margin-top: -4px;
+}
+
+.cestyle5 {
+  height: 20px;
+  width: 20px;
+  background: var(--dark-color);
+  margin-left: -10px;
+  margin-top: -10px;
+}
+
+.cestyle6 {
+  height: 30px;
+  width: 30px;
+  border-radius: 99999px;
+  border: 2px solid var(--dark-color);
+  background: var(--darkest-color);
   margin-left: -17px;
   margin-top: -17px;
 }
 
-.cestyle4 {
-  height: 10px;
-  width: 10px;
-  background: var(--brightest-color);
-  margin-left: -5px;
-  margin-top: -5px;
-}
-
-.cestyle5 {
+.cestyle7 {
   height: 26px;
   width: 26px;
-  background: var(--brightest-color);
+  border-radius: 99999px;
+  border: 2px solid var(--dark-color);
+  background: var(--dark-color);
+  margin-left: -15px;
+  margin-top: -15px;
+}
+
+.cestyle8 {
+  height: 22px;
+  width: 22px;
+  border-radius: 99999px;
+  border: 2px solid var(--dark-color);
+  background: var(--bright-color);
   margin-left: -13px;
   margin-top: -13px;
 }
 
-.cestyle6 {
-  height: 40px;
-  width: 40px;
-  border-radius: 99999px;
-  border: 3px solid var(--brightest-color);
-  background: var(--darkest-color);
-  margin-left: -23px;
-  margin-top: -23px;
-}
-
-.cestyle7 {
-  height: 36px;
-  width: 36px;
-  border-radius: 99999px;
-  border: 3px solid var(--brightest-color);
-  background: var(--dark-color);
-  margin-left: -21px;
-  margin-top: -21px;
-}
-
-.cestyle8 {
-  height: 30px;
-  width: 30px;
-  border-radius: 99999px;
-  border: 3px solid var(--brightest-color);
-  background: var(--bright-color);
-  margin-left: -18px;
-  margin-top: -18px;
-}
-
 .cestyle9 {
-  height: 24px;
-  width: 24px;
+  height: 20px;
+  width: 20px;
   background: var(--darkest-color);
-  margin-left: -12px;
-  margin-top: -12px;
+  margin-left: -10px;
+  margin-top: -10px;
 }
 
 .cestyle10 {
@@ -130,16 +205,19 @@
 /* ===================SEQUENCER===================*/
 
 .seqtile {
-  height: 40px;
+  height: 100%;
   width: 40px;
-  border: solid 1px var(--dark-color);
+  outline: solid 1px var(--dark-color);
   margin: 0;
-  position: absolute;
+  position: relative;
   transition: 0.1s;
   background-color: var(--medium-color);
+  flex-shrink: 1;
+  flex-grow: 1;
+  flex-wrap: nowrap;
 }
 .seqtile:hover {
-  background-color: var(--medium-color);
+  background-color: var(--bright-color);
 }
 
 .selectedTile {
@@ -148,6 +226,20 @@
 
 .seqcursor {
   background: var(--bright-color);
+}
+
+.seqrow {
+  height: 40px;
+  width:100%;
+  outline: solid 1px var(--dark-color);
+  transition: 0.1s;
+  background-color: var(--medium-color);
+  float: left;
+  display:flex;
+  flex-shrink: 1;
+  flex-grow: 1;
+  flex-direction: row;
+  flex-wrap: nowrap;
 }
 
 #bpminput {
@@ -186,9 +278,14 @@
 
 #stepseq {
   position: absolute;
-  height: 100%;
+  height: 55%;
+  top:15%;
   left: 50%;
-  margin-left: -350px;
+  width:60%;
+  margin-left: -30%;
+  display:flex;
+  flex-direction:column;
+  
 }
 
 #stepinputalert {
@@ -230,39 +327,41 @@
 .seqlbl {
   font-size: 12px;
   color: var(--darkest-color);
+  position:absolute;
+  left:-90px;
+  top:calc(50% - 7px);
+  height:100%;
 }
 
 /* ===================SWITCH BUTTON===================*/
 
-.sequencerbutton {
+#switchseqmode{
   position: absolute;
-  height: 60px;
   width: 80px;
-  left: 50%;
-  margin-left: -40px;
   transition: 0.3s;
+  left:80%;
   text-align: center;
   font-size: 36px;
-  top: 30%;
-  margin-top: -30px;
+  margin-left:20px;
+
+
+}
+
+.sequencerbutton {
+  height: 60px;
+  border-radius: 0px;
+  top:40px;
+
 }
 .sequencerbutton:hover {
-  background: var(--brightest-color);
+  background: var(--dark-color);
 }
 
 .circlebutton {
-  position: absolute;
+  top:30px;
   height: 80px;
-  width: 80px;
-  left: 50%;
-  margin-left: -40px;
-  transition: 0.3s;
-  text-align: center;
-  font-size: 36px;
-  top: 30%;
-  margin-top: -40px;
   border-radius: 999px;
-  border: 1px solid var(--brightest-color);
+  border: 1px solid var(--dark-color);
   background: #37968300;
 }
 
@@ -270,10 +369,40 @@
   height: 19px;
   width: 19px;
   float: left;
-  background: var(--bright-color);
-  border: solid 1px var(--dark-color);
+  background: var(--brightest-color);
+  border: solid 1px var(--medium-color);
   margin-top: -1px;
   margin-left: -1px;
+}
+
+.drummeasure{
+  display: flex;
+  flex-direction: column;
+
+}
+
+.drummsretile{
+  background: var(--bright-color);
+  flex-grow: 1;
+  flex-shrink: 1;
+  height:100%;
+  /*outline: 1px solid var(--medium-color);*/
+
+}
+
+.activetile{
+  background: var(--dark-color);
+  outline: solid 1px var(--bright-color);
+
+
+}
+
+.drummsrerow{
+  width:100%;
+  flex-grow: 1;
+  flex-shrink: 1;
+  display:flex;
+  flex-direction: row;
 }
 
 #bt2,

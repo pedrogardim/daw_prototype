@@ -1,0 +1,22 @@
+#tlchannelscont{
+    position:absolute;
+    width:calc(100% - 240px);
+    margin-left:120px;
+    margin-right:120px;
+    background-color: var(--brightest-color);
+
+
+    padding:1px;
+
+
+
+}
+
+.tlchannel{
+    height:60px;
+    /*margin-bottom:10px;*/
+    background-color: var(--brightest-color);
+    outline: solid 1px var(--medium-color);
+    position: relative;
+
+}

@@ -1,57 +1,113 @@
-//SIDE MENU ================================================
-$("#sidemenu").css({
-  left: -$("#sidemenu").outerWidth() + 10,
-});
+//================================================
+//MUSIC DATA
+//================================================
+var notes = ["C","C#/D♭","D","D#/E♭","E","F","F#/G♭","G","G#/A♭","A","A#/B♭","B"];
 
-$("#sidemenu").hover(
-  function () {
-    //onHoverIn
-    $("#sidemenu").css({
-      left: 0,
-    });
+var chordnamepossibilities=[
+  ["4","4th"],
+  ["5","5th"],
+  ["","maj","major","maior","mayor","M"],
+  ["m","min","minor","menor","-"],
+  ["sus2","2"],
+  ["sus4","4"],
+  ["dim","°"],
+  ["aug","+","+5"],
+  
+  ["6","maj6","M6","major6"],
+  ["maj7","M7","major7"],
+  ["maj7#5","M7#5","aug7"],
 
-    $("#sideenubackgound").removeClass("visible").toggleClass("hidden");
-    $("#sidemenubackgound").removeClass("visible").toggleClass("hidden");
-  },
-  function () {
-    //onHoverOut
-    $("#sidemenu").css({
-      left: -$("#sidemenu").outerWidth() + 10,
-    });
-    $("#sidemenubackgound").removeClass("hidden").toggleClass("visible");
-  }
-);
+  ["9","add9","major9","maj9"],
+  
+  ["m6","-6","minor6"],
+  ["m7","-7","minor7","min7"],
+  ["m9","-9","minor9","min9"],
+  
+  ["7"],
+  ["mmaj7","-maj7"],
+  ["°7","dim7"],
+  ["ø7","m7♭5"],
 
-//MENUCLICK ================================================
+];
 
-$(".pagemenu").click(function (e) {
-  if (isPlaying == true) Tone.Transport.dispose();
+var chordtypes =[
 
-  var link = $(this).attr("id");
-  link = link.replace("link", "");
-  $("#workspace").html("");
-  $("#workspace").load("pages/" + link + ".html", pageSetup(link));
-  loadedPage = link;
-});
+  [0,5],
+  [0,7],
+  [0,4,7],
+  [0,3,7],
+  [0,2,7],
+  [0,5,7],
+  [0,3,6],
+  [0,4,8],
+  
+  [0,4,7,9],
+  [0,4,7,11],
+  [0,4,8,11],
 
-//LOADER ================================================
+  [0,4,7,11,14],
+  
+  [0,3,7,8],
+  [0,3,7,10],
+  [0,3,7,10,14],
+  
+  [0,4,7,10],
+  [0,3,7,11],
+  [0,3,6,10],
+  [0,3,6,9],
 
-function pageSetup(link) {
-  if (link == "sequencerpage") {
-    setTimeout(() => {
+];
 
-    }, 100);
-    return;
-  } 
-  if (link == "composerpage") {
-    setTimeout(() => {
-      composerSetup();
+var chordextentions = ["","♭9","9","#9","#9","11","#11","","♭13","13","♭7","7"]
+///////////////77777/ ["","m2","2","m3","M3","4"," #4","5", "m6", "6","m7","7"]
 
-    }, 100);
-    return;
-  } 
-}
+var musicalintervals = [1.0595,1.1225,1.1892,1.2599,1.3348,1.4142,1.4983,1.5874,1.6818,1.7818,1.8877,2];
 
+var scales = [
+  [[0,2,4,5,7,9,11,12],"Major"],
+  [[0,2,3,5,7,8,10,12],"Minor"],
+
+
+];
+
+var drumlabels = [
+  "Kick",
+  "Snare",
+  "Clap",
+  "C.HiHat",
+  "O.HiHat",
+  "Lo Tom",
+  "Mid Tom",
+  "Hi Tom",
+  "Crash",
+  "Perc",
+];
+
+var colors = [
+  "var(--darkest-color)",
+  "var(--dark-color)",
+  "var(--medium-color)",
+  "var(--bright-color)",
+]
+
+//var colors = [
+//  "blue",
+//  "red",
+//  "green",
+//  "yellow",
+//]
+//================================================
+//================================================
+
+
+//METER ================================================
+
+//const meter = new Tone.FFT(128);
+//console.log([0, 1, 2, 3, 4].map(index => meter.getFrequencyOfIndex(index)));
+//const meter = new Tone.FFT(128);
+const meter = new Tone.Meter();
+meter.normalRange = true;
+Tone.Master.connect(meter);
 
 //TOOLTIP ================================================
 
@@ -69,7 +125,331 @@ $(document).tooltip({
   },
 });
 
-$(window).resize(function () {
-  drawSequencer();
+$( ".sidemenuitem" ).tooltip({
+  position: { my: "left+15 center", at: "right center" }
+});
+
+
+
+function drawScore() {
+
+  $("#centerscore").html("");
+  
+  var measures=[];
+    sessionchords.forEach((e,i)=>{measures.push(e[2])})
+    measures = [...new Set(measures)];
+    measures.forEach((e,i)=>{
+      var measure = '<div class="measure" id="measure' + e + '"></div>';
+      $("#centerscore").append(measure);
+    })
+  
+  sessionchords.forEach(function (el, ind) {
+
+    var chord = '<div class="chord" id="chord' + (ind+1) + '">' +
+                //'<span class="material-icons addchordbtn acbl">add_circle</span>' +
+                chordNotestoName(el[0]) + 
+                //'<span class="material-icons addchordbtn acbr">add_circle</span>' +
+                '</div>';
+
+    $("#measure" + el[2]).append(chord);
+    $("#chord" + (ind+1),"#centerscore").width( el[1] * 100 + "%");
+    $("#chord" + (ind+1)).droppable({
+      accept:".chordbtn",
+      hoverClass: ".drop-hover",
+      over: function( event, ui ) {
+
+        hoveredchord = event.target.id.replace("chord","");
+        isChordHovered = true;
+        //$("#chord"+hoveredchord).width($("#chord"+hoveredchord).width()-10);
+      },
+      out: function( event, ui ) {
+        
+        //$("#chord"+hoveredchord).css("outline","");
+        console.log("hoverout");
+        //hoveredchord = hoveredside = null;
+
+      },
+      drop: function( event, ui ) {
+        var chordnum = $(ui.draggable).attr("id").replace("chordbtn","");
+        addChord(scalechords[chordnum],hoveredchord-1,hoveredside);
+      }
+  
+  });
+    
+  });
+}
+
+function drumScore() {
+  
+  var existentnotesonsession = [];
+
+  sessiondrums.forEach((msre,msreindex)=>{
+   msre.forEach((a)=>{a.forEach((b)=>{if(existentnotesonsession.indexOf(b) == -1){existentnotesonsession.push(b)}})});
+  });
+
+  existentnotesonsession.sort((a, b) => a - b);
+  
+  sessiondrums.forEach((msre,msreindex)=>{
+  
+    var measure = '<div class="measure drummeasure" id="drummeasure' + (msreindex+1) + '"></div>';
+    $("#bottomscore").append(measure);
+    //draw the measure tiles
+
+    var tileh = 60/existentnotesonsession.length;
+    var tilew = $('#drummeasure'+(msreindex+1)).width()/msre.length;
+    
+    existentnotesonsession.forEach((note,noteindex)=>{
+
+
+    msre.forEach((beat,beatindex)=>{
+        
+        var tile = '<div class="measuretile" id="mt'+msreindex+'-'+beatindex+'-'+noteindex+'"></div>';
+        $('#drummeasure'+(msreindex+1)).append(tile);
+
+        $("#mt"+msreindex+'-'+beatindex+'-'+noteindex).css({
+          "height":tileh+"px",
+          "width":tilew+"px",
+        });
+        
+        if(beat.indexOf(note)!=-1){
+          $("#mt"+msreindex+'-'+beatindex+'-'+noteindex).addClass("activetile");
+        }
+
+      });
+    });
+
+  })
+
+  
+  //sessionchords.forEach(function (el, ind) {
+  //    
+  //  var chord = '<div class="ghostchord" id="ghostchord' + (ind+1) + '">' + chordNotestoName(el[0]) + '</div>';
+  //  $("#drummeasure" + el[2]).append(chord);
+  //  $("#chord" + (ind+1),"#bottomscore").width(el[1] * 100 + "%");
+  //});
+
+  
+
+}
+
+function chordNametoNotes(arg) {
+  var chordroot,
+    chordtype,
+    chordbass = null;
+  var chordinput = arg.replace(" ", "");
+
+  if (chordinput.indexOf("/") != -1) {
+    chordbass = chordinput.split("/")[1];
+    chordinput = chordinput.split("/")[0];
+  } else if (chordinput[1] == "b") {
+    var includecomma = chordinput.replace("b", "b,");
+    var rootandtypearray = includecomma.split(",");
+    chordroot = rootandtypearray[0];
+    chordtype = rootandtypearray[1];
+  } else {
+    chordroot = chordinput[0];
+    chordtype = chordinput.replace(chordroot, "");
+  }
+
+  chordnamepossibilities.forEach(function (element, index) {
+    if (element.indexOf(chordtype) != -1) {
+      chordtype = index;
+    }
+  });
+
+  if (chordbass !== null) {
+    //append bass
+  }
+  
+  var harmonizedchord =  Tone.Frequency(chordroot + "3").harmonize(chordtypes[chordtype]);
+  var finishedchord = [];
+  harmonizedchord.forEach((e)=>finishedchord.push(Tone.Frequency(e).toNote()));
+
+  return finishedchord;
+
+}
+
+function chordNotestoName(arg) {
+
+  if(arg.length == 0){
+    return "N.C";
+  };
+
+  var chordroot = Tone.Frequency(arg[0]).toFrequency();
+  var chordtype = "...";
+  var additionalnotes = [];
+  var additionalnotesstring = "";
+
+  var chordintervals = [0];
+
+  //transform the note array into intervals array, putting everyone inside the same octave and removing duplicated.
+
+  arg.forEach(function (element, index) {
+    if (index == 0) return;
+    var thisfrequency = Tone.Frequency(element).toFrequency();
+    var thisrelation =
+      Math.round((thisfrequency / chordroot + Number.EPSILON) * 10000) / 10000;
+    while (thisrelation < 1) {
+      thisrelation *= 2;
+    }
+    while (thisrelation > 2) {
+      thisrelation /= 2;
+    }
+
+    musicalintervals.forEach(function (e, i) {
+      if (Math.abs(thisrelation - e) < 0.005) {
+        thisinterval = i + 1;
+      }
+    });
+
+    if (chordintervals.indexOf(thisinterval) == -1)
+      chordintervals.push(thisinterval);
+  });
+
+  //Sort in numeric order - 2,3,1 into 1,2,3
+
+  chordintervals.sort((a, b) => a - b);
+
+  //Now, compare it with each type in the "chordtypes" array
+
+  //This array will store the common intervals with each of the "chordtypes" type
+
+  var typepossibilities = [];
+
+  //For each chordtype:
+
+  chordtypes.forEach(function (element, index) {
+    var commonintervals = [];
+    commonintervals = chordintervals.filter((el) => element.includes(el));
+    typepossibilities.push(commonintervals.length - 1);
+
+    //Check the common intervals with which of the types.
+  });
+
+  //Now, chose the one type with most common intervals (if are more than 1, pick the first)
+
+  var typechosen = typepossibilities.reduce(
+    (iMax, x, i, arr) => (x > arr[iMax] ? i : iMax),
+    0
+  );
+
+  //the output is a int, will be the index. Now we pick the name from "chordnamepossibilities"
+
+  chordtype = chordnamepossibilities[typechosen][0];
+
+  //also add other extentions to the chord
+
+  additionalnotes = chordintervals.filter(function (val) {
+    return chordtypes[typechosen].indexOf(val) == -1;
+  });
+
+
+    additionalnotes.forEach(function (element, index) {
+      if (additionalnotes.length == 1 && element != 12) {
+        additionalnotesstring = "(" + chordextentions[element] + ")";
+         
+      } 
+      else if(element == 12){
+        additionalnotesstring="";
+      }
+      
+      else {
+        if (index == 0) {
+          additionalnotesstring = chordextentions[element];
+        } else if(element != 12){
+          additionalnotesstring += "/";
+          additionalnotesstring += chordextentions[element];
+        }
+      }
+    });
+ 
+
+  //Convert the root note from chord to  ;
+
+  chordroot = Tone.Frequency(chordroot).toNote().replace(/[0-9]/g, "");
+
+  //return everything
+
+  return chordroot + chordtype + additionalnotesstring;
+}
+
+
+function noteArraytoMidi(arg){
+  var newarray = []
+  arg.forEach((e)=>{newarray.push(Tone.Frequency(e).toMidi())});
+  return newarray;
+
+}
+
+function midiArraytoNote(arg){
+  var newarray = []
+  arg.forEach((e)=>{newarray.push(Tone.Frequency(e,"midi").toNote())});
+  return newarray;
+
+}
+
+//ANIMATED CUBE
+
+function setup() {
+  let cnv = createCanvas(100, 100, WEBGL);
+  cnv.id('mycanvas');
+  cnv.parent("circlescont");
+  ortho(-width / 2, width / 2, height / 2, -height / 2, 0, 500);
+}
+function draw() {
+  background(color(0,0,0,0));
+  
+  var size = map((meter.getValue()),0,0.5,40,50);
+
+  rotateX(millis() / 3500);
+  rotateY(millis() / 3500);
+
+  //torus(map((meter.getValue()),0,0.5,30,40), 15, 3, 12);
+  stroke("#05386b");
+  strokeWeight(2);
+  box(size, size, size);
+  noFill();
+
+}
+
+function loadDrums(y) { 
+  for (var i = 0; i < 10; i++) {
+    //load 10 drum sounds, from 1.wav (kick) to 10.wav (perc)
+    drumSounds.push(
+      new Tone.Player("assets/samples/drums/" + y + "/" + (i + 1) + ".wav")
+        .toDestination()
+        .connect(Tone.Master)
+    );
+  }
+}
+
+//all necesaries functions to load sequencer page
+$(function() {
   drawCircleElements();
+  drawChordsCircle();
+  drumScore();
+  drawScore();
+
+  getChordsFromScale();
+  showMelodyList();
+
+  updateMsreScroreTiles();
+  adaptDrumSeqtoSubdiv();
+
+  loadDrums("808");
+  $("#sessiontitle").html(sessionName);
+  $('#chordpiano').klavier({ startKey: 21, endKey: 108});
+  
+  navTo(3);
+
+  drawSequencer();
+
+});
+
+$(window).resize(function () {
+  //sequencerResize();
+  updatePianoRoll();
+  //$('#chordpiano').klavier({ startKey: 21, endKey: 108});
+
+
 });

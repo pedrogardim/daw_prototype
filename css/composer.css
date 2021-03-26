@@ -1,51 +1,317 @@
-#rightcolumn{
-    width:40%;
-    right:0px;
-    bottom:0;
-    height:85%;
+#optionscolumn {
+  width: 240px;
+  right: -260px;
+  height: 100%;
+  bottom:0;
+  position: fixed;
+  background: var(--brightest-color);
+  border-left: 1px solid var(--dark-color);
+  transition: 0.3s;
+  z-index: 2;
+  padding: 10px;
+  padding-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content:flex-start;
+}
 
+.optionrow{
+  height:35px;
+  float: left;
+  display: flex;
+  flex-wrap:nowrap;
+  flex-direction: row;
+  justify-content:space-around;
+}
+
+.optionrow > *{
+  flex-grow: 1;
+  flex-basis: 1px; 
+  flex-shrink:0;
+  font-size: 20px;
+  line-height: 35px;
+  width: 30px;
+}
+
+#scorecolumn {
+  width: 100%;
+  left: 0;
+  top: 0;
+  height: 85%;
+  transition: width 0.3s;
+  background: var(--brightest-color);
 
 }
 
-#scorecolumn{
-    width:60%;
-    right:40%;
-    bottom:0;
-    height:85%;
-}
-
-#headcomposer {
-    height: 15%;
-    top: 0;
-    border:solid 1px tomato;
-
-  }
-
-#score{
-    position:absolute;
-    border:solid 1px tomato;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    
-}
-
-.line{
-    border:solid 1px rgb(33, 87, 8);
-    height:60px;
-    width: 60%;
-    right:0;
-    margin-top:20px;
-    margin-right:20px;
-    position:absolute;
+.score {
+  position: absolute;
+  width: 60%;
+  right: 50%;
+  margin-right: calc(-1 * 60% / 2);
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content:flex-start;
+  align-content:center;
 
 }
 
-.measure{
-    position:relative;
-    width:25%;
-    border:solid 1px rgb(147, 149, 146);
-    float:left
+#floatinginput {
+  position:absolute;
+  background:transparent;
+  z-index:99;
+  height:60px;
+  text-align: center;
+  border:none;
+  top: -999px;
+  left:-999px;
+}
 
+#centerscore{
+  top:20%;
+  height:40%;
 
 }
+#bottomscore{
+  top:70%;
+  margin-top: 20px;
+}
+
+#rhythmeditor{
+  position: absolute;
+  width: calc(60%);
+  left: 50%;
+  top:60%;
+  height:calc(20% - 16px);
+  margin-left: calc(-1 * 60% / 2);
+
+}
+
+#re-centralline{
+  height:0;
+  border-top:1px solid var(--darkest-color);
+  top:50%;
+  position:absolute;
+  width:100%;
+}
+
+.re-chord{
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content:space-around;
+  align-items:center;
+  height:100%;
+  float: left;
+}
+
+.re-strike{
+  height:30px;
+  width:3px;
+  transform:rotate(45deg);
+  background:var(--darkest-color);
+}
+
+.re-silence{
+  background:none;
+  height:5px;
+  width:20px;
+  transform:rotate(0deg);
+  outline:solid 1px var(--darkest-color);
+
+}
+
+.re-chordlbl{
+  position:absolute;
+  top:16px;
+  margin-left:16px;
+  font-size:20px;
+
+}
+
+.re-chordlbl > .material-icons{
+
+  color:transparent;
+  font-size:14px;
+  margin:8px 10px 0px 10px;
+
+}
+
+.re-chordlbl:hover > .material-icons{
+  color:var(--dark-color)
+
+}
+
+#chordbuttoncontainer{
+  position:absolute;
+  height:54px;
+  left:50%;
+  margin-left:-30%;
+  width:60%;
+  top:80%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+}
+
+.chordbtn{
+  flex-grow: 0;
+  flex-shrink: 1;
+  /*outline:1px solid var(--darkest-color);*/
+  background:var(--dark-color);
+  cursor:pointer;
+  width:54px;
+  height:54px;
+
+  font-size: 26px;
+  text-align: center;
+  color:var(--brightest-color);
+  line-height: 54px;
+  border-radius:999px;
+  transition: 0;
+}
+
+.helperchord{
+  background-color:var(--medium-color);
+}
+
+.measure {
+  position: relative;
+  outline: solid  1px var(--darkest-color);
+  height: 60px;
+  margin-bottom: 20px;
+  width: 25%;
+  background: var(--brightest-color);
+  z-index: auto;  
+}
+
+.measure:hover > .chord {
+  outline: solid  1px var(--darkest-color);
+}
+
+#partselector{
+  position:absolute;
+  height:40px;
+  width:80px;
+  right:80%;
+  margin-right:40px;
+  top: 50px;
+}
+
+.partsep {
+  height:60px;
+  width: 100%;
+  position: relative;
+}
+
+.partlabel{
+  position:absolute;
+  font-size:20px;
+}
+
+.chord{
+  line-height: 60px;
+  height:60px;
+  font-size: 26px;
+  text-align: center;
+  background: var(--brightest-color);
+  float: left;
+  width:12.5%;
+  white-space: nowrap;
+  /*outline: solid  1px var(--darkest-color);*/
+}
+
+#addchordhelper{
+  position:absolute;
+  height:100%;
+  background:var(--contrast-color);
+  z-index:99;
+  top:0;
+  width:0;
+}
+
+.chord:hover > .addchordbtn{
+  color:var(--dark-color);
+  transition:0.3s;
+}
+
+.chord:hover > .addchordbar{
+  background-color:var(--dark-color);
+  transition:0.3s;
+}
+
+.nochord{
+  color:var(--dark-color) !important;
+  font-size:20px;
+}
+
+
+.addchordbtn{
+  font-size:15px;
+  position:absolute;
+  top:20px;
+  color:transparent;
+}
+
+.acbl{
+  left:5px;
+}
+
+.acbr{
+  right:5px;
+}
+
+.activechord{
+  color: var(--medium-color);
+}
+
+.hightlightedmeasure{
+  background: var(--bright-color);
+}
+
+.chordinput{
+  height:60px;
+  border:none;
+  width:100%;
+  text-align: center;
+}
+
+.chordinput::selection {
+  background: transparent; /* WebKit/Blink Browsers */
+}
+.chordinput::-moz-selection {
+  background: transparent; /* Gecko Browsers */
+}
+
+#chordpiano{
+  position:absolute !important;
+  bottom:0;
+  height:60px;
+  width:100%;
+}
+
+.klavier-key {
+  border: 1px solid var(--darkest-color);
+}
+.klavier-black-key {
+  background-color:  var(--darkest-color);
+}
+.klavier-white-key {
+  background-color:  var(--brightest-color);
+}
+.klavier-white-key.klavier-selected-key {
+  background-color:  var(--medium-color);
+}
+.klavier-black-key.klavier-selected-key {
+  background-color:  var(--medium-color);
+}
+/*
+.ui-draggable-dragging{
+  height:20px;
+  width:20px;
+  transform-origin: 50% 50%;
+  transform: scale(0.3);
+  
+}
+*/
