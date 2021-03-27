@@ -126,6 +126,7 @@ function stopPlayback() {
   Tone.Transport.cancel(); //stop the loop
 
   playbackMeasure = playbackBeat = playbackChord = elementtoanimate = beatsOnChord = 0;
+  drawRhythm();
 
   //playbackChord --; 
 

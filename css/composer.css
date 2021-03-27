@@ -224,8 +224,8 @@
 
 #addchordhelper{
   position:absolute;
-  height:100%;
-  background:var(--contrast-color);
+  height:60px;
+  background:var(--medium-color);
   z-index:99;
   top:0;
   width:0;

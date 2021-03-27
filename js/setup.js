@@ -157,21 +157,26 @@ function drawScore() {
       accept:".chordbtn",
       hoverClass: ".drop-hover",
       over: function( event, ui ) {
+        $("#addchordhelper").show(0);
 
         hoveredchord = event.target.id.replace("chord","");
         isChordHovered = true;
-        //$("#chord"+hoveredchord).width($("#chord"+hoveredchord).width()-10);
       },
       out: function( event, ui ) {
-        
         //$("#chord"+hoveredchord).css("outline","");
-        console.log("hoverout");
-        //hoveredchord = hoveredside = null;
+        //console.log("hoverout");
+        //$("#addchordhelper").hide(0);
+        //isChordHovered = false;
 
       },
       drop: function( event, ui ) {
         var chordnum = $(ui.draggable).attr("id").replace("chordbtn","");
         addChord(scalechords[chordnum],hoveredchord-1,hoveredside);
+        isChordHovered = false;
+        $("#addchordhelper").hide(0);
+
+
+
       }
   
   });

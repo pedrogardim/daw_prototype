@@ -13,7 +13,6 @@ var oldpianoselection;
 
 var maxchordspermeasure = 4;
 
-
 function selectChord(chord){
 
     if(selectedchord == chord){
@@ -411,25 +410,26 @@ $(".chordbtn").draggable({
     drag: function( event, ui ) {
 
         if(isChordHovered){
-        var innerposition = ui.offset.left-$("#chord"+hoveredchord).offset().left;
-        hoveredside = (innerposition<($("#chord"+hoveredchord).width()/2)-27)?(0):(1);
+            var innerposition = ui.offset.left-$("#chord"+hoveredchord).offset().left;
+            hoveredside = (innerposition<($("#chord"+hoveredchord).width()/2)-27)?(0):(1);
 
-        if($("#chord"+hoveredchord).parent().children().length < maxchordspermeasure){
-            $("#addchordhelper").appendTo("#chord"+hoveredchord);
-            $("#addchordhelper").width($("#chord"+hoveredchord).width()/2);
+            if(sessionchords[hoveredchord-1][1] > 1/maxchordspermeasure){
+                console.log(hoveredchord,hoveredside);
+                $("#addchordhelper").show(0).css({
+                    top:$("#chord"+hoveredchord).offset().top,
+                    left:$("#chord"+hoveredchord).offset().left+((hoveredside==0)?(0):($("#chord"+hoveredchord).width()/2)),
+                    width:$("#chord"+hoveredchord).width()/2
+                })
+            }
+            else{
+                $("#addchordhelper").hide(0);
+            }
         }
-
-    
-        if(hoveredside == 0){
-            $("#addchordhelper").css("left",0)
-        }
-        if(hoveredside == 1){
-            $("#addchordhelper").css("left",$("#chord"+hoveredchord).width()/2);
-        }
-    }
         
     },
     stop: function( event, ui ) {
+        isChordHovered = false;
+        $("#addchordhelper").hide(0);
 
     }
 });

@@ -70,7 +70,7 @@ function drawNotesPreview(melody,melodyindex){
             width: (Tone.Time(note.dur).toSeconds()/(Tone.Time("1m").toSeconds()*sessionlength))*200,
             left:(Tone.Time(note.time).toSeconds()/(Tone.Time("1m").toSeconds()*sessionlength))*200,
             top:(145/minmaxnotes.length)*(maxnote-Tone.Frequency(note.note).toMidi()),
-            "margin-top":-(145/minmaxnotes.length)*(maxnote-Tone.Frequency(note.note).toMidi())/2
+            "margin-top":(145/minmaxnotes.length)*0.25-(145/minmaxnotes.length)*(maxnote-Tone.Frequency(note.note).toMidi())/2
 
         })
     })
