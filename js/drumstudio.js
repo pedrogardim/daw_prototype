@@ -80,7 +80,7 @@ function drawSequencer() {
       }
 
       updateSequencerElements();
-      updateMsreScroreTiles()
+      updateMsreScroreTiles();
   }
 
 
@@ -147,10 +147,12 @@ function drawSequencer() {
   function updateSequencerElements() {
     updateSeqCursor();
     updateTiles();
-    //drawCircleElements();
     $(".circlebutton").html(playbackBeat);
     $(".drummeasure").removeClass("hightlightedmeasure").css("filter","none");
     $("#drummeasure"+(playbackMeasure+1)).addClass("hightlightedmeasure").css("filter","brightness(1.2)");
+    //when update sequencer, also update circle
+    drawCircleElements();
+
 
   }
 
