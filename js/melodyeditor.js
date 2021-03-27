@@ -114,7 +114,7 @@ function addNote(notetoadd,noteindex){
             grid:[1,$("#prrow0").height()],
             containment: "parent",
             drag: function( event, ui ) {
-                var newnotemidi = Math.floor(($("#pianorollgrid").height()-(ui.position.top))/$("#prrow0").height())+bottomnote+12;
+                var newnotemidi = Math.floor(($("#pianorollgrid").height()-(ui.position.top))/$("#prrow0").height())+bottomnote+11;
                 console.log(Tone.Frequency(newnotemidi,"midi").toNote());
                 sessionmelodies[selectedmelody].notes[selectednote].note = Tone.Frequency(newnotemidi,"midi").toNote();
                 sessionmelodies[selectedmelody].notes[selectednote].time = (ui.position.left/($("#pianorollgrid").width())*Tone.Time("1m").toSeconds()*sessionlength);

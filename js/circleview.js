@@ -185,6 +185,10 @@ function drawChordsCircle() {
 
 }
 
+function drawCircleMelodies(){
+  
+}
+
 //////////////////////////
 //ANIMATIONS
 //////////////////////////
