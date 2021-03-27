@@ -20,6 +20,7 @@ function showMelodyList(){
     sessionmelodies.forEach((e,i)=>{
 
         $("#melodylist").append(melodyListItem(e,i));
+        drawNotesPreview(e,i);
     })
 
     $("#melodylist").append(addbutton);
@@ -28,12 +29,13 @@ function showMelodyList(){
 function melodyListItem(element,index){
 
     var thisdiv = 
+
     '<div class="melodylistitem data-index="'+index+'">'+
-    '<div class="melodyinfo"><h3>'+element.name+'</h3><h5>'+element.instrument+'</h5></div>'+
-    
     '<div class="melodypreview" data-index="'+index+'"></div>'+
 
     '<div class="melodyactions">'+
+
+    '<div class="melodyinfo"><h3>'+element.name+'</h3><h5>'+element.instrument+'</h5></div>'+
     '<span class="material-icons play" data-index="'+index+'">play_arrow</span>'+
     '<span class="material-icons edit" data-index="'+index+'">edit</span>'+
     '<span class="material-icons remove" data-index="'+index+'">delete</span>'+
@@ -43,6 +45,39 @@ function melodyListItem(element,index){
 
     return thisdiv;
 };
+
+function drawNotesPreview(melody,melodyindex){
+
+    var notesdivs ="";
+    var thisnotes = melody.notes;
+    var minmaxnotes = [];
+    var minnote, maxnote;
+
+    thisnotes.forEach((e,i)=>{minmaxnotes.push(Tone.Frequency(e.note).toMidi());})
+    minmaxnotes.sort((a, b) => a - b);
+    minmaxnotes = [...new Set(minmaxnotes)];
+
+    minnote = minmaxnotes[0];
+    maxnote = minmaxnotes[minmaxnotes.length-1];
+
+    thisnotes.forEach((note,noteindex)=>{
+
+        var thisnote =  '<div class="preview-note pn'+melodyindex+'" data-index="'+noteindex+'"></div>'
+        $(".melodypreview[data-index='"+melodyindex+"']").append(thisnote);
+        
+        $(".pn"+melodyindex+"[data-index='"+noteindex+"']").css({
+            height:(145/minmaxnotes.length)*0.5,
+            width: (Tone.Time(note.dur).toSeconds()/(Tone.Time("1m").toSeconds()*sessionlength))*200,
+            left:(Tone.Time(note.time).toSeconds()/(Tone.Time("1m").toSeconds()*sessionlength))*200,
+            top:(145/minmaxnotes.length)*(maxnote-Tone.Frequency(note.note).toMidi()),
+            "margin-top":-(145/minmaxnotes.length)*(maxnote-Tone.Frequency(note.note).toMidi())/2
+
+        })
+    })
+
+    return notesdivs;
+
+}
 
 // ----------------------------------------------------------------
 // DRAW PIANO ROLL

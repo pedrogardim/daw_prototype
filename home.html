@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Musa</title>
+        <title>Musa Loops</title>
         <!--libs-->
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
@@ -21,7 +21,7 @@
     -->
         <div class="loader"></div>
         <header>
-            <span class="title" id="logo">MUSA</span>
+            <span class="title" id="logo">MUSA LOOPS</span>
             <span class="title" id="sessiontitle"></span>
             <div id="tabnav">
                 <a class="tabitem" data-nav="1">
@@ -70,17 +70,18 @@
             <div class="optionrow"></div>
         </div>
         <div id="workspace">
-            <!--timeline view-->
-            <div id="timelinepage" class="page hidden">
-                <div id="tlchannelscont"></div>
-            </div>
-            <!--Circles view-->
-            <div id="circlescont" class="">
+            <div id="circlescont">
                 <div id="rhythmcircle" class="visible"></div>
                 <div id="chordcircle"></div>
                 <div id="chordcirclecenter"></div>
                 <div id="statuscursor" class="statuscursor"><div></div></div>
             </div>
+            <!--timeline view-->
+            <div id="timelinepage" class="page hidden">
+                <div id="tlchannelscont"></div>
+            </div>
+            <!--Circles view-->
+            
             <!--Drumstudio-->
             <div id="drumpage" class="page hidden">
                 <div id="stepseq"></div>
@@ -106,7 +107,7 @@
             </div>  
             <div id="melodyeditor" class="page hidden">
                 <div id="melodylist" class="column"></div>
-                <div id="pianoroll" class="column">
+                <div id="pianoroll" class="column hidden">
                     <div id="prcursor"></div>
                     <div id="prheader">
                         <div id="headerkey" class="prkey"></div>
@@ -131,6 +132,7 @@
         <script src="libs/Tone.js"></script>
         <script src="libs/anime.min.js"></script>
         <script src="libs/p5.js"></script>
+        <script src="libs/lodash.js"></script>
         <script src="libs/jquery.scrollTo.js"></script>
         <script src="libs/input-knobs.js"></script>
         <script src="libs/jqueryui/jquery-ui.js"></script>

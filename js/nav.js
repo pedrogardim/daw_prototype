@@ -16,18 +16,11 @@ function navTo(page){
     $(".tabitem").removeClass("selectednavitem");
     $(".tabitem[data-nav="+page+"]").addClass("selectednavitem");
     if(page == 1){
-        $("#circlescont").css({
-            "transform":"scale(1)",
-            "right":"calc(50% - 230px)",
-
-        });
+        $("#circlescont").removeClass("circle-comp");
     }
     if(page != 1){
-        $("#circlescont").css({
-            "transform":"scale(0.4)",
-            "right":"calc(10% - 230px)",
+        $("#circlescont").addClass("circle-comp");
 
-        });
     }
 
 }
