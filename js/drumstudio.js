@@ -1,3 +1,6 @@
+var stepvalues = [4,6,8,12,16,24,32,48];
+var stepselec;
+
 function drawSequencer() {
     $("#stepseq").html("");
     
@@ -27,37 +30,31 @@ function drawSequencer() {
     updateSequencerElements();
   }
   
-  function updateMsreScroreTiles(){
+function updateMsreScroreTiles(){
+  var existentnotesonsession = [];
+sessiondrums.forEach((msre,msreindex)=>{
+ msre.forEach((a)=>{a.forEach((b)=>{if(existentnotesonsession.indexOf(b) == -1){existentnotesonsession.push(b)}})});
+});
+existentnotesonsession.sort((a, b) => a - b);
 
-    var existentnotesonsession = [];
-
-  sessiondrums.forEach((msre,msreindex)=>{
-   msre.forEach((a)=>{a.forEach((b)=>{if(existentnotesonsession.indexOf(b) == -1){existentnotesonsession.push(b)}})});
-  });
-
-  existentnotesonsession.sort((a, b) => a - b);
+sessiondrums.forEach((msre,msreindex)=>{
+  $('#drummeasure'+(msreindex+1)).html("");
   
-  sessiondrums.forEach((msre,msreindex)=>{
-
-    $('#drummeasure'+(msreindex+1)).html("");
+  existentnotesonsession.forEach((note,noteindex)=>{
     
-    existentnotesonsession.forEach((note,noteindex)=>{
+    var thisrow = '<div class="drummsrerow" style="order:'+note+'" id="drummsrerow-'+msreindex+"-"+note+'"></div>';
+    $('#drummeasure'+(msreindex+1)).append(thisrow);
+    msre.forEach((beat,beatindex)=>{
+        var thistile = '<div class="drummsretile" id="mt'+msreindex+'-'+beatindex+'-'+note+'"></div>';
+        $('#drummsrerow-'+msreindex+"-"+(note)).append(thistile);
+        if(beat.indexOf(note)!=-1){
+          $("#mt"+msreindex+'-'+beatindex+'-'+note).addClass("activetile");
+        }
       
-      var thisrow = '<div class="drummsrerow" style="order:'+note+'" id="drummsrerow-'+msreindex+"-"+note+'"></div>';
-      $('#drummeasure'+(msreindex+1)).append(thisrow);
-      msre.forEach((beat,beatindex)=>{
-          var thistile = '<div class="drummsretile" id="mt'+msreindex+'-'+beatindex+'-'+note+'"></div>';
-          $('#drummsrerow-'+msreindex+"-"+(note)).append(thistile);
-          if(beat.indexOf(note)!=-1){
-            $("#mt"+msreindex+'-'+beatindex+'-'+note).addClass("activetile");
-          }
-        
-        });
-    });
-
+      });
   });
-
-  };
+});
+};
 
 
   
@@ -83,7 +80,6 @@ function drawSequencer() {
       updateMsreScroreTiles();
   }
 
-
   function adaptDrumSeqtoSubdiv(){
     sessiondrums.forEach((element,index)=>{
       var newsubdivarray = [];
@@ -103,20 +99,54 @@ function drawSequencer() {
 
   }
 
-
   ///////////////////////////
   //PARAMETERS INPUT
   //////////////////////////
   
-  //////BPM
-  
-  $("#bpminput").on("input", function () {
-    seqbpm = $("#bpminput").val();
-    Tone.Transport.bpm.rampTo(seqbpm, 0.5);
+  //////STEPS
+
+  $("#seq-steps-input").on("change", function (e) {
+
+    var goal = $(this).val();
+    var closest = stepvalues.reduce((prev, curr) => {return (Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev)});
+    stepselec = stepvalues.indexOf(closest);
+    
+    updateSteps($(this).val());
+    
   });
 
+  $(".addstep").on("click", function (e) {
+    if(stepselec < stepvalues.length-1){
+      stepselec++;
+      updateSteps(stepvalues[stepselec]);
+      }
 
-  
+
+  });
+
+  $(".subtractstep").on("click", function (e) {
+    if(stepselec > 0){
+    stepselec--;
+    updateSteps(stepvalues[stepselec]);
+    }
+
+    
+  });
+
+  $(function(){
+    var goal = sessionsubdivision;
+    var closest = stepvalues.reduce((prev, curr) => {return (Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev)});
+    stepselec = stepvalues.indexOf(closest);
+    $("#seq-steps-input").val(stepvalues[stepselec]);
+
+  })
+
+  function updateSteps(input){
+    $("#seq-steps-input").val(input);
+    sessionsubdivision = input;
+    adaptDrumSeqtoSubdiv();
+
+  }
   
   ///////////////////////////
   //UPDATE ELEMENTS

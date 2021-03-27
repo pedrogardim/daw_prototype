@@ -32,12 +32,6 @@ html::-webkit-scrollbar {
   display: none;
 }
 
-input::selection {
-  background: var(--bright-color); /* WebKit/Blink Browsers */
-}
-input::-moz-selection {
-  background: var(--bright-color); /* Gecko Browsers */
-}
 
 header{
   /* box-shadow: 0 1px 4px rgb(0 0 0 / 50%); */
@@ -281,9 +275,41 @@ input{
   font-family: "Barlow Semi Condensed", sans-serif;
   color: var(--darkest-color);
 
+
 }
 
 input:focus {
+  outline-width: 0;
+    
+}
+
+input::selection {
+  background: var(--bright-color); /* WebKit/Blink Browsers */
+}
+input::-moz-selection {
+  background: var(--bright-color); /* Gecko Browsers */
+}
+
+
+input{
+  border:solid 1px var(--darkest-color);
+  border-radius: 0px;
+  background-color: transparent;
+  font-size: 26px;
+  font-family: "Barlow Semi Condensed", sans-serif;
+  color: var(--darkest-color);
+
+
+}
+
+button{
+
+  background:var(--dark-color);
+  border:1px solid var(--darkest-color);
+  color: var(--brightest-color);
+}
+
+button:focus {
   outline-width: 0;
     
 }
@@ -300,5 +326,12 @@ select{
 select:focus {
   outline-width: 0;
     
+}
+
+.flex-col{
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  align-items: center;
 }
 

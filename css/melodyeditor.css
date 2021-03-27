@@ -10,7 +10,9 @@
 #melodylist > .material-icons{
     font-size: 48px;
     color:var(--dark-color);
-    margin-top: 16px;
+    margin-top: 30px;
+    width:100%;
+    text-align:center;
 }
 
 
