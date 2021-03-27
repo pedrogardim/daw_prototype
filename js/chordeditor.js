@@ -130,11 +130,7 @@ function addChord(chordnotes,chord,side){
     }
     
     var chorddiv = '<div class="chord" id="chord' + (chord+side) + '">' +
-                //'<div class="addchordbar acbl"></div>' +
-                '<span class="material-icons addchordbtn acbl">add_circle</span>' +
                 chordNotestoName(chordnotes) + 
-                //'<div class="addchordbar acbr"></div>' +
-                '<span class="material-icons addchordbtn acbr">add_circle</span>' +
                 '</div>';
     
     $("#measure" + olderchord[2]).append(chorddiv);
@@ -233,13 +229,24 @@ function unselectChord(){
 //RHYTHM EDITOR
 ////////////////////////////////
 
-function drawRhythm(){
+function drawRhythm(inputmeasure){
 
     $(".re-chord").remove();
 
-    if (selectedchord == null)return;
+    var measuretodraw;
 
-    var measuretodraw = sessionchords[selectedchord][2];
+    if(inputmeasure !== undefined){
+        measuretodraw = inputmeasure;
+
+    }
+    else if(selectedchord == null && inputmeasure === undefined){
+        return;
+
+    }
+    else{
+        measuretodraw = sessionchords[selectedchord][2];
+    }
+
     var measurechords = sessionchords.filter(chord => chord[2] == measuretodraw);
     
     measurechords.forEach((chord,chordindex)=>{
@@ -247,7 +254,7 @@ function drawRhythm(){
         var rechordlbl = 
         '<a class="re-chordlbl">'+
         '<span class="material-icons" onclick="editRhythm('+chordindex+',false)">remove_circle</span>'+
-        '<span>'+chordNotestoName(chord[0])+'</span>'+
+        '<span id="re-chname'+chordindex+'" class="re-chname">'+chordNotestoName(chord[0])+'</span>'+
         '<span class="material-icons" onclick="editRhythm('+chordindex+',true)">add_circle</span>'+
         '</a>';
 

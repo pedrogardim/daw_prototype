@@ -9,12 +9,14 @@ var isChordPlaying = false;
 var drumIsLoaded = false;
 var drumSounds = [];
 
-Tone.Transport.bpm.value = sessionbpm;
-
 var looponfirstdrum = false;
 
 var playingmelodies = [];
 var melodyCursorLoop;
+
+var rhythmcounter;
+
+Tone.Transport.bpm.value = sessionbpm;
 
 Tone.Transport.loop = true;
 Tone.Transport.loopStart = 0;
@@ -22,7 +24,7 @@ Tone.Transport.loopEnd = "4m";
 
 function startPlayback() {
   
-  playbackMeasure = playbackBeat = playbackChord = elementtoanimate = beatsOnChord = 0;
+  playbackMeasure = playbackBeat = playbackChord = chordsOnMeasure = elementtoanimate = beatsOnChord = 0;
   
   isChordPlaying = false;
   drawCircleElements();
@@ -66,7 +68,7 @@ function startPlayback() {
     updateSequencerElements();
 
     //================
-    //RHYTHM
+    //CHORD RHYTHM
     //================
 
     //Play the first chord of the loop
@@ -96,6 +98,7 @@ function startPlayback() {
 
       if (looponfirstdrum == false) {
         playbackMeasure++;
+        chordsOnMeasure = 0;
         Tone.Draw.schedule(function () {
           updateSequencerElements();
           drawCircleElements();
@@ -182,16 +185,24 @@ function scheduleChordRhythm(chord,timetostart) {
           //Trigger the full chord
           instrmusaepiano.triggerAttackRelease(chord[0],chordhitdur-0.01,schedulerhythmtime);
         }
+
+        $(".re-strike").css("background","var(--darkest-color)");
+
+        $("#re-strike-"+(chordsOnMeasure-1)+"-"+i).css("background","var(--medium-color)");
+
       },rhythmtime);
   });
 
   if (playbackChord < sessionchords.length){ 
-    playbackChord++;
+    playbackChord++;chordsOnMeasure++;
     chord = sessionchords[playbackChord-1];
     $(".chord").css("color","var(--darkest-color)");
     $("#chord"+(playbackChord)).css("color","var(--medium-color)");
-      $('#chordpiano').klavier('setSelectedValues', noteArraytoMidi(chord[0]));
-    
+    $("#chordpiano").klavier('setSelectedValues', noteArraytoMidi(chord[0]));
+
+    drawRhythm(sessionchords[playbackChord-1][2]);
+    $("#re-chname").css("color","var(--darkest-color)");
+    $("#re-chname"+(chordsOnMeasure-1)).css("color","var(--medium-color)");
 
   }
 }
