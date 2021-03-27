@@ -7,6 +7,16 @@
 
 /* ========================RHYTHM CIRCLE=========================*/
 
+#circlescont{
+  position:fixed;
+  top:calc(50% - 230px);
+  right:calc(10% - 230px);
+  height:460px;
+  width:460px;
+  transform-origin: 50% 50%;
+  transform:scale(0.4);
+  
+}
 #rhythmcircle {
   height: 300px;
   width: 300px;

@@ -28,10 +28,7 @@ function drawCircleElements() {
   var totalAngle = -Math.PI / 2;
 
   $("#rhythmcircle").html("");
-  $("#rhythmcircle").css({
-    "width": $("#rhythmcircle").height(),
-    "margin-left": -($("#rhythmcircle").height() / 2),
-  });
+
 
   var brokedowndrums = [];
 
@@ -136,10 +133,22 @@ function drawCircleElements() {
 
   }
 
+  
+
 
 }
 
 function drawChordsCircle() {
+
+  if (sessionchords.length==0){
+    $("#chordcircle").css(
+      {"background":"var(--bright-color)",
+        "border":"solid 1px var(--dark-color)"});
+    $("#chordcirclecenter").css({"border":"solid 1px var(--dark-color)"});
+    return;
+
+
+  }
 
   var chordcircle = "conic-gradient("
   var accumulatedegree = 0; 
@@ -165,12 +174,15 @@ function drawChordsCircle() {
       chordcircle += colors[i%3] + " 0 " +accumulatedegree+"deg, ";
 
     }
-
   });
 
   chordcircle += ")";
 
-  $("#chordcircle").css({"background-image":chordcircle});
+  $("#chordcircle").css({"background-image":chordcircle,
+                        "border":"none"});
+
+  $("#chordcirclecenter").css({"border":"none"});
+
 }
 
 //////////////////////////
