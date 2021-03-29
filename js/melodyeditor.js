@@ -36,9 +36,9 @@ function melodyListItem(element,index){
     '<div class="melodyactions">'+
 
     '<div class="melodyinfo"><h3>'+element.name+'</h3><h5>'+element.instrument+'</h5></div>'+
-    '<span class="material-icons play" data-index="'+index+'">play_arrow</span>'+
-    '<span class="material-icons edit" data-index="'+index+'">edit</span>'+
-    '<span class="material-icons remove" data-index="'+index+'">delete</span>'+
+    '<span class="material-icons m-play" data-index="'+index+'">play_arrow</span>'+
+    '<span class="material-icons m-edit" data-index="'+index+'">edit</span>'+
+    '<span class="material-icons m-remove" data-index="'+index+'">delete</span>'+
     
     '</div>'+
     '</div>';
@@ -64,13 +64,16 @@ function drawNotesPreview(melody,melodyindex){
 
         var thisnote =  '<div class="preview-note pn'+melodyindex+'" data-index="'+noteindex+'"></div>'
         $(".melodypreview[data-index='"+melodyindex+"']").append(thisnote);
+        var thisH = $(".melodypreview").height();
+        var thisW = $(".melodypreview").width();
+
         
         $(".pn"+melodyindex+"[data-index='"+noteindex+"']").css({
-            height:(145/minmaxnotes.length)*0.5,
-            width: (Tone.Time(note.dur).toSeconds()/(Tone.Time("1m").toSeconds()*sessionlength))*200,
-            left:(Tone.Time(note.time).toSeconds()/(Tone.Time("1m").toSeconds()*sessionlength))*200,
-            top:(145/minmaxnotes.length)*(maxnote-Tone.Frequency(note.note).toMidi()),
-            "margin-top":(145/minmaxnotes.length)*0.25-(145/minmaxnotes.length)*(maxnote-Tone.Frequency(note.note).toMidi())/2
+            height:(thisH/minmaxnotes.length)*0.5,
+            width: (Tone.Time(note.dur).toSeconds()/(Tone.Time("1m").toSeconds()*sessionlength))*thisW,
+            left:(Tone.Time(note.time).toSeconds()/(Tone.Time("1m").toSeconds()*sessionlength))*thisW,
+            top:(thisH/minmaxnotes.length)*(maxnote-Tone.Frequency(note.note).toMidi()),
+            "margin-top":(thisH/minmaxnotes.length)*0.25-(thisH/minmaxnotes.length)*(maxnote-Tone.Frequency(note.note).toMidi())/2
 
         })
     })
@@ -136,7 +139,7 @@ function addNote(notetoadd,noteindex){
 
     var thisnote = Tone.Frequency(notetoadd.note).toMidi();
 
-        if(thisnote >= bottomnote+12 && thisnote < bottomnote+36){
+    //if(thisnote >= bottomnote+12 && thisnote < bottomnote+36){
         $("#pianorollgrid").append('<div class="note" id="note'+i+'">'+notetoadd.note+'</div>');
         var thispos = pr_rows - ((Tone.Frequency(notetoadd.note).toMidi()+13)-(bottomnote)-pr_rows);
         $("#note"+i).css({
@@ -149,7 +152,7 @@ function addNote(notetoadd,noteindex){
             grid:[1,$("#prrow0").height()],
             containment: "parent",
             drag: function( event, ui ) {
-                var newnotemidi = Math.floor(($("#pianorollgrid").height()-(ui.position.top))/$("#prrow0").height())+bottomnote+11;
+                var newnotemidi = Math.floor(($("#pianorollgrid").height()-(ui.position.top))/$("#prrow0").height())+bottomnote+12;
                 console.log(Tone.Frequency(newnotemidi,"midi").toNote());
                 sessionmelodies[selectedmelody].notes[selectednote].note = Tone.Frequency(newnotemidi,"midi").toNote();
                 sessionmelodies[selectedmelody].notes[selectednote].time = (ui.position.left/($("#pianorollgrid").width())*Tone.Time("1m").toSeconds()*sessionlength);
@@ -171,10 +174,11 @@ function addNote(notetoadd,noteindex){
             },
         });
         
-    }
+    //}
+
+    //console.log($(".note").toArray().length);
 
 }
-
 
 
 function updatePianoRoll(){   
@@ -208,6 +212,7 @@ function updatePianoRoll(){
     }
     
     $("#prscrollthumb").css("top",(((1-(bottomnote/98)))*$("#prscrollbar").height())-$("#prscrollthumb").height());
+
     $(".note").toArray().forEach((e,i)=>{
         var thispos = pr_rows - ((Tone.Frequency($(e).html()).toMidi()+13)-(bottomnote)-pr_rows);
         var thisnote = sessionmelodies[selectedmelody].notes[i];
@@ -231,6 +236,11 @@ function PRTimeToPixels(input){
     return Tone.Time(input).toSeconds()/Tone.Time("1m").toSeconds()*$("#pianorollgrid").width()/sessionlength
 }
 
+
+////////////////////////////////////////////////////////////////
+//EVENTS
+////////////////////////////////
+
 $(document).on("mousedown",".note",(e)=>{
 
     if($(e.target).hasClass("note") && e.target.id.replace("note","") != selectednote){
@@ -249,6 +259,13 @@ $(document).on("mousedown",".prkey",(e)=>{
 
 $(document).on("mouseup",".prkey",(e)=>{
     sessionmelodies[selectedmelody].instrument.triggerRelease($(e.target).html());
+
+});
+
+$(document).on("click",".m-edit",(e)=>{
+    var newmelody = $(e.target).data("index")
+    selectedmelody = newmelody;
+    $("#pianoroll").removeClass("hidden").addClass("visible");
 
 });
 

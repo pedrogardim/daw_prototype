@@ -55,13 +55,18 @@
 
 .melodyactions > span{
     margin-right: 4px;
+    cursor: pointer;
 }
 
-.melodyactions .remove{
+.melodyactions > span:hover{
+    filter:brightness(1.2);
+}
+
+.melodyactions .m-remove{
     color: var(--contrast-color);
 }
 
-.melodyactions .play{
+.melodyactions .m-play{
     font-size:32px;
     color: var(--medium-color);
 }

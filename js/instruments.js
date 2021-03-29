@@ -116,7 +116,7 @@ const simplesquerewave = new Tone.PolySynth(Tone.AmSynth,
 		}
 	} ).toDestination();
 
-	simplesquerewave.volume.value = -24;
+	simplesquerewave.volume.value = -18;
 
 
 function loadDrums(y) {

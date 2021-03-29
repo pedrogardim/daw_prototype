@@ -102,7 +102,7 @@ sessiondrums.forEach((msre,msreindex)=>{
       //console.log(sessionsubdivision,sessiondrums[index].length,difference)
 
     });
-    console.log(sessiondrums[0]);
+    
     updateMsreScroreTiles();
     drawSequencer();
     updateSequencerElements();
