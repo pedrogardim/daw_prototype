@@ -1,5 +1,7 @@
 var stepvalues = [4,8,12,16,24,32,48];
 var stepselec;
+var dragtileselect = false;
+var selectedonthisdrag = [];
 
 function drawSequencer() {
     $("#stepseq").html("");
@@ -215,6 +217,45 @@ sessiondrums.forEach((msre,msreindex)=>{
   
     registerNoteToSequencer(thisintrument, thisstep);
   });
+
+  //SEQTILE Drag Select
+
+  $(document).on('mousedown','.seqtile',function () {
+
+    dragtileselect = true;
+  });
+  $(document).on('mouseup',function () {
+
+    dragtileselect = false;
+    selectedonthisdrag = [];
+  });
+
+  $(document).on('mousemove','.seqtile',function (e) {
+
+    var targetid = $(this).attr("id");
+
+    if(dragtileselect && selectedonthisdrag.indexOf(targetid) == -1){
+
+      $(this).toggleClass("selectedTile");
+      
+      var thisid = $(this).attr("id");
+      thisid = thisid.replace("seqTile-", "");
+      thisid = thisid.split("-");
+      var thisstep = parseInt(thisid[0]);
+      var thisintrument = parseInt(thisid[1]) + 1;
+      
+      registerNoteToSequencer(thisintrument, thisstep);
+      selectedonthisdrag.push(targetid)
+      console.log(selectedonthisdrag);
+      
+    }
+
+  });
+
+
+
+
+
 
   //MEASURE CLICK
 
