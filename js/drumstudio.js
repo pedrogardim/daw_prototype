@@ -1,4 +1,4 @@
-var stepvalues = [4,6,8,12,16,24,32,48];
+var stepvalues = [4,8,12,16,24,32,48];
 var stepselec;
 
 function drawSequencer() {
@@ -81,24 +81,38 @@ sessiondrums.forEach((msre,msreindex)=>{
   }
 
   function adaptDrumSeqtoSubdiv(){
-    sessiondrums.forEach((element,index)=>{
-      var newsubdivarray = [];
-      var difference = (sessionsubdivision / element.length)-1;
-      element.forEach((e,i)=>{
-        newsubdivarray.push(e);
-        for(var x = 0; x < difference; x++){
-          newsubdivarray.push([]);
-        }
-      });
+    sessiondrums.forEach((drumseq,index)=>{
+      
+      if ((sessionsubdivision - drumseq.length) == 0) return;
+      
+      var newsubdivarray = Array.apply([],Array(sessionsubdivision));
+      //var dif = sessionsubdivision/(sessionsubdivision-drumseq.length);
+      //console.log(dif)
+      
+      for(var x = 0; x < sessionsubdivision; x++){
+
+        newsubdivarray[x] = drumseq[x%drumseq.length];
+      
+      }
+
       sessiondrums[index] = newsubdivarray;
+
+      //console.log(sessionsubdivision,sessiondrums[index].length,difference)
+
     });
-    
-    updateSequencerElements();
+    console.log(sessiondrums[0]);
     updateMsreScroreTiles();
     drawSequencer();
+    updateSequencerElements();
 
   }
 
+  function updateSteps(input){
+    $("#seq-steps-input").val(input);
+    sessionsubdivision = input;
+    adaptDrumSeqtoSubdiv();
+
+  }
   ///////////////////////////
   //PARAMETERS INPUT
   //////////////////////////
@@ -112,6 +126,7 @@ sessiondrums.forEach((msre,msreindex)=>{
     stepselec = stepvalues.indexOf(closest);
     
     updateSteps($(this).val());
+    $("#seq-steps-input").blur();
     
   });
 
@@ -120,8 +135,7 @@ sessiondrums.forEach((msre,msreindex)=>{
       stepselec++;
       updateSteps(stepvalues[stepselec]);
       }
-
-
+      $(".addstep").blur();
   });
 
   $(".subtractstep").on("click", function (e) {
@@ -129,6 +143,8 @@ sessiondrums.forEach((msre,msreindex)=>{
     stepselec--;
     updateSteps(stepvalues[stepselec]);
     }
+    $(".subtractstep").blur();
+
 
     
   });
@@ -141,12 +157,7 @@ sessiondrums.forEach((msre,msreindex)=>{
 
   })
 
-  function updateSteps(input){
-    $("#seq-steps-input").val(input);
-    sessionsubdivision = input;
-    adaptDrumSeqtoSubdiv();
 
-  }
   
   ///////////////////////////
   //UPDATE ELEMENTS
@@ -172,7 +183,6 @@ sessiondrums.forEach((msre,msreindex)=>{
       });
     });
   }
-
   
   function updateSequencerElements() {
     updateSeqCursor();

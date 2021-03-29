@@ -11,7 +11,7 @@ var sessionData = {
     ],
     "dploop":1,
     "chords":[
-        [["C4", "E4", "G4", "B4"],0.5,1,[2,2]],
+        [["C4", "E4", "G4", "B4"],0.5,1,[2]],
         [["G4", "B4", "D4"],0.5,1,[2,2]],
         [["E4", "G4", "B4"],1,2,[2,2]],
         [["A4", "C4", "E4"],0.25,3,[2,2]],
@@ -26,76 +26,61 @@ var sessionData = {
         instrument:simplesquerewave,
         notes:[{
           time: "0:0",
-          note: "C5",
+          note: "C3",
           dur: "4n",
           velocity: 0.9
         }, {
           time: "0:2",
-          note: "G4",
+          note: "G3",
           dur: "8n",
           velocity: 0.7
         
         }, {
           time: "0:3",
-          note: "C4",
+          note: "A3",
           dur: "8n",
           velocity: 0.7
-        }, {
-          time: "0:3",
-          note: "A4",
-          dur: "8n",
-          velocity: 0.8
-        }, {
+        },  {
           time: "1:0",
-          note: "C4",
+          note: "E3",
           dur: "4n",
           velocity: 0.9
         }, {
           time: "1:2",
-          note: "C4",
+          note: "B2",
           dur: "8n",
           velocity: 0.7
         }, {
           time: "2:0",
-          note: "F4",
+          note: "A2",
+          dur: "4n",
+          velocity: 0.9
+        }, {
+          time: "2:1",
+          note: "B2",
           dur: "4n",
           velocity: 0.9
         }, {
           time: "2:2",
-          note: "F4",
-          dur: "8n",
+          note: "C3",
+          dur: "4n",
           velocity: 0.9
         }, {
-          time: "2:2",
-          note: "D4",
-          dur: "8n",
-          velocity: 0.9
-        }, {
-          time: "2:2",
-          note: "F4",
-          dur: "8n",
-          velocity: 0.9
-        }, {
+          time: "2:3",
+          note: "D3",
+          dur: "4n",
+          velocity: 0.8
+        },, {
           time: "3:0",
-          note: "D4",
+          note: "E3",
           dur: "4n",
           velocity: 0.8
         }, {
           time: "3:2",
-          note: "F4",
+          note: "C3",
           dur: "8n",
           velocity: 0.9
-        }, {
-          time: "3:2",
-          note: "D4",
-          dur: "8n",
-          velocity: 0.6
-        }, {
-          time: "3:2",
-          note: "A#4",
-          dur: "8t",
-          velocity: 0.7
-        }]}
+        } ]}
       ],
     //0=silece, 1=bass, 2=chord hit
 }
@@ -112,7 +97,7 @@ var sessiondrums = sessionData.drumpatterns;
 var sessiontimesignature = sessionData.timesignature;
 var sessionmelodies = sessionData.melodies;
 
-var sessionsubdivision = 16;
+var sessionsubdivision = 8;
 
 var dploop = sessionData.dploop;
 var chloop = sessionData.chloop;

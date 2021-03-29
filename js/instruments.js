@@ -96,7 +96,7 @@ const simplesquerewave = new Tone.PolySynth(Tone.AmSynth,
 	{
 		"harmonicity": 3.999,
 		"oscillator": {
-			"type": "square"
+			"type": "sawtooth"
 		},
 		"envelope": {
 			"attack": 0.03,

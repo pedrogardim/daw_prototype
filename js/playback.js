@@ -50,20 +50,20 @@ function startPlayback() {
     //DRUMS
     //================
 
-    var drumssub = sessionsubdivision / sessiondrums[playbackMeasure].length;
+    //var drumssub = sessionsubdivision / sessiondrums[playbackMeasure].length;
     //For instance, 16(session sub)/8(length of drumpattern of the current measur) = 2
 
     //If the current beat is a multiple of 2 (0,2,4,6,8....), play.
 
-    if (playbackBeat % drumssub == 0) {
-      thisdrumpattern[playbackBeat / drumssub].forEach((element) =>
+    //if (playbackBeat % drumssub == 0) {
+      thisdrumpattern[playbackBeat].forEach((element) =>
         drumSounds[element - 1].start(time)
       );
       //console.log(time);
       Tone.Draw.schedule(function () {
         animateCircleOnBeat();
       }, time);
-    }
+    //}
 
     updateSequencerElements();
 
