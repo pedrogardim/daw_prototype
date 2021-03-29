@@ -23,7 +23,7 @@ function selectChord(chord){
         selectedchord = chord;
         playChord();
         $('#chordpiano').klavier('setSelectedValues', noteArraytoMidi(sessionchords[chord][0]));
-        $("#chord"+(chord+1)).css("background","var(--bright-color)");
+        $("#chord"+(chord+1)).addClass("selectedchord");
     }
 
     drawRhythm();
@@ -219,7 +219,7 @@ function updateChordsOnScore(){
 
 function unselectChord(){
     selectedchord = null;
-    $(".chord").css("background","var(--brightest-color)");
+    $(".selectedchord").removeClass("selectedchord");
     $('#chordpiano').klavier('setSelectedValues', []);
 
 }   

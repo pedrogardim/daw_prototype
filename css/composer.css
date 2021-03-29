@@ -155,6 +155,17 @@
   justify-content: space-around;
 }
 
+.selectedchord{
+  animation: flashing 0.8s infinite alternate;
+
+}
+
+@keyframes flashing {
+  from {background-color: var(--brightest-color)}
+  to {background-color: var(--bright-color)}
+}
+
+
 .chordbtn{
   flex-grow: 0;
   flex-shrink: 1;

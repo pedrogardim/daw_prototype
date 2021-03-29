@@ -24,42 +24,42 @@ instrPiano1.release = 0.4;
 //==============================================
 
 
-const instrOrgan1 = new Tone.Sampler({
-	urls: {
-		"C1": "C1.wav",
-        "C2": "C2.wav",
-		"C3": "C3.wav",
-		"C4": "C4.wav",
-		"C5": "C5.wav",
-		"C6": "C6.wav",
-		"C7": "C7.wav",
-	},
-	baseUrl: "assets/samples/instruments/organ1/",
-	onload: () => {
-	}
-}).toDestination();
-
-instrOrgan1.volume.value = -12;
-
-//==============================================
-
-
-const instrEp1 = new Tone.Sampler({
-	urls: {
-		"C1": "C1.wav",
-        "C2": "C2.wav",
-		"C3": "C3.wav",
-		"C4": "C4.wav",
-		"C5": "C5.wav",
-		"C6": "C6.wav",
-		"C7": "C7.wav",
-	},
-	baseUrl: "assets/samples/instruments/ep1/",
-	onload: () => {
-	}
-}).toDestination();
-
-instrEp1.volume.value = -12;
+//const instrOrgan1 = new Tone.Sampler({
+//	urls: {
+//		"C1": "C1.wav",
+//        "C2": "C2.wav",
+//		"C3": "C3.wav",
+//		"C4": "C4.wav",
+//		"C5": "C5.wav",
+//		"C6": "C6.wav",
+//		"C7": "C7.wav",
+//	},
+//	baseUrl: "assets/samples/instruments/organ1/",
+//	onload: () => {
+//	}
+//}).toDestination();
+//
+//instrOrgan1.volume.value = -12;
+//
+////==============================================
+//
+//
+//const instrEp1 = new Tone.Sampler({
+//	urls: {
+//		"C1": "C1.wav",
+//        "C2": "C2.wav",
+//		"C3": "C3.wav",
+//		"C4": "C4.wav",
+//		"C5": "C5.wav",
+//		"C6": "C6.wav",
+//		"C7": "C7.wav",
+//	},
+//	baseUrl: "assets/samples/instruments/ep1/",
+//	onload: () => {
+//	}
+//}).toDestination();
+//
+//instrEp1.volume.value = -12;
 
 const instrmusaepiano = new Tone.PolySynth(Tone.FMSynth,
 	{
