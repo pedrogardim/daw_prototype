@@ -351,7 +351,7 @@
 }
 
 
-#seq-params{
+.bottommenu{
   top:calc(70% + 100px);
   width:60%;
   left:20%;

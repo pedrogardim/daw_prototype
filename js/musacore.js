@@ -11,19 +11,20 @@ var sessionData = {
     ],
     "dploop":1,
     "chords":[
-        [["C4", "E4", "G4", "B4"],0.5,1,[2,2]],
-        [["G4", "B4", "D4"],0.5,1,[2,2]],
-        [["E4", "G4", "B4"],1,2,[2,2]],
+        [["F3", "C4", "G4", "Ab4","C5","Eb5","G5"],0.5,1,[2]],
+        [["G3", "G4", "Bb4","B4","Eb5"],0.5,1,[2,2,2]],
+        [["C3", "Eb4", "G4","Bb4","D5"],1,2,[2,2]],
         [["A4", "C4", "E4"],1,3,[2,2,2,2]],
         [["C4", "E4", "G4", "B4"],1,4,[2,2]],
     ],
     "chloop":1,
     "melodies":[{
-        name:"Demo",
+        name:"Bass",
         instrument:simplesquerewave,
+        size:4,
         notes:[{
           time: "0:0",
-          note: "C3",
+          note: "F3",
           dur: "4n",
           velocity: 0.9
         }, {

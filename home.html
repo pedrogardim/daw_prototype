@@ -85,7 +85,7 @@
             <div id="drumpage" class="page hidden">
                 <div id="stepseq"></div>
                 <div id="bottomscore" class="score"></div>
-                <div id="seq-params">
+                <div id="seq-params" class="bottommenu">
                     <span>STEPS (SUBDVISION)</span>
                     <button class="addstep">+</button>
                     <input type="text" id="seq-steps-input">
@@ -113,17 +113,26 @@
             </div>  
             <div id="melodyeditor" class="page hidden">
                 <div id="melodylist" class="column"></div>
-                <div id="pianoroll" class="column hidden">
-                    <div id="prcursor"></div>
-                    <div id="prheader">
-                        <div id="headerkey" class="prkey"></div>
+                <div id="melodyeditcont" class="column hidden">
+                    <div id="pianoroll" class="">
+                        <span id="pr-close" class="material-icons">keyboard_arrow_left</span>
+                        <div id="prcursor"></div>
+                        <div id="prheader">
+                            <div id="headerkey" class="prkey"></div>
+                        </div>
+                        <div id="prcont">
+                            <div id="pianorollgrid"></div>
+                            <div id="pianorollkeys"></div>
+                        </div>
+                        <div id="prscrollbar">
+                            <div id="prscrollthumb"></div>
+                        </div>
                     </div>
-                    <div id="prcont">
-                        <div id="pianorollgrid"></div>
-                        <div id="pianorollkeys"></div>
-                    </div>
-                    <div id="prscrollbar">
-                        <div id="prscrollthumb"></div>
+                    <div id="melody-params" class="bottommenu">
+                        <span>Melody Size</span>
+                        <button class="addstep">+</button>
+                        <input type="text" id="">
+                        <button class="subtractstep">-</button>
                     </div>
                 </div>
             </div>  
