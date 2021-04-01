@@ -75,11 +75,13 @@ function getChordsFromScale(){
     scalechords = [];
     for(var x = 0; x < 7; x++){
         var thischord = [];
+        //bassnote
         thischord.push((scales[selectedscale][0][x]-12));
+
         for(var y = 0; y < chordcomplexity; y++){
             var noteindex = x + (y*2);
             if(noteindex > (scales[selectedscale][0].length)-1){
-                noteindex = noteindex - (scales[selectedscale][0].length-1);
+                noteindex = noteindex - (scales[selectedscale][0].length);
             }
             thischord.push(scales[selectedscale][0][noteindex]);
         }

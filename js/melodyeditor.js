@@ -10,7 +10,7 @@ var mldysize = sessionmelodies[selectedmelody].size;
 var prrange;
 var bottomnote = 40;
 
-var prmode = 1;
+var prscale = 1;
 
 
 function showMelodyList(){
@@ -205,12 +205,14 @@ function updatePianoRoll(){
             $("#prrow"+(y)).addClass((blackkey?"prblack":""));
         }
 
-        //$('.prtile').css("border-left","1px solid rgb(43, 116, 101)");
-        //for(var z = 0; z < mldysize*sessionsubdivision/2; z++){
-        //   if(z % (sessionsubdivision/2) == 0  && z!=0){
-        //       $('#prtile'+(y)+'-'+z).css("border-left","solid 2px #1f554a")
-        //   }
-        //} 
+        /* 
+        $('.prtile').css("border-left","1px solid rgb(43, 116, 101)");
+        for(var z = 0; z < mldysize*sessionsubdivision/2; z++){
+           if(z % (sessionsubdivision/2) == 0  && z!=0){
+               $('#prtile'+(y)+'-'+z).css("border-left","solid 2px #1f554a")
+           }
+        }  
+        */
     }
     
     $("#prscrollthumb").css("top",(((1-(bottomnote/98)))*$("#prscrollbar").height())-$("#prscrollthumb").height());
