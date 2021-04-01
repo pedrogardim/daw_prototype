@@ -170,7 +170,7 @@
 }
 
 .prblack > .prtile{
-    background: #379683;
+    background: var(--dark-color);
 }
 
 .prtile{
@@ -179,7 +179,7 @@
     width:1px;
     border-left:1px solid rgb(43, 116, 101);
     border-bottom:1px solid rgb(43, 116, 101);
-    background-color: #40ad97;
+    background-color: #3aa18d;
     order:1;
 }
 

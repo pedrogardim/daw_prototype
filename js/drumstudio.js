@@ -207,6 +207,8 @@ sessiondrums.forEach((msre,msreindex)=>{
   
   $(document).on('click','.seqtile',function () {
 
+    selectedonthisdrag = [];
+
     $(this).toggleClass("selectedTile");
   
     var thisid = $(this).attr("id");
@@ -220,7 +222,7 @@ sessiondrums.forEach((msre,msreindex)=>{
 
   //SEQTILE Drag Select
 
-  $(document).on('mousedown','.seqtile',function () {
+/*   $(document).on('mousedown','.seqtile',function () {
 
     dragtileselect = true;
   });
@@ -250,7 +252,7 @@ sessiondrums.forEach((msre,msreindex)=>{
       
     }
 
-  });
+  }); */
 
 
 

@@ -10,6 +10,8 @@ var mldysize = sessionmelodies[selectedmelody].size;
 var prrange;
 var bottomnote = 40;
 
+var prmode = 1;
+
 
 function showMelodyList(){
 
