@@ -85,14 +85,19 @@
     position:absolute;
     background:var(--dark-color);
     border-radius: 0px;
-    
+
+}
+
+
+#melodyeditcont{
+    outline:1px solid var(--darkest-color);
 }
 
 #pianoroll{
-    border:1px solid var(--darkest-color);
     background: var(--dark-color);
     text-align: center;
     overflow:hidden;
+    height:100%
 
 }
 
@@ -231,10 +236,10 @@
 #prscrollbar{
     width:15px;
     height:calc(100% - 30px);
-    outline:solid 1px var(--darkest-color);
     position:absolute;
     right:0;
     top:30px;
+    outline: 1px solid var(--darkest-color);
 }
 
 #prscrollthumb{
