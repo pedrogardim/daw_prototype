@@ -96,7 +96,6 @@
 #pianoroll{
     background: var(--dark-color);
     text-align: center;
-    overflow:hidden;
     height:100%
 
 }
@@ -115,7 +114,6 @@
     left:0px;
     display: flex;
     flex-direction: column-reverse;
-    height:100%;
     margin-top:-1px;
 
 }
@@ -124,7 +122,7 @@
     width:50px;
     background: var(--brightest-color);
     outline:1px solid var(--darkest-color);
-    flex-grow: 1;
+    height:20px;    
 }
 
 #pianorollkeys > .prblack{
@@ -147,7 +145,6 @@
     position:absolute;
     width:calc(100% - 50px);
     left:50px;
-    height:100%;
     display: flex;
     flex-direction: column-reverse;
 
@@ -155,17 +152,19 @@
 
 #prcont{
     position:absolute;
-    width:calc(100% - 15px);
+    width:100%;
     top:30px;
     left:0;
     height:calc(100% - 30px);
-    overflow:hidden;
+    overflow-y:scroll;
+    overflow-x: hidden;
 }
 
-.prrow{
-    flex-grow:1;
+.prrow{ 
+    height:20px;
     display: flex;
     flex-direction: row;
+
 
 }
 

@@ -79,7 +79,68 @@ var sessionData = {
           note: "B2",
           dur: "8n",
           velocity: 0.9
-        } ]}
+        } ]},{
+          name:"Mel2",
+          instrument:simplesquerewave,
+          scale:1,
+          size:4,
+          notes:[{
+            time: "0:0",
+            note: "F3",
+            dur: "4n",
+            velocity: 0.9
+          }, {
+            time: "0:2",
+            note: "G3",
+            dur: "8n",
+            velocity: 0.7
+          
+          }, {
+            time: "0:3",
+            note: "A3",
+            dur: "8n",
+            velocity: 0.7
+          },  {
+            time: "1:0",
+            note: "E3",
+            dur: "4n",
+            velocity: 0.9
+          }, {
+            time: "1:2",
+            note: "B2",
+            dur: "8n",
+            velocity: 0.7
+          }, {
+            time: "2:0",
+            note: "A2",
+            dur: "4n",
+            velocity: 0.9
+          }, {
+            time: "2:1",
+            note: "B2",
+            dur: "4n",
+            velocity: 0.9
+          }, {
+            time: "2:2",
+            note: "C3",
+            dur: "4n",
+            velocity: 0.9
+          }, {
+            time: "2:3",
+            note: "D3",
+            dur: "4n",
+            velocity: 0.8
+          },{
+            time: "3:0",
+            note: "E3",
+            dur: "8n",
+            velocity: 0.8
+          }, {
+            time: "3:2",
+            note: "B2",
+            dur: "8n",
+            velocity: 0.9
+          } ]}
       ],
     //0=silece, 1=bass, 2=chord hit
 }

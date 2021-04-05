@@ -456,6 +456,7 @@ $(function() {
   drawChordsCircle();
   drumScore();
   drawScore();
+  drawPianoRoll();
 
   getChordsFromScale();
   showMelodyList();
@@ -475,7 +476,6 @@ $(function() {
 
 $(window).resize(function () {
   //sequencerResize();
-  updatePianoRoll();
   //$('#chordpiano').klavier({ startKey: 21, endKey: 108});
 
 
