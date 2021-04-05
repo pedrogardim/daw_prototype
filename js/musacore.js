@@ -21,6 +21,7 @@ var sessionData = {
     "melodies":[{
         name:"Bass",
         instrument:simplesquerewave,
+        scale:0,
         size:4,
         notes:[{
           time: "0:0",

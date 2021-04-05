@@ -1,7 +1,7 @@
 var scalechords = [];
 var chordcomplexity = 3;
 
-var selectedscale = 0;
+var selectedscale = 1;
 var chordsroot = "C";
 var isPlayingChord = false;
 
@@ -14,6 +14,8 @@ var oldpianoselection;
 var maxchordspermeasure = 4;
 
 function selectChord(chord){
+
+    console.log("select")
 
     if(selectedchord == chord){
         unselectChord();
@@ -66,6 +68,7 @@ function releaseChords(input){
         easing: 'easeOutElastic(1, .8)',
     });
     scalechords.forEach((e)=>instrmusaepiano.triggerRelease(e));
+    console.log("release",selectedchord)
     isPlayingChord = false;
     $('#chordpiano').klavier('setSelectedValues',[]);
 }

@@ -6,6 +6,10 @@ var noterange = 97;
 var pr_rows = 24;
 var scrolllevels = noterange - pr_rows;
 var mldysize = sessionmelodies[selectedmelody].size;
+var mldyscale = sessionmelodies[selectedmelody].scale;
+var mldyscalelength = scales[sessionmelodies[selectedmelody].scale].length;
+
+
 
 var prrange;
 var bottomnote = 40;
