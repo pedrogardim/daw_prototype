@@ -55,7 +55,6 @@ function melodyListItem(element,index){
 
 function drawNotesPreview(melody,melodyindex){
 
-    var notesdivs ="";
     var thisnotes = melody.notes;
     var minmaxnotes = [];
     var minnote, maxnote;
@@ -82,10 +81,17 @@ function drawNotesPreview(melody,melodyindex){
             top:(thisH/minmaxnotes.length)*(maxnote-Tone.Frequency(note.note).toMidi()),
             "margin-top":(thisH/minmaxnotes.length)*0.25-(thisH/minmaxnotes.length)*(maxnote-Tone.Frequency(note.note).toMidi())/2
 
-        })
+        });
     })
+}
 
-    return notesdivs;
+function updateMelodyPreview(){
+    $(".melodypreview").html("");
+    sessionmelodies.forEach((melody,melodyindex)=>{
+
+        drawNotesPreview(melody,melodyindex);
+        
+    });
 
 }
 

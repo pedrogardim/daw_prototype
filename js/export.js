@@ -1,8 +1,3 @@
-
-
-$(()=>{
-
-
 function prepareOffline(){
     const offline = 
     new Tone.Offline(() => {
@@ -10,13 +5,12 @@ function prepareOffline(){
   
     }, 2).then((e) => {
       // do something with the output buffer
-    console.log(audioBufferToWav(e));
-
     var blob = audioBufferToWaveBlob(e);
 
     var promiseB = blob.then(function(result) {
         var url  = window.URL.createObjectURL(result);
-        console.log(url);
+        $("#downloadloopbtn").attr("href",url);
+        $("#downloadloopbtn").attr("download","loop.wav");
      });
     
     });
@@ -25,10 +19,6 @@ function prepareOffline(){
 
 prepareOffline();
 
-
-
-
-});
 
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
