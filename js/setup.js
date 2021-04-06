@@ -450,6 +450,23 @@ function loadDrums(y) {
   }
 }
 
+
+
+
+
+function prepareOffline(){
+  const offline = 
+  new Tone.Offline(() => {
+    const oscillator = new Tone.Oscillator().toDestination().start(0);
+
+  }, 2).then((buffer) => {
+    // do something with the output buffer
+    console.log(buffer.toArray());
+  });
+  
+}
+
+
 //all necesaries functions to load sequencer page
 $(function() {
   drawCircleElements();
@@ -471,6 +488,7 @@ $(function() {
   navTo(4);
 
   drawSequencer();
+  prepareOffline();
 
 });
 
@@ -480,3 +498,8 @@ $(window).resize(function () {
 
 
 });
+
+
+
+
+

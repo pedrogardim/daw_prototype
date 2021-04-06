@@ -176,15 +176,26 @@ function addNote(notetoadd,noteindex){
         grid:[1,$("#prrow0").height()],
         containment: "parent",
         drag: function( event, ui ) {
-            var newnotemidi = Math.floor(($("#pianorollgrid").height()-(ui.position.top))/$("#prrow0").height())+24-1;
-            //console.log(Tone.Frequency(newnotemidi,"midi").toNote());
-            sessionmelodies[selectedmelody].notes[selectednote].note = Tone.Frequency(newnotemidi,"midi").toNote();
-            sessionmelodies[selectedmelody].notes[selectednote].time = (ui.position.left/($("#pianorollgrid").width())*Tone.Time("1m").toSeconds()*mldysize);
-            $(event.target).html(Tone.Frequency(newnotemidi,"midi").toNote());
             sessionmelodies[selectedmelody].instrument.triggerRelease();
+            
         },
         stop: function( event, ui ) {
-            //(event.target).css("top","");
+
+            var newnote, newtop;
+
+            $(".prkey").toArray().forEach((e,i)=>{
+                if(Math.abs($(e).offset().top - ui.offset.top) < 5){
+                    newnote = $(e).html();
+                    newtop = $(e).offset().top - $("#prcont").offset().top;
+                }
+            })
+
+            var newnotemidi = (Math.floor(($("#pianorollgrid").height()-(ui.position.top))/$("#prrow0").height())+24-1);
+            //console.log(Tone.Frequency(newnotemidi,"midi").toNote());
+            sessionmelodies[selectedmelody].notes[selectednote].note = newnote;
+            sessionmelodies[selectedmelody].notes[selectednote].time = (ui.position.left/($("#pianorollgrid").width())*Tone.Time("1m").toSeconds()*mldysize);
+            $(event.target).html(newnote);
+            ui.position.top = newtop;
             
         }
     });
