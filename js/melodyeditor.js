@@ -132,7 +132,7 @@ function drawPianoRoll(){
         } 
     }
 
-    $("#prcont").scrollTop(0);
+    //$("#prcont").scrollTop(0);
 
     var thisnotes = [];
 
@@ -141,7 +141,7 @@ function drawPianoRoll(){
         thisnotes.push(Tone.Frequency(e.note).toFrequency());
     });
 
-    var highestnoteoffset = $('.prkey:contains("'+Tone.Frequency(Math.max.apply(Math,thisnotes)).toNote()+'")').offset().top - $('#prcont').offset().top - 20;
+    var highestnoteoffset = $('.prkey:contains("'+Tone.Frequency(Math.max.apply(Math,thisnotes)).toNote()+'")').position().top - 20;
 
     $("#prcont").scrollTop(highestnoteoffset);
 
@@ -157,8 +157,7 @@ function drawPianoRoll(){
 
 function addNote(notetoadd,noteindex){
 
-    var i;
-    (typeof noteindex == undefined)?(i=$(".note").toArray().length-1):(i = noteindex);
+    var i = (noteindex == undefined)?($(".note").toArray().length):(noteindex);
 
     var thisnote = Tone.Frequency(notetoadd.note).toNote();
 
@@ -168,7 +167,7 @@ function addNote(notetoadd,noteindex){
         return;
     }
     
-    var thispos = $('.prkey:contains("'+thisnote+'")').offset().top - $('#prcont').offset().top + 1;
+    var thispos = $('.prkey:contains("'+thisnote+'")').position().top;
     
     $("#note"+i).css({
         top: thispos,
@@ -197,7 +196,7 @@ function addNote(notetoadd,noteindex){
             var newnotemidi = (Math.floor(($("#pianorollgrid").height()-(ui.position.top))/$("#prrow0").height())+24-1);
             //console.log(Tone.Frequency(newnotemidi,"midi").toNote());
             sessionmelodies[selectedmelody].notes[selectednote].note = newnote;
-            sessionmelodies[selectedmelody].notes[selectednote].time = (ui.position.left/($("#pianorollgrid").width())*Tone.Time("1m").toSeconds()*mldysize);
+            sessionmelodies[selectedmelody].notes[selectednote].time = PRPixelsToTime(ui.position.left);
             $(event.target).html(newnote);
             ui.position.top = newtop;
             
@@ -208,7 +207,7 @@ function addNote(notetoadd,noteindex){
         handles:"e",
         "disabled": true,
         stop: function( event, ui ) {
-            sessionmelodies[selectedmelody].notes[selectednote].dur = (ui.size.width/ui.element.parent().width())*mldysize*Tone.Time("1m").toSeconds();
+            sessionmelodies[selectedmelody].notes[selectednote].dur = PRPixelsToTime(ui.size.width);
             
         },
     });
@@ -232,6 +231,10 @@ function adjustNotesPos(){
 function PRTimeToPixels(input){
 
     return Tone.Time(input).toSeconds()/Tone.Time("1m").toSeconds()*$("#pianorollgrid").width()/mldysize
+}
+
+function PRPixelsToTime(input){
+    return (input/$("#pianorollgrid").width())*Tone.Time("1m").toSeconds()*mldysize;
 }
 
 
@@ -282,16 +285,29 @@ $("#pianorollgrid").on("mousewheel",(e)=>{
            
 });
 
-$("#pianorollgrid").dblclick((e)=>{
+$("#pianorollgrid").dblclick((event)=>{
 
-    console.log(e);
+    var tileclickedposY = $(event.target).position().top;
+    var tileclickedposX = $(event.target).position().left;
+
+    var thisnote;
+
+    console.log(tileclickedposY);
+
+    $(".prkey").toArray().forEach((e,i)=>{
+        if(Math.abs($(e).position().top - tileclickedposY) < 5){
+            thisnote =  $(e).html();
+            console.log(thisnote,tileclickedposX);
+        }
+    })
 
     var newnote = {
-        time:"",
-        note: Tone.Frequency(Math.floor(e.offsetY / $("#prscrollbar").height())+bottomnote+24,"midi").toNote(),
-        dur:"8n",
+        time:  PRPixelsToTime(tileclickedposX),
+        note: thisnote,
+        dur:"4n",
         velocity:0.7
     }
+    console.log(newnote);
     sessionmelodies[selectedmelody].notes.push(newnote);
     addNote(newnote);
             
