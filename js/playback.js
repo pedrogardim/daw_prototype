@@ -109,8 +109,8 @@ function startPlayback() {
 
   }, playbacksubdivision);
   
-
-  Tone.Transport.start(); //start loop
+  
+  Tone.Transport.start();//start loop
 
   melodyCursorLoop = 
   setInterval(function (){
@@ -267,7 +267,7 @@ $("html").keydown(function (e) {
     return;
   }
   if (e.keyCode == 190) {
-    //instrmusaepiano.triggerAttackRelease(["C3", "E4", "B4"],"4n");
+    prepareOffline();
     return;
   }
 });

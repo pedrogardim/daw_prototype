@@ -387,19 +387,16 @@ function chordNotestoName(arg) {
   return chordroot + chordtype + additionalnotesstring;
 }
 
-
 function noteArraytoMidi(arg){
   var newarray = []
   arg.forEach((e)=>{newarray.push(Tone.Frequency(e).toMidi())});
   return newarray;
-
 }
 
 function midiArraytoNote(arg){
   var newarray = []
   arg.forEach((e)=>{newarray.push(Tone.Frequency(e,"midi").toNote())});
   return newarray;
-
 }
 
 function gcd_two_numbers(x, y) {
@@ -471,6 +468,8 @@ $(function() {
   navTo(4);
 
   drawSequencer();
+
+  //prepareOffline();
 
 });
 

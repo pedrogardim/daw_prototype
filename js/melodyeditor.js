@@ -88,7 +88,6 @@ function drawNotesPreview(melody,melodyindex){
 function updateMelodyPreview(){
     $(".melodypreview").html("");
     sessionmelodies.forEach((melody,melodyindex)=>{
-
         drawNotesPreview(melody,melodyindex);
         
     });
@@ -189,7 +188,7 @@ function addNote(notetoadd,noteindex){
             $(".prkey").toArray().forEach((e,i)=>{
                 if(Math.abs($(e).offset().top - ui.offset.top) < 5){
                     newnote = $(e).html();
-                    newtop = $(e).offset().top - $("#prcont").offset().top;
+                    newtop = $(e).position().top + 1;
                 }
             })
 
@@ -199,6 +198,8 @@ function addNote(notetoadd,noteindex){
             sessionmelodies[selectedmelody].notes[selectednote].time = PRPixelsToTime(ui.position.left);
             $(event.target).html(newnote);
             ui.position.top = newtop;
+            updateMelodyPreview();
+
             
         }
     });
@@ -208,12 +209,15 @@ function addNote(notetoadd,noteindex){
         "disabled": true,
         stop: function( event, ui ) {
             sessionmelodies[selectedmelody].notes[selectednote].dur = PRPixelsToTime(ui.size.width);
+            updateMelodyPreview();
+
             
         },
     });
-        
-    //}
 
+    updateMelodyPreview();
+
+        
     //console.log($(".note").toArray().length);
 
 }
@@ -278,6 +282,8 @@ $(document).on("click",".m-edit",(e)=>{
 
 $("#pr-close").on("click",(e)=>{
     $("#melodyeditcont").removeClass("visible").addClass("hidden");
+    updateMelodyPreview();
+
 
 });
 
