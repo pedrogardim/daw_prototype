@@ -132,8 +132,6 @@ function drawPianoRoll(){
         } 
     }
 
-    $("#prheader").width($("#prcont").width());
-
     $("#prcont").scrollTop(0);
 
     var thisnotes = [];
@@ -219,6 +217,16 @@ function addNote(notetoadd,noteindex){
 
     //console.log($(".note").toArray().length);
 
+}
+
+function adjustNotesPos(){
+    for(var x = 0; x < $(".note").toArray().length; x++){
+        var thisnote = sessionmelodies[selectedmelody].notes[x];
+        $("#note"+x).css({
+            width:  PRTimeToPixels(thisnote.dur),
+            left:   PRTimeToPixels(thisnote.time)
+        });
+    }
 }
 
 function PRTimeToPixels(input){

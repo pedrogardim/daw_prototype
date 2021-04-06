@@ -476,6 +476,7 @@ $(function() {
 
 $(window).resize(function () {
   updateMelodyPreview();
+  adjustNotesPos();
   //sequencerResize();
   //$('#chordpiano').klavier({ startKey: 21, endKey: 108});
 
