@@ -240,10 +240,11 @@ function playMelodies(){
     playingmelodies = [];
   }
   sessionmelodies.forEach((e,i)=>{
+    var thisintrument = instrumentContructor(e.instrument);
     playingmelodies.push(new Tone.Part(((time, value) => {
       // the value is an object which contains both the note and the velocity
-      sessionmelodies[0].instrument.triggerAttackRelease(value.note, value.dur, time, value.velocity);
-    }), sessionmelodies[0].notes).start(0));
+      thisintrument.triggerAttackRelease(value.note, value.dur, time, value.velocity);
+    }), e.notes).start(0));
   });
 }
 

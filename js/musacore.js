@@ -20,7 +20,7 @@ var sessionData = {
     "chloop":1,
     "melodies":[{
         name:"Bass",
-        instrument:simplesquerewave,
+        instrument:1,
         scale:0,
         size:4,
         notes:[{
@@ -81,7 +81,7 @@ var sessionData = {
           velocity: 0.9
         } ]},{
           name:"Mel2",
-          instrument:simplesquerewave,
+          instrument:1,
           scale:1,
           size:4,
           notes:[{

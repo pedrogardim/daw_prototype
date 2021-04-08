@@ -436,17 +436,6 @@ function draw() {
 
 }
 
-function loadDrums(y) { 
-  for (var i = 0; i < 10; i++) {
-    //load 10 drum sounds, from 1.wav (kick) to 10.wav (perc)
-    drumSounds.push(
-      new Tone.Player("assets/samples/drums/" + y + "/" + (i + 1) + ".wav")
-        .toDestination()
-        .connect(Tone.Master)
-    );
-  }
-}
-
 //all necesaries functions to load sequencer page
 $(function() {
   drawCircleElements();
