@@ -8,6 +8,8 @@ var isChordPlaying = false;
 
 var drumIsLoaded = false;
 var drumSounds = [];
+var rhythminstrument = instrumentContructor(0);
+
 
 var looponfirstdrum = false;
 
@@ -21,6 +23,7 @@ Tone.Transport.bpm.value = sessionbpm;
 Tone.Transport.loop = true;
 Tone.Transport.loopStart = 0;
 Tone.Transport.loopEnd = "4m";
+
 
 function startPlayback() {
   
@@ -180,11 +183,11 @@ function scheduleChordRhythm(chord,timetostart) {
         }
         if(e==1){
           //Bass note, temporary solution
-          instrmusaepiano.triggerAttackRelease(Tone.Frequency(chord[0][0]).toFrequency()/2,chordhitdur-0.01,schedulerhythmtime);
+          rhythminstrument.triggerAttackRelease(Tone.Frequency(chord[0][0]).toFrequency()/2,chordhitdur-0.01,schedulerhythmtime);
         }
         if(e==2){
           //Trigger the full chord
-          instrmusaepiano.triggerAttackRelease(chord[0],chordhitdur-0.01,schedulerhythmtime);
+          rhythminstrument.triggerAttackRelease(chord[0],chordhitdur-0.01,schedulerhythmtime);
         }
 
         $(".re-strike").css("background","var(--darkest-color)");

@@ -1,29 +1,57 @@
+var looprepeats = 1;
+
 function prepareOffline(){
+
+    var exportdur = looprepeats * (60/sessionbpm) * 4 * sessionlength;
+
     Tone.Offline(({ transport }) => {
 
-      console.log(sessionchords);
+      transport.bpm.value = sessionbpm;
+      var exportpiano = instrumentContructor(0);
+      
+      /*
+      const exportpiano = new Tone.PolySynth(Tone.FMSynth,
+        {
+        "harmonicity":50,
+        "modulationIndex": 20,
+        "oscillator" : {
+          "type": "sine2"
+        },
+        "envelope": {
+          "attack": 0.001,
+          "decay": 2,
+          "sustain": 0.0,
+          "release": 0.2,
+        },
+        "modulation" : {
+          "type" : "sine"
+        },
+        "modulationEnvelope" : {
+          "attack": 0.001,
+          "decay": 0.5,
+          "sustain": 0,
+          "release": 0.0,
+        }
+      } ).toDestination();
 
-      var OFFplaybackMeasure = 0;
-      var OFFplaybackBeat = 0;
-      var OFFplaybackChord = 0;
-      var OFFchordsOnMeasure = 0;
-      var OFFbeatsOnChord = 0;
-  
+      */
+
+      exportpiano.volume.value = -12;
+      
 
       if(playingmelodies.length > 0){
         playingmelodies.forEach((e)=>e.dispose());
         playingmelodies = [];
       }
-      sessionmelodies.forEach((e,i)=>{
+
+     /*  sessionmelodies.forEach((e,i)=>{
         playingmelodies.push(new Tone.Part(((time, value) => {
           // the value is an object which contains both the note and the velocity
           sessionmelodies[0].instrument.triggerAttackRelease(value.note, value.dur, time, value.velocity);
         }), sessionmelodies[0].notes).start(0));
-      });
+      }); */
 
-      var playbacksubdivision = Tone.Time("1m").toSeconds() / sessionsubdivision;
-
-      transport.scheduleRepeat((time) => {
+      /* transport.scheduleRepeat((time) => {
 
         if (OFFplaybackMeasure == sessionlength) {
           OFFplaybackMeasure = OFFbeatsOnChord = OFFplaybackChord = 0;
@@ -43,14 +71,6 @@ function prepareOffline(){
         //================
       
         //Play the first chord of the loop
-        if (OFFplaybackChord == 0){
-          scheduleOfflineChordRhythm(thischord, Tone.Time(transport.position).quantize("8n"),transport,OFFplaybackChord,OFFchordsOnMeasure);
-        }
-      
-        if(OFFbeatsOnChord == sessionchords[OFFplaybackChord][1]*sessionsubdivision){
-          scheduleOfflineChordRhythm(thischord, Tone.Time(transport.position).quantize("8n"),transport,OFFplaybackChord,OFFchordsOnMeasure);
-          OFFbeatsOnChord = 0;
-        }
       
         OFFplaybackBeat++;
         OFFbeatsOnChord++;
@@ -64,13 +84,38 @@ function prepareOffline(){
           }
         }
       
-      }, playbacksubdivision);
+      }, playbacksubdivision); */
+
+      var rhythmtime = 0;
+
+      sessionchords.forEach((chord,chordindex)=>{
+
+        chord[3].forEach((rhythm,rhythmindex)=>{
+
+          var chordhitdur = (chord[1] * Tone.Time("1m").toSeconds()) / chord[3].length;
+
+          transport.scheduleOnce((schedulerhythmtime)=>{
+            if(rhythm==0){}
+
+            if(rhythm==1){
+              exportpiano.triggerAttackRelease(Tone.Frequency(chord[0][0]).toFrequency()/2,chordhitdur,schedulerhythmtime);
+            }
+            if(rhythm==2){
+              exportpiano.triggerAttackRelease(chord[0],chordhitdur,schedulerhythmtime);
+            }
+          },rhythmtime);
+
+          rhythmtime += chordhitdur;
+
+        });
+      });
 
       transport.start();//start loop
 
-    }, 2).then((e) => {
+    }, exportdur).then((e) => {
       // do something with the output buffer
     var blob = audioBufferToWaveBlob(e);
+    console.log(e);
 
     var promiseB = blob.then(function(result) {
         var url  = window.URL.createObjectURL(result);
@@ -78,6 +123,8 @@ function prepareOffline(){
         $("#downloadloopbtn").attr("download","loop.wav");
      });
     
+    }).catch((e)=>{
+      console.log({ e });
     });
     
 }
@@ -109,11 +156,11 @@ function scheduleOfflineChordRhythm(chord,timetostart,transport,pc,cm) {
         }
         if(e==1){
           //Bass note, temporary solution
-          instrmusaepiano.triggerAttackRelease(Tone.Frequency(chord[0][0]).toFrequency()/2,chordhitdur-0.01,schedulerhythmtime);
+          exportpiano.triggerAttackRelease(Tone.Frequency(chord[0][0]).toFrequency()/2,chordhitdur-0.01,schedulerhythmtime);
         }
         if(e==2){
           //Trigger the full chord
-          instrmusaepiano.triggerAttackRelease(chord[0],chordhitdur-0.01,schedulerhythmtime);
+          exportpiano.triggerAttackRelease(chord[0],chordhitdur-0.01,schedulerhythmtime);
         }
 
       },rhythmtime);
