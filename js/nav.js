@@ -6,7 +6,7 @@
 //3 = Chord
 
 var appMode = 1;
-var pages = ["circlescont","drumpage","chordeditor","melodyeditor"];
+var pages = ["circlescont","drumpage","chordeditor","melodyeditor","mixpage"];
 var optionsMenu = false;
 
 function navTo(page){
