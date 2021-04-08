@@ -2,10 +2,17 @@
     display:flex;
     flex-direction:row;
     align-items:center;
+    justify-content:center;
     /* background:var(--medium-color); */
     overflow-y: hidden;
-    overflow-x:visible;
+    overflow-x:scroll;
     height:70%;
+    width:100%;
+    padding-left:150px;
+    padding-right:150px;
+
+    position: absolute;
+    top: 15%;
 }
 
 .chstrip{

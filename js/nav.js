@@ -15,6 +15,13 @@ function navTo(page){
     appMode = page;
     $(".tabitem").removeClass("selectednavitem");
     $(".tabitem[data-nav="+page+"]").addClass("selectednavitem");
+    if(page == 5){
+        $("#circlescont").addClass("hidden");
+    }
+    else{
+        $("#circlescont").removeClass("hidden");
+
+    }
     if(page == 1){
         $("#circlescont").removeClass("circle-comp");
     }
