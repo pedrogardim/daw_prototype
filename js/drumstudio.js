@@ -29,6 +29,13 @@ function drawSequencer() {
       $("#seqTile-0-"+y).append(instrlabel);
 
     }
+
+    $("#seq-steps-input").html("");
+
+    stepvalues.forEach((e)=>{
+      $("#seq-steps-input").append('<option value="'+e+'">'+e+'</option>')
+    })
+
     updateSequencerElements();
   }
   
@@ -66,11 +73,12 @@ sessiondrums.forEach((msre,msreindex)=>{
   
   function registerNoteToSequencer(note, beat) {
 
-      ///WITHOUT STEP INPUT MODE
-  
+    console.log(note, beat);
+
+      ///WITHOUT STEP INPUT MODE  
       if (sessiondrums[playbackMeasure][beat].includes(note) == true) {
         sessiondrums[playbackMeasure][beat] = sessiondrums[playbackMeasure][beat].filter(
-          (x) => x != note
+          (e) => e != note
         );
       } else if (sessiondrums[playbackMeasure][beat].includes(note) == false) {
         sessiondrums[playbackMeasure][beat].push(note);
@@ -83,6 +91,7 @@ sessiondrums.forEach((msre,msreindex)=>{
   }
 
   function adaptDrumSeqtoSubdiv(){
+
     sessiondrums.forEach((drumseq,index)=>{
       
       if ((sessionsubdivision - drumseq.length) == 0) return;
@@ -110,7 +119,6 @@ sessiondrums.forEach((msre,msreindex)=>{
   }
 
   function updateSteps(input){
-    $("#seq-steps-input").val(input);
     sessionsubdivision = input;
     adaptDrumSeqtoSubdiv();
 
@@ -123,41 +131,17 @@ sessiondrums.forEach((msre,msreindex)=>{
 
   $("#seq-steps-input").on("change", function (e) {
 
+
     var goal = $(this).val();
     var closest = stepvalues.reduce((prev, curr) => {return (Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev)});
     stepselec = stepvalues.indexOf(closest);
     
-    updateSteps($(this).val());
-    $("#seq-steps-input").blur();
-    
+    updateSteps(goal);
+
+    $(this).val(goal);
+
   });
 
-  $(".addstep").on("click", function (e) {
-    if(stepselec < stepvalues.length-1){
-      stepselec++;
-      updateSteps(stepvalues[stepselec]);
-      }
-      $(".addstep").blur();
-  });
-
-  $(".subtractstep").on("click", function (e) {
-    if(stepselec > 0){
-    stepselec--;
-    updateSteps(stepvalues[stepselec]);
-    }
-    $(".subtractstep").blur();
-
-
-    
-  });
-
-  $(function(){
-    var goal = sessionsubdivision;
-    var closest = stepvalues.reduce((prev, curr) => {return (Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev)});
-    stepselec = stepvalues.indexOf(closest);
-    $("#seq-steps-input").val(stepvalues[stepselec]);
-
-  })
 
 
   
@@ -179,9 +163,9 @@ sessiondrums.forEach((msre,msreindex)=>{
     $(".seqtile").removeClass("selectedTile");
 
   
-    sessiondrums[playbackMeasure].forEach(function (e, i) {
-      e.forEach(function (element, index) {
-        $("#seqTile-" + i + "-" + (element - 1)).toggleClass("selectedTile");
+    sessiondrums[playbackMeasure].forEach(function (beat, btindex) {
+      beat.forEach(function (element, index) {
+        $("#seqTile-" + btindex + "-" + (element - 1)).toggleClass("selectedTile");
       });
     });
   }
@@ -205,13 +189,12 @@ sessiondrums.forEach((msre,msreindex)=>{
   
   //SEQ TILE CLICK
   
-  $(document).on('click','.seqtile',function () {
+  $(document).on('click','.seqtile',function (e) {
+    //selectedonthisdrag = [];
 
-    selectedonthisdrag = [];
-
-    $(this).toggleClass("selectedTile");
+    $(e.target).toggleClass("selectedTile");
   
-    var thisid = $(this).attr("id");
+    var thisid = $(e.target).attr("id");
     thisid = thisid.replace("seqTile-", "");
     thisid = thisid.split("-");
     var thisstep = parseInt(thisid[0]);
