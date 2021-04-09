@@ -36,6 +36,8 @@ function drawSequencer() {
       $("#seq-steps-input").append('<option value="'+e+'">'+e+'</option>')
     })
 
+    $("#seq-steps-input").val(sessionsubdivision)
+
     updateSequencerElements();
   }
   
@@ -305,9 +307,30 @@ $("html").keydown(function (e) {
         //e.preventDefault();
         //stop();
         //stepInputOn();
-        
+      }
+
+      if (e.keyCode == 67 && (e.ctrlKey || e.metaKey)){
+        //Ctrl + C / Cmd + C
+        e.preventDefault();
+        navigator.clipboard.writeText(JSON.stringify([0,sessiondrums[playbackMeasure]]));
 
       }
+      if (e.keyCode == 86 && (e.ctrlKey || e.metaKey)){
+       //Ctrl + V / Cmd + V
+        e.preventDefault();
+        navigator.clipboard.readText().then((value)=>{
+        try{var copiedmsre = JSON.parse(value)}
+        catch(err){alert("Oops.. Make sure you are trying to paste a drum pattern");return}
+          
+          if(copiedmsre[0] == 0 && copiedmsre[1] != sessiondrums[playbackMeasure]){
+            sessiondrums[playbackMeasure] = copiedmsre[1];
+            updateSequencerElements();
+            updateMsreScroreTiles();
+          }
+        })
+        
+      }
+
     }
     
   });
