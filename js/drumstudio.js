@@ -90,6 +90,7 @@ sessiondrums.forEach((msre,msreindex)=>{
 
       updateSequencerElements();
       updateMsreScroreTiles();
+      onModifySession();
   }
 
   function adaptDrumSeqtoSubdiv(){
@@ -139,8 +140,9 @@ sessiondrums.forEach((msre,msreindex)=>{
     stepselec = stepvalues.indexOf(closest);
     
     updateSteps(goal);
-
     $(this).val(goal);
+    onModifySession();
+
 
   });
 

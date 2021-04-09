@@ -138,11 +138,16 @@ function addChord(chordnotes,chord,side){
                 '</div>';
     
     $("#measure" + olderchord[2]).append(chorddiv);
+
     updateChordsOnScore();
     unselectChord();
+    onModifySession();
+
+
 }
 
 function removeChord(){
+    
     var chordsinthismeasure = sessionchords.filter(function(value, index, arr){ 
         return value[2] == sessionchords[selectedchord][2];
     });
@@ -172,6 +177,9 @@ function removeChord(){
 
     unselectChord();
     updateChordsOnScore();
+    onModifySession();
+
+
 
 }
 
@@ -218,8 +226,6 @@ function updateChordsOnScore(){
     drawRhythm();
     drawChordsCircle();
 
-
-    
 }
 
 function unselectChord(){
@@ -291,6 +297,7 @@ function editRhythm(chord,add_delete){
 
     }
     drawRhythm()
+    onModifySession();
 
 }
 

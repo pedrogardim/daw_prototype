@@ -199,6 +199,7 @@ function addNote(notetoadd,noteindex){
             $(event.target).html(newnote);
             ui.position.top = newtop;
             updateMelodyPreview();
+            onModifySession();
 
             
         }
@@ -210,6 +211,7 @@ function addNote(notetoadd,noteindex){
         stop: function( event, ui ) {
             sessionmelodies[selectedmelody].notes[selectednote].dur = PRPixelsToTime(ui.size.width);
             updateMelodyPreview();
+            onModifySession();
 
             
         },
@@ -316,6 +318,8 @@ $("#pianorollgrid").dblclick((event)=>{
     console.log(newnote);
     sessionmelodies[selectedmelody].notes.push(newnote);
     addNote(newnote);
+    onModifySession();
+
             
 });
 

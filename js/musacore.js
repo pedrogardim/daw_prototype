@@ -3,6 +3,7 @@ var sessionData = {
     "bpm":100,
     "length": 4, //in measure
     "timesignature":[4,4],
+    "steps":8,
     "drumpatterns":[
         [[1,4],[4],[2,4],[4],[1,4],[4],[2,4],[4]],
         [[1,4],[4],[2,4],[4],[1,4],[4],[2,4],[4]],
@@ -148,21 +149,75 @@ var sessionData = {
 var loadedPage;
 var isPlaying = false;
 
-var sessionName = sessionData.name;
-var sessionlength = sessionData.length;
-var sessionchords = sessionData.chords;
-var sessionrhythms = sessionData.rhythm;
-var sessionbpm = sessionData.bpm;
-var sessiondrums = sessionData.drumpatterns;
-var sessiontimesignature = sessionData.timesignature;
-var sessionmelodies = sessionData.melodies;
+var modhistory = [];
+var restoreversion = 0;
 
-var sessionsubdivision = 8;
+var tempData = JSON.parse(JSON.stringify(sessionData));
 
-var dploop = sessionData.dploop;
-var chloop = sessionData.chloop;
+var sessionName = tempData.name;
+var sessionlength = tempData.length;
+var sessionchords = tempData.chords;
+var sessionrhythms = tempData.rhythm;
+var sessionbpm = tempData.bpm;
+var sessiondrums = tempData.drumpatterns;
+var sessiontimesignature = tempData.timesignature;
+var sessionmelodies = tempData.melodies;
+var sessionsubdivision = tempData.steps;
+var dploop = tempData.dploop;
+var chloop = tempData.chloop;
+
 
 var drumSounds = [];
+
+
+function onModifySession(){
+
+  console.log("Modified");
+
+  var oldsessionData = JSON.parse(JSON.stringify(sessionData));
+
+  modhistory.push(oldsessionData);
+
+  if(modhistory.length == 20){
+    modhistory.shift();
+  }
+
+  sessionData = JSON.parse(JSON.stringify(tempData));
+
+}
+
+$("html").keydown(function (e) {
+
+  //ctrl Z
+
+  if (e.keyCode == 90  && (e.ctrlKey || e.metaKey)){
+
+    if(modhistory.length == 0){alert("No changes to undo"); return;}
+
+    sessionData = JSON.parse(JSON.stringify(modhistory.pop()));
+
+    console.log(sessionData.drumpatterns[0][0]);
+
+    tempData = JSON.parse(JSON.stringify(sessionData));
+
+    sessionName = tempData.name;
+    sessionlength = tempData.length;
+    sessionchords = tempData.chords;
+    sessionrhythms = tempData.rhythm;
+    sessionbpm = tempData.bpm;
+    sessiondrums = tempData.drumpatterns;
+    sessiontimesignature = tempData.timesignature;
+    sessionmelodies = tempData.melodies;
+    sessionsubdivision = tempData.steps;
+    dploop = tempData.dploop;
+    chloop = tempData.chloop;
+
+    updateAll();
+
+  }
+
+})
+
 
 
 

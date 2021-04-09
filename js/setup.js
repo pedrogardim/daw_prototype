@@ -438,6 +438,8 @@ function draw() {
 
 //all necesaries functions to load sequencer page
 $(function() {
+
+  //onModifySession();
   drawCircleElements();
   drawChordsCircle();
   drumScore();
@@ -471,6 +473,15 @@ $(window).resize(function () {
 
 });
 
+function updateAll(){
+  
+  updateMsreScroreTiles();
+  updateSequencerElements();
+  updateMelodyPreview();
+  drawScore();
+  adjustNotesPos();
+
+}
 
 
 
