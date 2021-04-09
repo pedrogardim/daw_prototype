@@ -1,4 +1,13 @@
 var looprepeats = 1;
+var downloadprepared = false;
+
+$("#downloadloopbtn").mouseenter(function () { 
+  if(downloadprepared == false){
+    prepareOffline();
+    $("#downloadloopbtn").html('<i class="fa fa-circle-o-notch fa-spin"></i>');
+  }
+  
+});
 
 
 
@@ -37,7 +46,7 @@ function prepareOffline(){
       
         if (OFFplaybackBeat == sessionsubdivision) {
           OFFplaybackBeat = 0;
-          playbackMeasure++;
+          OFFplaybackMeasure++;
         }
       
       }, playbacksubdivision);
@@ -75,12 +84,14 @@ function prepareOffline(){
     }, exportdur).then((e) => {
       // do something with the output buffer
     var blob = audioBufferToWaveBlob(e);
-    console.log(e);
 
     var promiseB = blob.then(function(result) {
         var url  = window.URL.createObjectURL(result);
         $("#downloadloopbtn").attr("href",url);
-        $("#downloadloopbtn").attr("download","loop.wav");
+        $("#downloadloopbtn").attr("download",sessionName+".wav");
+        downloadprepared = true;
+        $("#downloadloopbtn").html("DOWNLOAD LOOP");
+
      });
     
     });
@@ -123,3 +134,5 @@ function prepareOffline(){
     });
   
   }
+
+

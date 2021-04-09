@@ -172,8 +172,6 @@ var drumSounds = [];
 
 function onModifySession(){
 
-  console.log("Modified");
-
   var oldsessionData = JSON.parse(JSON.stringify(sessionData));
 
   modhistory.push(oldsessionData);
@@ -183,6 +181,7 @@ function onModifySession(){
   }
 
   sessionData = JSON.parse(JSON.stringify(tempData));
+  downloadprepared = false;
 
 }
 

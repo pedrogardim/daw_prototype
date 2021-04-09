@@ -307,10 +307,18 @@ button{
   background:var(--dark-color);
   border:1px solid var(--darkest-color);
   color: var(--brightest-color);
+  height:36px;
+  font-size:20px;
+  cursor: pointer;
+  font-family: "Barlow Semi Condensed", sans-serif;
 }
 
 button:focus {
   outline-width: 0;
+    
+}
+button:hover {
+  filter:brightness(1.2) contrast(0.8);
     
 }
 
@@ -326,6 +334,36 @@ select{
 select:focus {
   outline-width: 0;
     
+}
+
+#downloadloopbtn{
+  background:var(--dark-color);
+  border:1px solid var(--darkest-color);
+  color: var(--brightest-color);
+  height:36px;
+  font-size:20px;
+  cursor: pointer;
+  font-family: "Barlow Semi Condensed", sans-serif;
+  line-height:36px;
+  width:160px;
+  text-align: center;
+  text-decoration: none;
+}
+
+#downloadloopbtn:hover {
+  filter:brightness(1.2) contrast(0.8);
+  text-decoration: underline;
+
+    
+}
+
+.bottomcont{
+  top:75%;
+  height:15%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
 }
 
 .flex-col{
