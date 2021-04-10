@@ -477,6 +477,8 @@ function updateAll(){
   
   updateMsreScroreTiles();
   updateSequencerElements();
+
+  adaptDrumSeqtoSubdiv();
   updateMelodyPreview();
   drawScore();
   adjustNotesPos();

@@ -182,6 +182,8 @@ function onModifySession(){
 
   sessionData = JSON.parse(JSON.stringify(tempData));
   downloadprepared = false;
+  
+  console.log("Mod")
 
 }
 

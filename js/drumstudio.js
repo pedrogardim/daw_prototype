@@ -122,7 +122,7 @@ sessiondrums.forEach((msre,msreindex)=>{
   }
 
   function updateSteps(input){
-    sessionsubdivision = input;
+    sessionsubdivision = tempData.steps = input;
     adaptDrumSeqtoSubdiv();
 
   }
