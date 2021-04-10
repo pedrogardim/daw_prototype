@@ -4,6 +4,7 @@ var sessionData = {
     "length": 4, //in measure
     "timesignature":[4,4],
     "steps":8,
+    "selecteddrums":0,
     "drumpatterns":[
         [[1,4],[4],[2,4],[4],[1,4],[4],[2,4],[4]],
         [[1,4],[4],[2,4],[4],[1,4],[4],[2,4],[4]],
@@ -159,6 +160,7 @@ var sessionlength = tempData.length;
 var sessionchords = tempData.chords;
 var sessionrhythms = tempData.rhythm;
 var sessionbpm = tempData.bpm;
+var selecteddrums = tempData.selecteddrums;
 var sessiondrums = tempData.drumpatterns;
 var sessiontimesignature = tempData.timesignature;
 var sessionmelodies = tempData.melodies;
@@ -207,6 +209,7 @@ $("html").keydown(function (e) {
     sessionrhythms = tempData.rhythm;
     sessionbpm = tempData.bpm;
     sessiondrums = tempData.drumpatterns;
+    selecteddrums = tempData.selecteddrums;
     sessiontimesignature = tempData.timesignature;
     sessionmelodies = tempData.melodies;
     sessionsubdivision = tempData.steps;

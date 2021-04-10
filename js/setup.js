@@ -449,10 +449,12 @@ $(function() {
   getChordsFromScale();
   showMelodyList();
 
+  loadDrums("808");
+
+  drawDrumKeys();
   updateMsreScroreTiles();
   adaptDrumSeqtoSubdiv();
 
-  loadDrums("808");
   $("#sessiontitle").html(sessionName);
   $('#chordpiano').klavier({ startKey: 21, endKey: 108});
   

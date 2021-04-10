@@ -92,20 +92,7 @@ instrmusaepiano.connect(tremolo);
 
 //instrmusaepiano.connect(phaser);
 
-var drumsamplesbuffer = []
 
-for(var x = 0; x < 10; x++){
-  drumsamplesbuffer.push(new Tone.Buffer("assets/samples/drums/808/"+(x+1)+".wav"));
-}
-
-function loadDrums(y) {
-	for (var i = 0; i < 10; i++) {
-	  //load 10 drum sounds, from 1.wav (kick) to 10.wav (perc)
-	  drumSounds.push(
-		new Tone.Player(drumsamplesbuffer[i]).toDestination()
-	  );
-	}
-}
 
 
 const types = ["Drums", "Keys", "Synth"];

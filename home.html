@@ -47,7 +47,7 @@
             </div>
         </header>
         
-        <!--<div id="navbar"></div>-->
+        <!--<div id="navbar"></div>
         <div id="optionscolumn" class="">
             <div class="optionrow">
                 <span>SESSION SETTINGS</span>
@@ -72,6 +72,8 @@
             <hr>
             <div class="optionrow"></div>
         </div>
+        -->
+
         <div id="workspace">
             <div id="circlescont">
                 <div id="rhythmcircle" class="visible"></div>
@@ -92,15 +94,17 @@
             </div>
             
             <!--Drumstudio-->
-            <div id="drumpage" class="page hidden">
+            <div id="drumseqpage" class="page hidden">
                 <div id="stepseq"></div>
                 <div id="bottomscore" class="score"></div>
                 <div id="seq-params" class="bottommenu">
                     <span>STEPS (SUBDVISION)</span>
                     <select id="seq-steps-input"></select>
-
                 </div>
             </div>  
+            <div id="drumpage" class="page hidden">
+                <div id="drumkeyscont" class="column"></div>
+            </div>
             <!--Chords-->
             <div id="chordeditor" class="page hidden">
                 <input id="floatinginput" type="text" class="hidden">
@@ -160,6 +164,8 @@
         <script src="libs/audiobuffertowave.js"></script>
         
         <script src="js/instruments.js"></script>
+        <script src="js/drumkits.js"></script>
+
         <script src="js/musacore.js"></script>
         <script src="js/setup.js"></script>
 

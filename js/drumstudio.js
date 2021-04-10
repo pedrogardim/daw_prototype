@@ -2,6 +2,49 @@ var stepvalues = [4,8,12,16,24,32,48];
 var stepselec;
 var dragtileselect = false;
 var selectedonthisdrag = [];
+var drumview = 0;
+
+
+///////////////////////////
+//INTERNAL NAV
+//////////////////////////
+
+
+
+
+
+///////////////////////////
+//KEYS
+//////////////////////////
+
+var drumtriggers = ["1","2","3","4","5","6","7","8","9","0","Q","W","E","R","T","Y","U","I","O","P","A","S","D","F","G","H","J","K","L","Z","X","C","V","B","N","M"];
+
+function drawDrumKeys(){
+  var drumkeys = "";
+  drumSounds.forEach((e,i)=>{
+    drumkeys += '<div class="drumkey" data-index="'+i+'" data-trigger="'+drumtriggers[1]+'">'+drumkits[selecteddrums].labels[i]+'<br>'+drumtriggers[i]+'</div>'
+
+  })
+  $("#drumkeyscont").html(drumkeys)
+}
+
+
+function playDrumSound(keycodetoindex){
+
+  if(keycodetoindex < drumSounds.length){
+    drumSounds[keycodetoindex].start();
+    $('.drumkey[data-index="'+keycodetoindex+'"]').css("background-color","var(--medium-color)")
+   
+    if(drumview == 1) registerNoteToSequencer(e.keyCode - 48, playbackBeat);
+  } 
+
+
+
+}
+
+///////////////////////////
+//SEQUENCER
+//////////////////////////
 
 function drawSequencer() {
     $("#stepseq").html("");
@@ -96,10 +139,53 @@ sessiondrums.forEach((msre,msreindex)=>{
   function adaptDrumSeqtoSubdiv(){
 
     sessiondrums.forEach((drumseq,index)=>{
+
+      var difference = sessionsubdivision / drumseq.length;
+
+      var newsubdivarray = [];
+
+      //POSSIBLE SCENARIOS:
+
+      //no difference
       
-      if ((sessionsubdivision - drumseq.length) == 0) return;
+      if (difference == 1) return;
+
+      //difference is greater than double, insert silences between beats
+
+      else if (difference % 2 == 0 || difference % 3 == 0){ 
+
+        for(var x = 0; x < drumseq.length; x++){
+          newsubdivarray.push(drumseq[x]);
+          for(var y = 0; y < (difference-1); y++){
+            newsubdivarray.push([]);
+          }
+        }
+      }
+
+      //difference is positive, but less than double, insert silences in some intervals
+
+      else if (difference > 1 && difference < 2){ 
+
+        for(var x = 0; x < drumseq.length; x++){
+            newsubdivarray.push(drumseq[x]);
+            if(x%((difference*2)-1) == 1){
+              newsubdivarray.push([]);
+            }
+        }
+      }
+
+      else if (difference < 1){ 
+
+        for(var x = 0; x < sessionsubdivision; x++){
+            newsubdivarray.push(drumseq[x/difference]);
+        }
+      }
+
+      sessiondrums[index] = newsubdivarray;
+      return;
+    
+    
       
-      var newsubdivarray = Array.apply([],Array(sessionsubdivision));
       //var dif = sessionsubdivision/(sessionsubdivision-drumseq.length);
       //console.log(dif)
       
@@ -134,7 +220,6 @@ sessiondrums.forEach((msre,msreindex)=>{
 
   $("#seq-steps-input").on("change", function (e) {
 
-
     var goal = $(this).val();
     var closest = stepvalues.reduce((prev, curr) => {return (Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev)});
     stepselec = stepvalues.indexOf(closest);
@@ -143,8 +228,9 @@ sessiondrums.forEach((msre,msreindex)=>{
     $(this).val(goal);
     onModifySession();
 
-
   });
+
+
 
 
 
@@ -242,6 +328,26 @@ sessiondrums.forEach((msre,msreindex)=>{
   }); */
 
 
+  ///CLICK
+  $(document).on('mousedown','.drumkey',function (e) {
+
+    playDrumSound($(this).data("index"));
+  
+
+  });
+
+  $(document).on('mouseup',function (e) {
+
+    $('.drumkey').css("background-color","")
+
+  
+
+  });
+
+
+
+
+
 
 
 
@@ -277,20 +383,16 @@ $("html").keydown(function (e) {
     //ONLY TRIGGER WHEN PAGE LOADED
   
     if(appMode == 2){
-  
+
+      var keycodetoindex = drumtriggers.indexOf(String.fromCharCode(e.keyCode));
+      $('.drumkey[data-index="'+keycodetoindex+'"]').css("background-color","var(--bright-color)")
+
       //1-9
-      if (e.keyCode >= 49 && e.keyCode <= 57) {
-        drumSounds[e.keyCode - 49].start();
-        registerNoteToSequencer(e.keyCode - 48, playbackBeat);
+      if (keycodetoindex != -1) {
+        playDrumSound(keycodetoindex);
         return;
       }
   
-      //0
-      if (e.keyCode == 48) {
-        drumSounds[9].start();
-        registerNoteToSequencer(10, playbackBeat);
-        return;
-      }
       //L & R ARROWS
       if (e.keyCode == 37 || e.keyCode == 39) {
         if (e.keyCode == 37 && playbackBeat > 0){playbackBeat--;}
@@ -332,6 +434,19 @@ $("html").keydown(function (e) {
         })
         
       }
+
+    }
+    
+  });
+
+  $("html").keyup(function (e) {
+    //ONLY TRIGGER WHEN PAGE LOADED
+  
+    if(appMode == 2){
+
+      var keycodetoindex = drumtriggers.indexOf(String.fromCharCode(e.keyCode));
+      $('.drumkey[data-index="'+keycodetoindex+'"]').css("background-color","")
+
 
     }
     

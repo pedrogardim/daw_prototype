@@ -395,6 +395,7 @@
 
 /* ===================SWITCH BUTTON===================*/
 
+/* 
 #switchseqmode{
   position: absolute;
   width: 80px;
@@ -433,7 +434,38 @@
   border: solid 1px var(--medium-color);
   margin-top: -1px;
   margin-left: -1px;
+} */
+
+#drumkeyscont{
+  display:flex;
+  flex-direction:row;
+  flex-wrap: wrap;
+  /*justify-content: flex-start;*/
+  justify-content: center;
+
+  align-items: center;
+  align-content: center;
 }
+
+.drumkey{
+  height:auto;
+  margin:0.5vw;
+  flex-shrink: 1;
+  flex-basis:18%;
+  outline:solid 1px var(--darkest-color);
+  cursor:pointer;
+  transition: background-color 0.3s;
+  background-color:var(--brightest-color);
+  padding: 20px 0px 20px 0px;
+  text-align:center;
+
+}
+.drumkey:hover{
+  background-color:var(--bright-color);
+
+}
+
+
 
 .drummeasure{
   display: flex;
