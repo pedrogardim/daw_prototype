@@ -9,6 +9,29 @@ var drumview = 0;
 //INTERNAL NAV
 //////////////////////////
 
+$("#toggleseq").click((e)=>{
+  if (drumview == 0){
+    $("#drumpage").animate({bottom:"100%"});
+    $("#drumseqpage").animate({bottom:"0%"}).removeClass("hidden");
+    drumview = 1;
+    $("#toggleseq").css({transform:'rotate(-90deg)'})
+    return;
+  }
+  if (drumview == 1){
+    $("#drumpage").animate({bottom:"0%"}).removeClass("hidden");
+    $("#drumseqpage").animate({bottom:"-100%"});
+    
+    drumview = 0
+    $("#toggleseq").css({transform:'rotate(90deg)'})
+
+    return;
+  }
+
+});
+
+$("#drumseqpage").css({bottom:"-100%"});
+
+
 
 
 
@@ -383,12 +406,12 @@ $("html").keydown(function (e) {
     //ONLY TRIGGER WHEN PAGE LOADED
   
     if(appMode == 2){
-
+      
       var keycodetoindex = drumtriggers.indexOf(String.fromCharCode(e.keyCode));
       $('.drumkey[data-index="'+keycodetoindex+'"]').css("background-color","var(--bright-color)")
 
       //1-9
-      if (keycodetoindex != -1) {
+      if (keycodetoindex != -1 && e.ctrlKey == false && e.metaKey == false) {
         playDrumSound(keycodetoindex);
         return;
       }

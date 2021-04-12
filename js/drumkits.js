@@ -2,6 +2,7 @@ var drumkits = [
     {
         name: '808',
         type: 'Electronic',
+        sampled:true,
         labels:[
             "Kick",
             "Snare",
@@ -14,7 +15,9 @@ var drumkits = [
             "Crash",
             "Percussion",
         ],
-        sampled:true,
+        icons:[
+          
+        ]
     }
 ]
 

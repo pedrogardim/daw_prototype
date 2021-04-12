@@ -413,7 +413,7 @@ function gcd_two_numbers(x, y) {
 }
 
 //ANIMATED CUBE
-
+/* 
 function setup() {
   let cnv = createCanvas(100, 100, WEBGL);
   cnv.id('mycanvas');
@@ -435,7 +435,7 @@ function draw() {
   noFill();
 
 }
-
+ */
 //all necesaries functions to load sequencer page
 $(function() {
 
