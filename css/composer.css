@@ -78,6 +78,13 @@
   margin-top: 20px;
 }
 
+#chord-instr-input{
+  top:calc(40% - 30px);
+  left:calc(20% - 100px);
+  position:absolute;
+  
+}
+
 #rhythmeditor{
   position: absolute;
   width: calc(60%);

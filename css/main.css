@@ -179,7 +179,7 @@ body {
 }
 
 .shadow {
-  box-shadow: 2px 2px 8px 1px var(--darkest-color);
+  box-shadow: 1px 1px 4px 1px var(--darkest-color);
 }
 
 .sticky{
@@ -376,6 +376,119 @@ select:focus {
 
     
 }
+
+/*///////////////////////////////////////////////////////////////*/
+/*///////////////////////////////////////////////////////////////*/
+/*///////////////////////////////////////////////////////////////*/
+/*///////////////////////////////////////////////////////////////*/
+/*///////////////////////////////////////////////////////////////*/
+
+
+#intrument-editor{
+  background:var(--brightest-color);
+  outline: solid 1px ;
+}
+
+#ie-close{
+  position: absolute;
+  top:0px;
+  left:-50px;
+  color:var(--darkest-color);
+  cursor: pointer;
+  font-size:48px;
+  z-index:2;
+}
+
+#instr-tabs{
+
+  height:40px;
+  display: flex;
+  flex-direction: row;
+
+}
+
+.instr-tabs-item{
+
+  width:1px;
+  flex-grow: 1;  
+  line-height: 40px;
+  text-align: center;
+  
+}
+
+.ie-cont{
+  position:absolute;
+  outline: solid 1px #05386b25;
+  display:flex;
+  justify-content:flex-start;
+  flex-wrap: wrap;
+
+
+}
+
+.ie-subcont{
+  flex-grow: 1;
+  display: flex;
+  flex-direction:column;
+  flex-wrap: wrap;
+  align-self: stretch;
+  justify-content:space-between;
+  align-items:center;
+}
+
+
+#ie-osc{
+  width:60%;
+  height:50%;
+  top:40px;
+  flex-direction: row;
+
+
+}
+#ie-flt{
+  width:60%;
+  height:calc(50% - 40px);
+  bottom:0;
+  flex-direction: row;
+
+}
+#ie-adsr{
+  right:0;
+  height:calc(70% - 40px);
+  top:40px;
+  width:40%;
+  flex-direction: column;
+
+}
+#ie-amp{
+  bottom:0;
+  right:0;
+  height:30%;
+  width:40%;
+  flex-direction: row;
+
+}
+
+.ie-title{
+  width:100%;
+  margin:10px 0px 10px 0px;
+  text-align:center;
+  flex-shrink: 0;
+  max-height:20px;
+
+}
+
+
+
+
+
+/*///////////////////////////////////////////////////////////////*/
+/*///////////////////////////////////////////////////////////////*/
+/*///////////////////////////////////////////////////////////////*/
+/*///////////////////////////////////////////////////////////////*/
+/*///////////////////////////////////////////////////////////////*/
+/*///////////////////////////////////////////////////////////////*/
+
 
 .bottomcont{
   top:75%;

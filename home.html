@@ -113,7 +113,10 @@
             <div id="chordeditor" class="page hidden">
                 <input id="floatinginput" type="text" class="hidden">
                 <div id="addchordhelper"></div>
+                
                 <div id="centerscore" class="score"></div>
+                <button id="chord-instr-input">Instr</button>
+
                 <div id="rhythmeditor">
                     <div id="re-centralline"></div>
                 </div>
@@ -150,10 +153,38 @@
                     </div>
                 </div>
             </div>  
+
+            <div id="intrument-editor" class="column hidden">
+                <span id="ie-close" class="material-icons">keyboard_arrow_left</span>
+                <div id="instr-tabs">
+                    <div class="instr-tabs-item" data-type="0">Synth</div>
+                    <div class="instr-tabs-item" data-type="1">AM</div>
+                    <div class="instr-tabs-item" data-type="2">FM</div>
+                    <div class="instr-tabs-item" data-type="3">Sampler</div>
+                </div>
+                <div id="ie-osc" class="ie-cont">
+                    <span class="ie-title">Oscillators</span>
+                </div>
+                <div id="ie-flt" class="ie-cont">
+                    <span class="ie-title">Filters</span>
+                </div>
+                <div id="ie-adsr" class="ie-cont">
+                    <span class="ie-title">Envelopes</span>
+                </div>
+                <div id="ie-amp" class="ie-cont">
+                    <span class="ie-title">Output</span>
+                </div>
+
+
+
+
+            </div>
         </div>
+        <!-- 
         <a href="#" id="openedit" class="float">
             <i class="fa fa-plus my-float material-icons">settings</i>
-          </a> 
+        </a>  
+        -->
 
         <!--Core-->
 

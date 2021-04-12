@@ -95,13 +95,13 @@ instrmusaepiano.connect(tremolo);
 
 
 
-const types = ["Drums", "Keys", "Synth"];
+const instrcategories = ["Drums", "Keys", "Synth"];
 
 const instruments = [
 	{
 	name: "Musa Electric Piano",
 	base: "FM",
-	type: 1,
+	categ: 1,
 	gain: -6,
 	options:{
 		"harmonicity":50,
@@ -129,7 +129,7 @@ const instruments = [
 	{
 		name: "Square Lead",
 		base: "AM",
-		type: 2,
+		categ: 2,
 		gain: -16,
 		options:{
 			"harmonicity": 3.999,
@@ -153,6 +153,36 @@ const instruments = [
 				"release": 0.1
 			}
 		}
+		
+	},
+	{
+		name: "MonoDemo",
+		base: "Synth",
+		type: 2,
+		gain: -12,
+		options:{
+			"oscillator": {
+				"type": "sawtooth8"
+			},
+			"envelope": {
+				"attack": 0.03,
+				"decay": 0.3,
+				"sustain": 0.7,
+				"release": 0.1
+			},
+			"filter" : {
+				  "frequency" : 1000,
+				"gain": -12
+			},
+			"filterEnvelope" : {
+				"attack": 2,
+				"decay": 3,
+				"sustain": 0.8,
+				"release": 0.1
+			},
+			"portamento":0.4,
+		}
+		
 		},
 
 ];
@@ -170,6 +200,9 @@ function instrumentContructor(input){
 	if(patch.base == "AM"){
 		instr = new Tone.PolySynth(Tone.AMSynth,patch.options).toDestination();
 	}
+	if(patch.base == "Synth"){
+		instr = new Tone.PolySynth(Tone.MonoSynth,patch.options).toDestination();
+	}
 
 	instr.volume.value = patch.gain;
 
@@ -177,3 +210,66 @@ function instrumentContructor(input){
 
 }
 
+function openIntrumentEditor(intrument){
+
+	var instrtype = intrument._dummyVoice.name;
+
+	$(".instr-tabs-item").removeClass("selectednavitem");
+
+	//console.log(instrtype);
+
+	if(instrtype == "FMSynth"){
+    	$('.instr-tabs-item[data-type="2"]').addClass("selectednavitem");
+	}
+	if(instrtype == "MonoSynth"){
+    	$('.instr-tabs-item[data-type="0"]').addClass("selectednavitem");
+	}
+
+	var instropt = intrument.options
+
+	console.log(intrument.options);
+
+	//check for each instr option:
+
+	if("oscillator" in instropt){
+		$("#ie-osc").append('<div class="ie-subcont" id="ie-mainosc"></div>');
+		$("#ie-mainosc").append('<svg width="128px" height="64px" viewBow="0 0 128 64" id="ie-mainosc-wave"></svg>')
+		
+	}
+
+	intrument._dummyVoice.oscillator.asArray(128).then((r)=>{drawWave(r,"ie-mainosc-wave")});
+
+
+	$("#intrument-editor").removeClass("hidden").addClass("visible");
+
+
+
+}
+
+/*
+function drawWave(wavearray,id){
+
+	var canvas = document.getElementById(id);
+	var ctx = canvas.getContext("2d")
+	ctx.beginPath();
+	ctx.moveTo(0, 39);
+	for(var x = 0; x < wavearray.length; x++){
+		ctx.lineTo(x,(wavearray[x]*39)+39);
+	}
+	ctx.stroke();
+
+}
+*/
+
+function drawWave(wavearray,svgid){
+
+	var pathstring = "M 0 32 ";
+	
+	for(var x = 0; x < wavearray.length; x++){
+		pathstring += "L " + x + " " + ((wavearray[x]*32)+32) + " ";
+	}
+
+	$("#"+svgid).html('<path d="'+pathstring+'" stroke="#05386b" fill="none"/>');
+	
+
+}

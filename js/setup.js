@@ -475,7 +475,7 @@ $(function() {
   $("#sessiontitle").html(sessionName);
   $('#chordpiano').klavier({ startKey: 21, endKey: 108});
   
-  navTo(2);
+  navTo(3);
 
   drawSequencer();
 

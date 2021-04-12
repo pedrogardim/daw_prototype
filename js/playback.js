@@ -8,7 +8,7 @@ var isChordPlaying = false;
 
 var drumIsLoaded = false;
 var drumSounds = [];
-var rhythminstrument = instrumentContructor(0);
+var rhythminstrument = instrumentContructor(2);
 
 
 var looponfirstdrum = false;
