@@ -1,6 +1,10 @@
-function openIntrumentEditor(intrument){
+var wavetypes = ["sine","sawtooth","triangle","square"];
 
-	var instrtype = intrument._dummyVoice.name;
+function openIntrumentEditor(instrument){
+
+    var instrmonovoice = instrument._dummyVoice;
+
+	var instrtype = instrmonovoice.name;
 
 	$(".instr-tabs-item").removeClass("selectednavitem");
 
@@ -13,19 +17,44 @@ function openIntrumentEditor(intrument){
     	$('.instr-tabs-item[data-type="0"]').addClass("selectednavitem");
 	}
 
-	var instropt = intrument.options
-
-	console.log(intrument.options);
 
 	//check for each instr option:
 
-	if("oscillator" in instropt){
-		$("#ie-osc").append('<div class="ie-subcont" id="ie-mainosc"></div>');
-		$("#ie-mainosc").append('<svg width="128px" height="64px" viewBow="0 0 128 64" id="ie-mainosc-wave"></svg>')
-		
+	if("oscillator" in instrmonovoice){
+
+        var osctype = instrmonovoice.oscillator._sourceType;
+        console.log(osctype);
+        $('#ie-mainosc-type option[value="'+osctype+'"]').prop('selected', true);
+        $('#ie-mainosc-type').change((e)=>{
+            instrmonovoice.oscillator._sourceType = $('#ie-mainosc-type').val();
+            drawWave(instrument,"ie-mainosc-wave");
+
+        });
+
+        if(osctype == "oscillator"){
+            $("#ie-mainosc-params").append('<input type="text" class="dial">')
+        };
+
+        $(".dial").knob({
+            'min':-50,
+            'max':50,
+            'width':"40px",
+            'height':"40px",
+            'angleOffset':-140,
+            'angleArc':280,
+            'cursor':10,
+            'thickness':".3",
+            'font':'Barlow Semi Condensed", sans-serif',
+            'bgColor' : "#379683",
+            'fgColor':"#05386b"
+        });
+
+        drawWave(instrument,"ie-mainosc-wave");
+
+
 	}
 
-	intrument._dummyVoice.oscillator.asArray(128).then((r)=>{drawWave(r,"ie-mainosc-wave")});
+
 
 
 	$("#intrument-editor").removeClass("hidden").addClass("visible");
@@ -49,15 +78,20 @@ function drawWave(wavearray,id){
 }
 */
 
-function drawWave(wavearray,svgid){
+function drawWave(instr,svgid){
 
-	var pathstring = "M 0 32 ";
+    instr._dummyVoice.oscillator.asArray(128).then((wavearray)=>{
+
+        var pathstring = "M 0 32 ";
 	
-	for(var x = 0; x < wavearray.length; x++){
-		pathstring += "L " + x + " " + ((wavearray[x]*32)+32) + " ";
-	}
+        for(var x = 0; x < wavearray.length; x++){
+            pathstring += "L " + x + " " + ((wavearray[x]*32)+32) + " ";
+        }
+    
+        $("#"+svgid).html('<path d="'+pathstring+'" stroke="#05386b" fill="none"/>');       
 
-	$("#"+svgid).html('<path d="'+pathstring+'" stroke="#05386b" fill="none"/>');
+    });
+
 	
 
 }

@@ -35,7 +35,7 @@ function selectChord(chord){
 function playChord(input){
 
     if(input == null){
-        instrmusaepiano.triggerAttackRelease(sessionchords[selectedchord][0], sessionchords[selectedchord][1] * Tone.Time("1m"));
+        rhythminstrument.triggerAttackRelease(sessionchords[selectedchord][0], sessionchords[selectedchord][1] * Tone.Time("1m"));
         isPlayingChord = true;
         return;
     }
@@ -46,7 +46,7 @@ function playChord(input){
         duration: 300,
         easing: 'easeOutElastic(1, .8)',
     });
-    instrmusaepiano.triggerAttack(scalechords[input],Tone.now());
+    rhythminstrument.triggerAttack(scalechords[input],Tone.now());
     isPlayingChord = true;
 
     $('#chordpiano').klavier('setSelectedValues', noteArraytoMidi(scalechords[input]));
@@ -67,7 +67,7 @@ function releaseChords(input){
         duration: 300,
         easing: 'easeOutElastic(1, .8)',
     });
-    scalechords.forEach((e)=>instrmusaepiano.triggerRelease(e));
+    scalechords.forEach((e)=>rhythminstrument.triggerRelease(e));
     console.log("release",selectedchord)
     isPlayingChord = false;
     $('#chordpiano').klavier('setSelectedValues',[]);
@@ -436,7 +436,7 @@ $('#chordpiano').click((e)=>{
     var pianonotes = $('#chordpiano').klavier('getSelectedValues');
 
     if(pianonotes.indexOf(notepressed)!=-1){
-        instrmusaepiano.triggerAttackRelease(Tone.Frequency(notepressed,"midi"),"4n")
+        rhythminstrument.triggerAttackRelease(Tone.Frequency(notepressed,"midi"),"4n")
     }
 
     setNotes($('#chordpiano').klavier('getSelectedValues'));

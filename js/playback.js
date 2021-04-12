@@ -267,6 +267,7 @@ $("html").keydown(function (e) {
     return;
   }
   if (e.keyCode == 32 && isPlaying == true) {
+    e.preventDefault();
     stopPlayback();
     return;
   }

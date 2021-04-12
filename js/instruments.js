@@ -162,7 +162,7 @@ const instruments = [
 		gain: -12,
 		options:{
 			"oscillator": {
-				"type": "sawtooth8"
+				"type": "sine5"
 			},
 			"envelope": {
 				"attack": 0.03,
@@ -172,10 +172,10 @@ const instruments = [
 			},
 			"filter" : {
 				  "frequency" : 1000,
-				"gain": -12
+				"gain": 0
 			},
 			"filterEnvelope" : {
-				"attack": 2,
+				"attack": 0,
 				"decay": 3,
 				"sustain": 0.8,
 				"release": 0.1

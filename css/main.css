@@ -74,8 +74,9 @@ body {
 }
 
 .loadingscreen i{
-  color: var(--darkest-color);
+  color: var(--dark-color);
   font-size:10vw;
+
 }
 
 #workspace {
@@ -432,7 +433,7 @@ select:focus {
   flex-direction:column;
   flex-wrap: wrap;
   align-self: stretch;
-  justify-content:space-between;
+  justify-content:flex-start;
   align-items:center;
 }
 
@@ -471,13 +472,25 @@ select:focus {
 
 .ie-title{
   width:100%;
-  margin:10px 0px 20px 0px;
+  margin:8px 0px 16px 0px;
   text-align:center;
   flex-shrink: 0;
-  max-height:20px;
+  max-height:16px;
 
 }
 
+.ie-knob-cont{
+  flex-grow: 1;
+  align-self:stretch;
+  display: flex;
+  justify-content:center;
+  align-items:center;
+}
+
+#ie-mainosc-wave{
+  outline: solid 1px var(--darkest-color);
+  margin-bottom:16px;
+}
 
 
 

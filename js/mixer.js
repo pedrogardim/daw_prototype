@@ -41,7 +41,7 @@ function createChannelStrip(){
     $(thischstrip).append('<input type="text" value="0" class="dial">');
     var dialwidth = Math.floor($(thischstrip).width()*0.4);
 
-    $(".dial").knob({
+    $(thischstrip + " > .dial").knob({
         'min':-50,
         'max':50,
         'width':dialwidth+"px",
