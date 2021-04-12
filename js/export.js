@@ -25,7 +25,7 @@ function prepareOffline(){
 
       var offlineDrumSounds = [];
 
-      for (var x = 0; x < 10; x++) {
+      for (var x = 0; x < drumSounds.length; x++) {
         offlineDrumSounds.push(new Tone.Player(drumsamplesbuffer[x]).toDestination());
       }
 

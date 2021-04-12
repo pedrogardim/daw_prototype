@@ -60,6 +60,24 @@ body {
   padding: 0;
 }
 
+.loadingscreen{
+  height: 100%;
+  width: 100%;
+  background: var(--brightest-color);
+  position:fixed;
+  z-index:999;
+  display: flex;
+  justify-content: center;
+  align-items: center
+
+
+}
+
+.loadingscreen i{
+  color: var(--darkest-color);
+  font-size:10vw;
+}
+
 #workspace {
   position: fixed;
   margin: 0;

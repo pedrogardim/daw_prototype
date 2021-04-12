@@ -138,6 +138,23 @@ $( ".sidemenuitem" ).tooltip({
   position: { my: "left+15 center", at: "right center" }
 });
 
+////////////////////////////////
+//LOAD SCREEN ================================================
+////////////////////////////////
+
+function closeLoadingScreen(){
+  $(".loadingscreen").addClass("hidden").css("z-index",-99999);
+
+}
+
+
+
+
+
+
+
+
+////////////////////////////////
 
 
 function drawScore() {
@@ -461,6 +478,11 @@ $(function() {
   navTo(2);
 
   drawSequencer();
+
+  $("#sessiontitle").html(sessionName);
+
+  closeLoadingScreen();
+
 
   //prepareOffline();
 
