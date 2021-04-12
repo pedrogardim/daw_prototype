@@ -441,7 +441,7 @@ select:focus {
   width:60%;
   height:50%;
   top:40px;
-  flex-direction: row;
+  flex-direction: column;
 
 
 }
@@ -471,7 +471,7 @@ select:focus {
 
 .ie-title{
   width:100%;
-  margin:10px 0px 10px 0px;
+  margin:10px 0px 20px 0px;
   text-align:center;
   flex-shrink: 0;
   max-height:20px;
