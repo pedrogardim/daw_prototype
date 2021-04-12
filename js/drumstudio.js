@@ -3,6 +3,8 @@ var stepselec;
 var dragtileselect = false;
 var selectedonthisdrag = [];
 var drumview = 0;
+var seldrumkit = drumkits[selecteddrums];
+
 
 
 ///////////////////////////
@@ -32,10 +34,6 @@ $("#toggleseq").click((e)=>{
 $("#drumseqpage").css({bottom:"-100%"});
 
 
-
-
-
-
 ///////////////////////////
 //KEYS
 //////////////////////////
@@ -45,7 +43,17 @@ var drumtriggers = ["1","2","3","4","5","6","7","8","9","0","Q","W","E","R","T",
 function drawDrumKeys(){
   var drumkeys = "";
   drumSounds.forEach((e,i)=>{
-    drumkeys += '<div class="drumkey" data-index="'+i+'" data-trigger="'+drumtriggers[1]+'">'+drumkits[selecteddrums].labels[i]+'<br>'+drumtriggers[i]+'</div>'
+
+    var thislabel = (seldrumkit.hasOwnProperty('labels'))?(seldrumkit.labels[i]):(drumelemcategory[seldrumkit.elemcat[i]][0]);
+    var thisicon = (seldrumkit.hasOwnProperty('icons'))?(seldrumkit.icons[i]):(drumelemcategory[seldrumkit.elemcat[i]][1])
+
+    drumkeys += 
+    '<div class="drumkey" data-index="'+i+'" data-trigger="'+drumtriggers[1]+'">'+
+    '<span class="dk-lbl">'+thislabel+'</span>'+
+    '<svg height="48px" width="48px" viewBox="0 0 64 64">'+thisicon+'</svg>'+
+    '<span class="triggerkeylbl">'+
+    drumtriggers[i]+
+    '</span></div>';
 
   })
   $("#drumkeyscont").html(drumkeys)
@@ -84,12 +92,11 @@ function drawSequencer() {
 
       }
 
-      var thisicon = '<div class="ce cestyle' + (y + 1) +'" id="seqlblel' +(y + 1) +'"></div>';
+      var elementicon = (seldrumkit.hasOwnProperty('icons'))?(seldrumkit.icons[y]):(drumelemcategory[seldrumkit.elemcat[y]][1]);
+
+      var thisicon = '<svg height="40px" width="40px" viewBox="0 0 64 64" class="ce" id="seqlblel' +(y + 1) +'">'+elementicon+'</svg>';
+
       $("#seqTile-0-"+y).append(thisicon);
-  
-      $("#seqlblel" + (y + 1)).css({
-        transform: $("#seqlblel" + (y + 1)).css("transform") + "scale(0.9)",
-      });
 
       var instrlabel = '<span class="seqlbl hidden" id="seqlbl' +(y + 1) +'">'+drumlabels[y] +"</span>"
       $("#seqTile-0-"+y).append(instrlabel);
@@ -223,7 +230,7 @@ sessiondrums.forEach((msre,msreindex)=>{
       //console.log(sessionsubdivision,sessiondrums[index].length,difference)
 
     });
-    
+
     updateMsreScroreTiles();
     drawSequencer();
     updateSequencerElements();
@@ -233,6 +240,7 @@ sessiondrums.forEach((msre,msreindex)=>{
   function updateSteps(input){
     sessionsubdivision = tempData.steps = input;
     adaptDrumSeqtoSubdiv();
+
 
   }
   ///////////////////////////
@@ -406,7 +414,7 @@ $("html").keydown(function (e) {
     //ONLY TRIGGER WHEN PAGE LOADED
   
     if(appMode == 2){
-      
+
       var keycodetoindex = drumtriggers.indexOf(String.fromCharCode(e.keyCode));
       $('.drumkey[data-index="'+keycodetoindex+'"]').css("background-color","var(--bright-color)")
 

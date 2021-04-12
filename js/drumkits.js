@@ -3,26 +3,33 @@ var drumkits = [
         name: '808',
         type: 'Electronic',
         sampled:true,
-        labels:[
-            "Kick",
-            "Snare",
-            "Clap",
-            "Hihat",
-            "Open Hihat",
-            "Low Tom",
-            "Mid Tom",
-            "High Tom",
-            "Crash",
-            "Percussion",
-        ],
-        icons:[
-          
-        ]
+        elemcat:[0,1,3,4,5,7,8,9,10,13],
     }
 ]
 
 
 var drumsamplesbuffer = []
+
+const drumelemcategory = [
+  ["Kick","<circle cx=\"32\" cy=\"32\" r=\"32\" fill=\"#05386b\"/>"],
+  ["Snare","<polygon points=\"8,32 32,8 56,32 32,56\" style=\"fill:#8ee4af;stroke:#379683;stroke-width:4\" />"],
+  ["Side Stick","<polygon points=\"8,32 32,8 56,32 32,56\" style=\"fill:#379683;stroke:#8ee4af;stroke-width:4\" />"],
+  ["Clap","<polygon points=\"8,32 32,8 56,32 32,56\" style=\"fill:#379683;stroke:#8ee4af;stroke-width:4\" />"],
+  ["Hi-Hat Closed", "<line x1=\"44\" y1=\"44\" x2=\"20\" y2=\"20\" style=\"stroke:#379683;stroke-width:4\" /><line x1=\"44\" y1=\"20\" x2=\"20\" y2=\"44\" style=\"stroke:#379683;stroke-width:4\" />"],
+  ["Hi-hat Open",  "<circle cx=\"32\" cy=\"32\" r=\"24\" stroke=\"#379683\" stroke-width=\"4\" fill=\"none\"/><line x1=\"48\" y1=\"48\" x2=\"16\" y2=\"16\" style=\"stroke:#379683;stroke-width:4\" /><line x1=\"48\" y1=\"16\" x2=\"16\" y2=\"48\" style=\"stroke:#379683;stroke-width:4\" />"],
+  ["Hi-Hat Foot Close"],
+  ["Low Tom",  "<circle cx=\"32\" cy=\"32\" r=\"26\" stroke=\"#379683\" stroke-width=\"4\" fill=\"#05386b\"/>"],
+  ["Mid Tom","<circle cx=\"32\" cy=\"32\" r=\"22\" stroke=\"#379683\" stroke-width=\"4\" fill=\"#5cdb95\"/>"],
+  ["High Tom","<circle cx=\"32\" cy=\"32\" r=\"20\" stroke=\"#379683\" stroke-width=\"4\" fill=\"#8ee4af\"/>"],
+  ["Crash","<line x1=\"48\" y1=\"48\" x2=\"16\" y2=\"16\" style=\"stroke:#05386b;stroke-width:8\" /><line x1=\"48\" y1=\"16\" x2=\"16\" y2=\"48\" style=\"stroke:#05386b;stroke-width:8\" />"],
+  ["Ride Out"],
+  ["Ride Bell"],
+  ["Cow Bell", "<polygon points=\"14,16 32,47 49,16\"  style=\"fill:#8ee4af;stroke:#379683;stroke-width:4\" />"],
+  ["Tambourine"],
+  ["Shaker"]
+]
+
+
 
 
 

@@ -19,6 +19,9 @@ var stepinputmode = false;
 var sequencerSteps = sessiondrums.length;
 var showSeq = false;
 
+//numbers after [drumelemcategory] @ drumskits.js
+const showpriotity = [13,14,15,10,1,2,3,7,8,9,0,11,12,6,4,5]
+
 
 //////////////////////////
 //DRAW CIRCLE
@@ -29,112 +32,45 @@ function drawCircleElements() {
 
   $("#rhythmcircle").html("");
 
-
-  var brokedowndrums = [];
-
-  if(fulldrumcircle == true){
-    sessiondrums.forEach((x)=>{x.forEach((y)=>{brokedowndrums.push(y)})})
-    console.log(brokedowndrums);
-  }
-  else{
-    brokedowndrums = sessiondrums[playbackMeasure];
-  }
-
-  for(var x = 0; x< brokedowndrums.length; x++){
-    if (brokedowndrums[x].indexOf(1) != -1) {
-      //check for kick drum
-      $("#rhythmcircle").append(
-        '<div class="ce cestyle1" id="ce' + x + '"></div>'
-      );
-      continue;
-    }
-
-    if (brokedowndrums[x].indexOf(2) != -1) {
-      //check for snare drum
-      $("#rhythmcircle").append(
-        '<div class="ce cestyle2" id="ce' + x + '"></div>'
-      );
-      continue;
-    }
-    if (brokedowndrums[x].indexOf(3) != -1) {
-      //check for clap
-      $("#rhythmcircle").append(
-        '<div class="ce cestyle3" id="ce' + x + '"></div>'
-      );
-      continue;
-    }
-    if (brokedowndrums[x].indexOf(4) != -1) {
-      //check for hihat
-      $("#rhythmcircle").append(
-        '<div class="ce cestyle4" id="ce' + x + '"></div>'
-      );
-      continue;
-    }
-    if (brokedowndrums[x].indexOf(5) != -1) {
-      //check open hihat
-      $("#rhythmcircle").append(
-        '<div class="ce cestyle5" id="ce' + x + '"></div>'
-      );
-      continue;
-    }
-    if (brokedowndrums[x].indexOf(6) != -1) {
-      //check low tom
-      $("#rhythmcircle").append(
-        '<div class="ce cestyle6" id="ce' + x + '"></div>'
-      );
-      continue;
-    }
-    if (brokedowndrums[x].indexOf(7) != -1) {
-      //check mid tom
-      $("#rhythmcircle").append(
-        '<div class="ce cestyle7" id="ce' + x + '"></div>'
-      );
-      continue;
-    }
-    if (brokedowndrums[x].indexOf(8) != -1) {
-      //check hi tom
-      $("#rhythmcircle").append(
-        '<div class="ce cestyle8" id="ce' + x + '"></div>'
-      );
-      continue;
-    }
-    if (brokedowndrums[x].indexOf(9) != -1) {
-      //check crash
-      $("#rhythmcircle").append(
-        '<div class="ce cestyle9" id="ce' + x + '"></div>'
-      );
-      continue;
-    }
-    if (brokedowndrums[x].indexOf(10) != -1) {
-      //check perc
-      $("#rhythmcircle").append(
-        '<div class="ce cestyle10" id="ce' + x + '"></div>'
-      );
-      continue;
-    }
-
-  }
-  
+  brokedowndrums = sessiondrums[playbackMeasure];
 
   for(var x=0; x< brokedowndrums.length; x++){
 
+    if(brokedowndrums[x].length == 0){
+
+      totalAngle += Math.PI / (brokedowndrums.length / 2);
+      continue;
+
+    };
+
+    var priorarray = [];
+
+    brokedowndrums[x].forEach((e,i)=>{
+      var thisnotecategory = seldrumkit.elemcat[e-1];
+      var thisnotepriority = showpriotity.indexOf(thisnotecategory);
+      priorarray.push(thisnotepriority)
+    })
+
+    var chosenelement = brokedowndrums[x][priorarray.indexOf(Math.min.apply(null,priorarray))]-1;
+
+    var elementicon = (seldrumkit.hasOwnProperty('icons'))?(seldrumkit.icons[chosenelement]):(drumelemcategory[seldrumkit.elemcat[chosenelement]][1]);
+
+    $("#rhythmcircle").append(
+      '<svg height="48px" width="48px" viewBox="0 0 64 64" class="ce" id="ce' + x + '">'+elementicon+'</svg>'
+    );
+
     $("#ce" + x).css({
       left:
-        ($("#rhythmcircle").height() / 2) * Math.cos(totalAngle) +
-        $("#rhythmcircle").height() / 2 +
-        "px",
+        (($("#rhythmcircle").height() / 2) * Math.cos(totalAngle) +
+        $("#rhythmcircle").height() / 2 ) - 24 + "px",
       top:
         ($("#rhythmcircle").height() / 2) * Math.sin(totalAngle) +
-        $("#rhythmcircle").height() / 2 +
-        "px",
+        $("#rhythmcircle").height() / 2 - 24 + "px",
     });
 
     totalAngle += Math.PI / (brokedowndrums.length / 2);
 
   }
-
-  
-
 
 }
 
