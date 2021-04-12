@@ -15,6 +15,8 @@ function navTo(page){
     appMode = page;
     $(".tabitem").removeClass("selectednavitem");
     $(".tabitem[data-nav="+page+"]").addClass("selectednavitem");
+
+
     if(page == 5){
         $("#circlescont").addClass("hidden");
     }
@@ -25,10 +27,15 @@ function navTo(page){
     if(page == 1){
         $("#circlescont").removeClass("circle-comp");
     }
-    if(page != 1){
+    else{
         $("#circlescont").addClass("circle-comp");
 
     }
+    if(page == 2){
+        $("#drumseqpage").removeClass("hidden");
+        
+    }
+    
 
 }
 

@@ -148,8 +148,6 @@ sessiondrums.forEach((msre,msreindex)=>{
   
   function registerNoteToSequencer(note, beat) {
 
-    console.log(note, beat);
-
       ///WITHOUT STEP INPUT MODE  
       if (sessiondrums[playbackMeasure][beat].includes(note) == true) {
         sessiondrums[playbackMeasure][beat] = sessiondrums[playbackMeasure][beat].filter(
@@ -326,9 +324,11 @@ sessiondrums.forEach((msre,msreindex)=>{
 
   //SEQTILE Drag Select
 
-/*   $(document).on('mousedown','.seqtile',function () {
+   $(document).on('mousedown','.seqtile',function () {
 
     dragtileselect = true;
+    ($(this).hasClass("selectedTile"))?(dtsmode = "remove"):(dtsmode = "add");
+
   });
   $(document).on('mouseup',function () {
 
@@ -342,6 +342,8 @@ sessiondrums.forEach((msre,msreindex)=>{
 
     if(dragtileselect && selectedonthisdrag.indexOf(targetid) == -1){
 
+      if(($(this).hasClass("selectedTile") && dtsmode == "remove")||($(this).hasClass("selectedTile") == false && dtsmode == "add")){
+
       $(this).toggleClass("selectedTile");
       
       var thisid = $(this).attr("id");
@@ -352,11 +354,12 @@ sessiondrums.forEach((msre,msreindex)=>{
       
       registerNoteToSequencer(thisintrument, thisstep);
       selectedonthisdrag.push(targetid)
-      console.log(selectedonthisdrag);
-      
+
+      }
+
     }
 
-  }); */
+  }); 
 
 
   ///CLICK

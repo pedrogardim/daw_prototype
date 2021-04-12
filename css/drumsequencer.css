@@ -297,50 +297,6 @@
 
 }
 
-
-/* ===================SWITCH BUTTON===================*/
-
-/* 
-#switchseqmode{
-  position: absolute;
-  width: 80px;
-  transition: 0.3s;
-  left:80%;
-  text-align: center;
-  font-size: 36px;
-  margin-left:20px;
-
-
-}
-
-.sequencerbutton {
-  height: 60px;
-  border-radius: 0px;
-  top:40px;
-
-}
-.sequencerbutton:hover {
-  background: var(--dark-color);
-}
-
-.circlebutton {
-  top:30px;
-  height: 80px;
-  border-radius: 999px;
-  border: 1px solid var(--dark-color);
-  background: #37968300;
-}
-
-.buttontiles {
-  height: 19px;
-  width: 19px;
-  float: left;
-  background: var(--brightest-color);
-  border: solid 1px var(--medium-color);
-  margin-top: -1px;
-  margin-left: -1px;
-} */
-
 #drumkeyscont{
   display:flex;
   flex-direction:row;
@@ -379,6 +335,8 @@
 
 .triggerkeylbl{
   margin-right:calc(100% - 20px);
+  margin-bottom: 4px;
+
 }
 
 
