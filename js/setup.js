@@ -509,7 +509,9 @@ function updateAll(){
   updateMelodyPreview();
   drawScore();
   adjustNotesPos();
-
+  if(selectedchord != null){
+    $('#chordpiano').klavier('setSelectedValues', noteArraytoMidi(sessionchords[selectedchord][0]))
+  }
 }
 
 

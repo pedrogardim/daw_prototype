@@ -8,6 +8,9 @@ var isPlayingChord = false;
 var changingnamechord, hoveredchord, hoveredside, isChordHovered;
 var selectedchord = null;
 
+//avoit mouseout of button release clicked selected chord
+var lastPlayedOnButton = false;
+
 //to select which note was added/removed
 var oldpianoselection;
 
@@ -37,6 +40,8 @@ function playChord(input){
     if(input == null){
         rhythminstrument.triggerAttackRelease(sessionchords[selectedchord][0], sessionchords[selectedchord][1] * Tone.Time("1m"));
         isPlayingChord = true;
+        lastPlayedOnButton = false;
+
         return;
     }
 
@@ -46,15 +51,18 @@ function playChord(input){
         duration: 300,
         easing: 'easeOutElastic(1, .8)',
     });
+
     rhythminstrument.triggerAttack(scalechords[input],Tone.now());
+    lastPlayedOnButton = true;
     isPlayingChord = true;
 
     $('#chordpiano').klavier('setSelectedValues', noteArraytoMidi(scalechords[input]));
 
     if(selectedchord != null){
-    sessionchords[selectedchord][0] = scalechords[input];
-    updateChordsOnScore();
-    unselectChord();
+        sessionchords[selectedchord][0] = scalechords[input];
+        onModifySession();
+        updateChordsOnScore();
+        unselectChord();
     }
 
 }
@@ -71,6 +79,7 @@ function releaseChords(input){
     console.log("release",selectedchord)
     isPlayingChord = false;
     $('#chordpiano').klavier('setSelectedValues',[]);
+    input = null;
 }
 
 function getChordsFromScale(){
@@ -319,6 +328,7 @@ function editRhythm(chord,add_delete){
 function setNotes(input){
     sessionchords[selectedchord][0] = midiArraytoNote(input);
     updateChordsOnScore();
+    onModifySession();
 }
 
 
@@ -419,15 +429,20 @@ $(".chordbtn").mousedown(function (e) {
 
   playChord($(e.target).attr("id").replace("chordbtn",""));
   
+  
 });
 
 $(".chordbtn").mouseup(function (e) { 
+
     releaseChords($(e.target).attr("id").replace("chordbtn",""));
+
 });
 
 $(".chordbtn").mouseout(function (e) { 
-    if(isPlayingChord == true){
-    releaseChords($(e.target).attr("id").replace("chordbtn",""));
+    if(isPlayingChord && lastPlayedOnButton){
+
+        setTimeout(releaseChords($(e.target).attr("id").replace("chordbtn","")), 100);
+    
     }  
 });
 
