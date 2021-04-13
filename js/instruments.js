@@ -212,3 +212,10 @@ function instrumentContructor(input){
 
 }
 
+function loadMelodyInstruments(){
+
+	sessionmelodies.forEach((e,i)=>{
+		melodyinstruments.push(instrumentContructor(e.instrument));
+	  });
+}
+

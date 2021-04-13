@@ -9,6 +9,7 @@ var isChordPlaying = false;
 var drumIsLoaded = false;
 var drumSounds = [];
 var rhythminstrument = instrumentContructor(0);
+var melodyinstruments = [];
 
 
 var looponfirstdrum = false;
@@ -238,12 +239,13 @@ function playMelodies(){
   if(playingmelodies.length > 0){
     playingmelodies.forEach((e)=>e.dispose());
     playingmelodies = [];
+
   }
   sessionmelodies.forEach((e,i)=>{
-    var thisintrument = instrumentContructor(e.instrument);
+    melodyinstruments.push(instrumentContructor(e.instrument));
     playingmelodies.push(new Tone.Part(((time, value) => {
       // the value is an object which contains both the note and the velocity
-      thisintrument.triggerAttackRelease(value.note, value.dur, time, value.velocity);
+      melodyinstruments[i].triggerAttackRelease(value.note, value.dur, time, value.velocity);
     }), e.notes).start(0));
   });
 }

@@ -31,6 +31,8 @@ function showMelodyList(){
     })
 
     $("#melodylist").append(addbutton);
+    updateMelodyPreview()
+
 }
 
 function melodyListItem(element,index){
@@ -38,7 +40,7 @@ function melodyListItem(element,index){
     var thisdiv = 
 
     '<div class="melodylistitem data-index="'+index+'">'+
-    '<div class="melodyinfo"><h3>'+element.name+'</h3><h5>'+element.instrument+'</h5></div>'+
+    '<div class="melodyinfo"><h3>'+element.name+'</h3><h5>'+instruments[element.instrument].name+'</h5></div>'+
     '<div class="melodypreview" data-index="'+index+'"></div>'+
 
     '<div class="melodyactions">'+
@@ -178,7 +180,7 @@ function addNote(notetoadd,noteindex){
         grid:[1,$("#prrow0").height()],
         containment: "parent",
         drag: function( event, ui ) {
-            sessionmelodies[selectedmelody].instrument.triggerRelease();
+            melodyinstruments[sessionmelodies[selectedmelody].instrument].triggerRelease();
             
         },
         stop: function( event, ui ) {
@@ -251,21 +253,21 @@ function PRPixelsToTime(input){
 $(document).on("mousedown",".note",(e)=>{
 
     if($(e.target).hasClass("note") && e.target.id.replace("note","") != selectednote){
-        sessionmelodies[selectedmelody].instrument.triggerRelease();
+        melodyinstruments[sessionmelodies[selectedmelody].instrument].triggerRelease();
         $("#note"+selectednote).removeClass("activenote").resizable( "option", "disabled", true );
         selectednote = e.target.id.replace("note","");
         $("#note"+selectednote).addClass("activenote").resizable( "option", "disabled", false );
-        sessionmelodies[selectedmelody].instrument.triggerAttackRelease(sessionmelodies[selectedmelody].notes[selectednote].note,sessionmelodies[selectedmelody].notes[selectednote].dur);
+        melodyinstruments[sessionmelodies[selectedmelody].instrument].triggerAttackRelease(sessionmelodies[selectedmelody].notes[selectednote].note,sessionmelodies[selectedmelody].notes[selectednote].dur);
     }
 });
 
 $(document).on("mousedown",".prkey",(e)=>{
-    sessionmelodies[selectedmelody].instrument.triggerAttackRelease($(e.target).html(),"1m");
+    melodyinstruments[sessionmelodies[selectedmelody].instrument].triggerAttackRelease($(e.target).html(),"1m");
 
 });
 
 $(document).on("mouseup",".prkey",(e)=>{
-    sessionmelodies[selectedmelody].instrument.triggerRelease($(e.target).html());
+    melodyinstruments[sessionmelodies[selectedmelody].instrument].triggerRelease($(e.target).html());
 
 });
 

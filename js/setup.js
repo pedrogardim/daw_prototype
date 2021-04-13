@@ -481,6 +481,9 @@ $(function() {
 
   $("#sessiontitle").html(sessionName);
 
+  loadMelodyInstruments()
+
+
   closeLoadingScreen();
 
 

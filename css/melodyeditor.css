@@ -248,3 +248,8 @@
     position:absolute;
     background:var(--medium-color);
 }
+
+
+#melody-params{
+    position:fixed;
+}
