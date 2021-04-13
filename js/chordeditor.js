@@ -331,6 +331,8 @@ function setNotes(input){
     onModifySession();
 }
 
+//heavy
+
 function resizeKlavier(){
     $('#chordpiano').klavier('destroy');
     $('#chordpiano').klavier({ startKey: 21, endKey: 108});

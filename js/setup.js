@@ -121,9 +121,11 @@ Tone.Master.connect(meter);
 //TOOLTIP ================================================
 
 $(document).tooltip({
-  track: true,
+  track: false,
+  show:50,
+  hide:50,
   classes: {
-    "ui-tooltip": "customtooltip shadow",
+    "ui-tooltip": "customtooltip",
   },
   position: {
     my: "center bottom-20",
@@ -146,12 +148,6 @@ function closeLoadingScreen(){
   $(".loadingscreen").addClass("hidden").css("z-index",-99999);
 
 }
-
-
-
-
-
-
 
 
 ////////////////////////////////
@@ -461,10 +457,12 @@ $(function() {
   drawChordsCircle();
   drumScore();
   drawScore();
-  drawPianoRoll();
+  //drawPianoRoll();
 
   getChordsFromScale();
-  showMelodyList();
+  //showMelodyList();
+  //loadMelodyInstruments()
+
 
   loadDrums("808");
 
@@ -481,22 +479,14 @@ $(function() {
 
   $("#sessiontitle").html(sessionName);
 
-  loadMelodyInstruments()
-
-
   closeLoadingScreen();
-
-
-  //prepareOffline();
-
 });
 
 $(window).resize(function () {
-  updateMelodyPreview();
-  adjustNotesPos();
+  //updateMelodyPreview();
+  //adjustNotesPos();
   resizeKlavier();
-  //sequencerResize();
-  //$('#chordpiano').klavier({ startKey: 21, endKey: 108});
+  
 
 
 });

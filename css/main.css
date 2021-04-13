@@ -189,12 +189,11 @@ body {
 
 .customtooltip {
   z-index: 999;
-  padding: 3px;
-  background-color: var(--bright-color);
-  box-shadow: none;
-  border-radius: 0px;
-  border: 0px;
-  font-family: "Barlow Semi Condensed", sans-serif;
+  background:var(--brightest-color) !important;
+  color:var(--darkest-color) !important;
+  border: solid 1px #05386b67 !important;
+  /* border-radius: 10px; */
+  font-family: "Barlow Semi Condensed", sans-serif !important; 
 }
 
 .row {
@@ -374,8 +373,51 @@ select:focus {
 #downloadloopbtn:hover {
   filter:brightness(1.2) contrast(0.8);
   text-decoration: underline;
+}
 
-    
+#sessionsettings{
+
+  background-color: var(--dark-color);
+  color: var(--brightest-color);
+  transition:0.3s;
+  overflow:visible;
+}
+
+#ss-window{
+  position:fixed;
+  top:60px;
+  width:256px;
+  height:384px;
+  display:none;
+  background:var(--dark-color);
+  transition:height 0.3s;
+
+  
+ 
+}
+
+#sessionsettings:hover > #ss-window{
+  animation-name: expand;
+  animation-duration: 0.3s;
+  display:flex;
+
+ 
+}
+
+
+
+#sessionsettings:hover > .material-icons{
+  
+  animation-name: rotate;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+
+
+.disabled{
+  color:#999;
 }
 
 /*///////////////////////////////////////////////////////////////*/
@@ -557,5 +599,15 @@ select:focus {
   flex-direction:row;
   justify-content:space-around;
   align-items: center;
+}
+
+@keyframes rotate {
+  from {transform: rotate(0deg)}
+  to {transform: rotate(360deg)}
+}
+
+@keyframes expand {
+  from {height: 0}
+  to {height: 384px}
 }
 

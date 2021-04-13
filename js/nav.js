@@ -10,6 +10,11 @@ var pages = ["homepage","drumpage","chordeditor","melodyeditor","mixpage"];
 var optionsMenu = false;
 
 function navTo(page){
+
+    if(page == 4 || page == 5){
+        return;
+    }
+    
     $(".page").removeClass("visible").addClass("hidden");
     $("#"+pages[page-1]).removeClass("hidden").addClass("visible");
     appMode = page;
@@ -40,8 +45,8 @@ function navTo(page){
 }
 
 $(".tabitem").click(function (e) { 
+    if($(this).attr("id") == "sessionsettings"){return};
     navTo($(this).data("nav"));
-    
 });
 
 $("#chordcircle").click(function (e) { 
@@ -52,20 +57,5 @@ $("#rhythmcircle").click(function (e) {
     navTo(2)
 });
 
-
-
-$("#openedit").click(function (e) { 
-    if(optionsMenu == false){
-        $("#optionscolumn").css("right",0);
-        optionsMenu = true;
-        return;
-    }
-    if(optionsMenu == true){
-        $("#optionscolumn").css("right",-($("#optionscolumn").width()+20));
-        optionsMenu = false;
-        return;
-
-    }
-});
 
 
