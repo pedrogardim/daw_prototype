@@ -162,7 +162,9 @@ const instruments = [
 		gain: -12,
 		options:{
 			"oscillator": {
-				"type": "sine5"
+				"sourceType":"oscillator",
+				"baseType": "square",
+				"partialCount":10
 			},
 			"envelope": {
 				"attack": 0.03,

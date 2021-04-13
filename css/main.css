@@ -423,6 +423,7 @@ select:focus {
   display:flex;
   justify-content:flex-start;
   flex-wrap: wrap;
+  
 
 
 }
@@ -443,6 +444,8 @@ select:focus {
   height:50%;
   top:40px;
   flex-direction: column;
+  align-items:stretch
+  
 
 
 }
@@ -479,17 +482,48 @@ select:focus {
 
 }
 
-.ie-knob-cont{
-  flex-grow: 1;
-  align-self:stretch;
-  display: flex;
-  justify-content:center;
-  align-items:center;
+.ie-select{
+  margin:8px;
 }
+
+.ie-slider-cont{
+  flex-grow: 1;
+  display: flex;
+  justify-content:space-around;
+  align-self:stretch;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin:8px 16px 8px 16px;
+
+
+}
+
+.ie-slider-cont > .flex-row{
+  flex: 0 1 30%;
+  width:50%;
+
+  justify-content:space-between;
+
+}
+
+.ie-slider-cont input{
+  flex: 0 1 50px;
+
+}
+
+.ie-slider-cont span{
+  flex: 0 0 40px;
+  max-width: 40px;
+  width:40px;
+  text-overflow:ellipsis;
+
+}
+
 
 #ie-mainosc-wave{
   outline: solid 1px var(--darkest-color);
-  margin-bottom:16px;
+  margin-bottom:24px;
+
 }
 
 
@@ -516,13 +550,12 @@ select:focus {
   display:flex;
   flex-direction:column;
   justify-content:flex-start;
-  align-items: center;
 }
 
 .flex-row{
   display:flex;
   flex-direction:row;
-  justify-content:space-evenly;
+  justify-content:space-around;
   align-items: center;
 }
 

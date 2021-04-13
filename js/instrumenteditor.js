@@ -1,10 +1,35 @@
-var wavetypes = ["sine","sawtooth","triangle","square"];
+const wavetypes = ["sine","sawtooth","triangle","square"];
+const oscparamsbytype = {
+    "oscillator":["partialCount"],
+    "fat":["partialCount","spread"],
+    "pwm":["partialCount","modulationFrequency"],
+    "pulse":["partialCount","width","carrierType"],
+    "am":["partialCount","harmonicity","modulationType"],
+    "fm":["partialCount","harmonicity","modulationIndex","modulationType"],
+}
+const oscparamsrange = {
+    "partialCount":[1,32],
+    "spread":[],
+    "width":[],
+    "modulationFrequency":[],
+    "carrierType":[],
+    "harmonicity":[],
+    "modulationIndex":[],
+    "modulationType":[]
+}
+
+var editinginstrument;
+
 
 function openIntrumentEditor(instrument){
 
-    var instrmonovoice = instrument._dummyVoice;
+    editinginstrument = instrument;
 
-	var instrtype = instrmonovoice.name;
+    var originalinstr = instrument._dummyVoice;
+    var instrtype = originalinstr.name;
+
+
+	var instropt = instrument._dummyVoice;
 
 	$(".instr-tabs-item").removeClass("selectednavitem");
 
@@ -20,36 +45,61 @@ function openIntrumentEditor(instrument){
 
 	//check for each instr option:
 
-	if("oscillator" in instrmonovoice){
+	if("oscillator" in instropt){
 
-        var osctype = instrmonovoice.oscillator._sourceType;
-        console.log(osctype);
+        const init_osctype = instropt.oscillator.sourceType;
+        const init_oscpartials = instropt.oscillator.partialCount;
+        const init_oscwave = instropt.oscillator.baseType;
+
+        var osctype = init_osctype;
+        var oscwave = init_oscwave;
+        var oscpartials = init_oscpartials;
+
+        console.log(osctype,oscwave,oscpartials);
+
         $('#ie-mainosc-type option[value="'+osctype+'"]').prop('selected', true);
+        $('#ie-mainosc-type option[value="'+oscwave+'"]').prop('selected', true);
+
         $('#ie-mainosc-type').change((e)=>{
-            instrmonovoice.oscillator._sourceType = $('#ie-mainosc-type').val();
+            osctype = $('#ie-mainosc-type').val();
+            instropt.oscillator.sourceType = osctype;
+            drawWave(instrument,"ie-mainosc-wave");
+
+
+        });
+
+        $('#ie-mainosc-wavetype').change((e)=>{
+            oscwave = $('#ie-mainosc-wavetype').val();
+            instropt.oscillator.baseType = oscwave;
+
             drawWave(instrument,"ie-mainosc-wave");
 
         });
 
-        if(osctype == "oscillator"){
-            $("#ie-mainosc-params").append('<input type="text" class="dial">')
-        };
+        $("#ie-mainosc-params").html("");
 
-        $(".dial").knob({
-            'min':-50,
-            'max':50,
-            'width':"40px",
-            'height':"40px",
-            'angleOffset':-140,
-            'angleArc':280,
-            'cursor':10,
-            'thickness':".3",
-            'font':'Barlow Semi Condensed", sans-serif',
-            'bgColor' : "#379683",
-            'fgColor':"#05386b"
-        });
+        oscparamsbytype[osctype].forEach((e,i)=>{
+
+            $("#ie-mainosc-params").append('<div class="flex-row"><span>'+e+'</span><input class="ie-osc-slider" data-param="'+e+'" min="'+oscparamsrange[e][0]+'" max="'+oscparamsrange[e][1]+'" type="range"></div>');
+
+        })
+
+        $(document).on("input",".ie-osc-slider",(e)=>{
+
+            console.log(editinginstrument,$(e.target).val());
+        
+            instropt.oscillator[$(e.target).data("param")] = 
+            originalinstr.oscillator.type[$(e.target).data("param")] = 
+            $(e.target).val();
+            drawWave(editinginstrument,"ie-mainosc-wave");
+        
+        
+        })
+
 
         drawWave(instrument,"ie-mainosc-wave");
+
+
 
 
 	}
@@ -95,3 +145,13 @@ function drawWave(instr,svgid){
 	
 
 }
+
+$(document).on("change",".ie-osc-slider",(e)=>{
+
+    console.log(editinginstrument,$(e.target).val());
+
+    editinginstrument.options.oscillator[$(e.target).data("param")] = editinginstrument._dummyVoice.oscillator[$(e.target).data("param")] = $(e.target).val();
+    drawWave(editinginstrument,"ie-mainosc-wave");
+
+
+})

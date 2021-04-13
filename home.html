@@ -115,7 +115,7 @@
                 <div id="addchordhelper"></div>
                 
                 <div id="centerscore" class="score"></div>
-                <button id="chord-instr-input">Instr</button>
+                 <!--<button id="chord-instr-input">Instr</button>-->
 
                 <div id="rhythmeditor">
                     <div id="re-centralline"></div>
@@ -131,6 +131,9 @@
                 </div>
                 <div id="chordpiano"></div>
             </div>  
+
+
+            <!--MELODY-->
             <div id="melodyeditor" class="page hidden">
                 <div id="melodylist" class="column"></div>
                 <div id="melodyeditcont" class="column hidden">
@@ -166,15 +169,23 @@
                     <span class="ie-title">Oscillators</span>
                     <div class="ie-subcont" id="ie-mainosc">
                         <svg width="128px" height="64px" viewBow="0 0 128 64" id="ie-mainosc-wave"></svg>
-                        <select id="ie-mainosc-type">
-                            <option value="oscillator">Simple</option>
-                            <option value="am">AM</option>
-                            <option value="fm">FM</option>
-                            <option value="pulse">Pulse</option>
-                            <option value="pwm">PWM</option>
-                            <option value="fat">Analog</option>
-                        </select>
-                        <div class="ie-knob-cont" id="ie-mainosc-params"></div>
+                        <div class="flex-row">
+                            <select id="ie-mainosc-type" class="ie-select">
+                                <option value="oscillator">Simple</option>
+                                <option value="am">AM</option>
+                                <option value="fm">FM</option>
+                                <option value="pulse">Pulse</option>
+                                <option value="pwm">PWM</option>
+                                <option value="fat">Analog</option>
+                            </select>
+                            <select id="ie-mainosc-wavetype" class="ie-select">
+                                <option value="sine">Sine</option>
+                                <option value="square">Square</option>
+                                <option value="sawtooth">Sawtooth</option>
+                                <option value="triangle">Triangle</option>
+                            </select>
+                        </div>
+                        <div class="ie-slider-cont" id="ie-mainosc-params"></div>
 
                     </div>
                 </div>
