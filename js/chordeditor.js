@@ -331,6 +331,14 @@ function setNotes(input){
     onModifySession();
 }
 
+function resizeKlavier(){
+    $('#chordpiano').klavier('destroy');
+    $('#chordpiano').klavier({ startKey: 21, endKey: 108});
+    if(selectedchord != null){
+        $('#chordpiano').klavier('setSelectedValues', noteArraytoMidi(sessionchords[selectedchord][0]));
+    }
+}
+
 
 
 
