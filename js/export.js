@@ -5,7 +5,7 @@ $("#downloadloopbtn").mouseenter(function () {
   if(downloadprepared == false){
     prepareOffline();
     $("#downloadloopbtn").removeAttr('href');
-    $("#downloadloopbtn").html('<i class="fa fa-circle-o-notch fa-spin"></i>');
+    $("#downloadloopbtn").html('Rendering... <i class="fa fa-circle-o-notch fa-spin"></i>');
   }
   
 });

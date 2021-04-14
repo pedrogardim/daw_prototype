@@ -425,6 +425,10 @@ function gcd_two_numbers(x, y) {
   return x;
 }
 
+function checkForSelInput(){
+  return ($(document.activeElement)[0].tagName == "INPUT")?(false):(true)
+}
+
 //ANIMATED CUBE
 /* 
 function setup() {
@@ -478,6 +482,7 @@ $(function() {
   drawSequencer();
 
   $("#sessiontitle").html(sessionName);
+  initializeSettingsInputs();
 
   closeLoadingScreen();
 });
@@ -504,6 +509,43 @@ function updateAll(){
     $('#chordpiano').klavier('setSelectedValues', noteArraytoMidi(sessionchords[selectedchord][0]))
   }
 }
+
+
+//////////////////////////////////
+///EVENTS
+//////////////////////////////////
+
+function initializeSettingsInputs(){
+
+  $("#ss-bpminput").val(sessionbpm);
+  $("#ss-lpsizeinput").val(sessionlength);
+  $('#ss-timesig option[value="'+(sessiontimesignature[0]/sessiontimesignature[1])+'"]').prop('selected', true);
+
+}
+
+$("#ss-bpminput").change((e)=>{
+
+  var newbpm = parseInt($(e.target).val());
+  if (newbpm > 60 && newbpm < 300){
+    Tone.Transport.bpm.rampTo(newbpm, 0.5);
+    sessionbpm = tempData.bpm = newbpm;
+  }
+  else if(newbpm < 60){
+    $("#ss-bpminput").val(60);
+    Tone.Transport.bpm.rampTo(60, 0.5);
+    sessionbpm = tempData.bpm = 60;
+
+  }
+  else if(newbpm > 300){
+    $("#ss-bpminput").val(300);
+    Tone.Transport.bpm.rampTo(300, 0.5);
+    sessionbpm = tempData.bpm = 300; 
+  }
+
+  onModifySession()
+
+})
+
 
 
 

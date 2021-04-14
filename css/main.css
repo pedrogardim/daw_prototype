@@ -112,7 +112,7 @@ body {
 #tabnav{
   flex-grow: 1;
   height:72px;
-  margin: 0px 20px;
+  margin: 0 0 0 20px;
   display: flex;
   justify-content:flex-end;
   /*margin-top:24px;*/
@@ -185,6 +185,11 @@ body {
 
 .sticky{
   position:fixed;
+}
+
+.flex-break{
+  flex-basis:100%;
+  height:0;
 }
 
 .customtooltip {
@@ -377,34 +382,50 @@ select:focus {
 
 #sessionsettings{
 
-  background-color: var(--dark-color);
-  color: var(--brightest-color);
+  color: var(--darkest-color);
   transition:0.3s;
   overflow:visible;
 }
 
 #ss-window{
-  position:fixed;
-  top:60px;
+  position:absolute;
+  top:62px;
   width:256px;
-  height:384px;
-  display:none;
-  background:var(--dark-color);
-  transition:height 0.3s;
 
-  
- 
+  display:none;
+  background:var(--brightest-color);
+  outline:solid 1px var(--darkest-color);
+  transition:height 0.3s;
+  padding:16px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content:space-between;
+  align-items: center;
+  align-content: flex-start;
+
 }
 
-#sessionsettings:hover > #ss-window{
+
+#sessionsettings:hover ~ #ss-window{
   animation-name: expand;
   animation-duration: 0.3s;
   display:flex;
-
- 
 }
 
+#ss-window:hover{
+  display:flex;
 
+}
+
+#ss-window:hover #stticon{
+  animation-name: rotate;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+
+
+
+}
 
 #sessionsettings:hover > .material-icons{
   
@@ -414,6 +435,53 @@ select:focus {
   animation-timing-function: linear;
 }
 
+#ss-window > input{
+  flex: 0 0;
+  width:40px;
+  margin:8px 0 8px 0;
+  height:24px;
+  font-size:24px;
+  text-align: center;
+  border:none;
+  border-bottom:1px solid var(--darkest-color);
+
+}
+
+
+#ss-window > select{
+  flex: 0 0;
+  height:24px;
+  font-size:18px;
+  text-align: center;
+  
+
+}
+
+#ss-window > .optlbl{
+  flex: 1 0;
+  margin:8px 0 8px 0;
+  font-size:16px;
+
+}
+
+.textcheckboxlbl {
+  color: var(--darkest-color);
+  margin:0 0 0 16px;
+}
+
+.textcheckbox {
+  display: none;
+}
+
+.textcheckbox:checked + .textcheckboxlbl {
+  color: var(--medium-color);
+}
+
+input[type="text"] + .textcheckbox:checked{
+  color:#999 !important;
+  border:none;
+
+}
 
 
 .disabled{
@@ -588,6 +656,10 @@ select:focus {
 
 }
 
+.rotated{
+  transform:rotate(-90deg)
+}
+
 .flex-col{
   display:flex;
   flex-direction:column;
@@ -607,7 +679,7 @@ select:focus {
 }
 
 @keyframes expand {
-  from {height: 0}
-  to {height: 384px}
+  from {right: -256px}
+  to {right: 0}
 }
 

@@ -63,10 +63,13 @@ function drawDrumKeys(){
 function playDrumSound(keycodetoindex){
 
   if(keycodetoindex < drumSounds.length){
+    if(drumview == 1){
+      registerNoteToSequencer(keycodetoindex+1, playbackBeat); 
+      return
+    };
     drumSounds[keycodetoindex].start();
     $('.drumkey[data-index="'+keycodetoindex+'"]').css("background-color","var(--medium-color)")
    
-    if(drumview == 1) registerNoteToSequencer(e.keyCode - 48, playbackBeat);
   } 
 
 
@@ -147,6 +150,8 @@ sessiondrums.forEach((msre,msreindex)=>{
   //////////////////////////
   
   function registerNoteToSequencer(note, beat) {
+
+    console.log(note,beat)
 
       ///WITHOUT STEP INPUT MODE  
       if (sessiondrums[playbackMeasure][beat].includes(note) == true) {
@@ -379,13 +384,6 @@ sessiondrums.forEach((msre,msreindex)=>{
   });
 
 
-
-
-
-
-
-
-
   //MEASURE CLICK
 
   $(document).on('click','.drummeasure',function (e) {
@@ -422,53 +420,59 @@ $("html").keydown(function (e) {
       $('.drumkey[data-index="'+keycodetoindex+'"]').css("background-color","var(--bright-color)")
 
       //1-9
-      if (keycodetoindex != -1 && e.ctrlKey == false && e.metaKey == false) {
+      if (keycodetoindex != -1 && e.ctrlKey == false && e.metaKey == false && checkForSelInput()) {
         playDrumSound(keycodetoindex);
         return;
       }
-  
+
+      //only on sequencer page
+
+      if(drumview == 1){
+
+      
       //L & R ARROWS
-      if (e.keyCode == 37 || e.keyCode == 39) {
-        if (e.keyCode == 37 && playbackBeat > 0){playbackBeat--;}
-        else if (e.keyCode == 37 && playbackBeat == 0 && playbackMeasure > 0){playbackMeasure--; playbackBeat = sessiondrums[playbackMeasure].length-1;}
-        else if (e.keyCode == 39 && playbackBeat < sessiondrums[playbackMeasure].length-1){playbackBeat++;}
-        else if (e.keyCode == 39 && playbackBeat == sessiondrums[playbackMeasure].length-1 && playbackMeasure < sessiondrums.length-1){playbackMeasure++; playbackBeat=0;}
-        if (isPlaying == true){stopPlayback();}
-        sessiondrums[playbackMeasure][playbackBeat].forEach((element) =>
-          drumSounds[element - 1].start()
-        );
-        updateSequencerElements();
-        //$("#stepindicator").html(playbackBeat);
-      }
-      //SHIFT / STEP INPUT MODE ON
-      if (e.keyCode == 16) {
-        //e.preventDefault();
-        //stop();
-        //stepInputOn();
-      }
+        if (e.keyCode == 37 || e.keyCode == 39) {
+          if (e.keyCode == 37 && playbackBeat > 0){playbackBeat--;}
+          else if (e.keyCode == 37 && playbackBeat == 0 && playbackMeasure > 0){playbackMeasure--; playbackBeat = sessiondrums[playbackMeasure].length-1;}
+          else if (e.keyCode == 39 && playbackBeat < sessiondrums[playbackMeasure].length-1){playbackBeat++;}
+          else if (e.keyCode == 39 && playbackBeat == sessiondrums[playbackMeasure].length-1 && playbackMeasure < sessiondrums.length-1){playbackMeasure++; playbackBeat=0;}
+          if (isPlaying == true){stopPlayback();}
+          sessiondrums[playbackMeasure][playbackBeat].forEach((element) =>
+            drumSounds[element - 1].start()
+          );
+          updateSequencerElements();
+          //$("#stepindicator").html(playbackBeat);
+        }
+        //SHIFT / STEP INPUT MODE ON
+        if (e.keyCode == 16) {
+          //e.preventDefault();
+          //stop();
+          //stepInputOn();
+        }
 
-      if (e.keyCode == 67 && (e.ctrlKey || e.metaKey)){
-        //Ctrl + C / Cmd + C
-        e.preventDefault();
-        navigator.clipboard.writeText(JSON.stringify([0,sessiondrums[playbackMeasure]]));
+        if (e.keyCode == 67 && (e.ctrlKey || e.metaKey)){
+          //Ctrl + C / Cmd + C
+          e.preventDefault();
+          navigator.clipboard.writeText(JSON.stringify([0,sessiondrums[playbackMeasure]]));
+
+        }
+        if (e.keyCode == 86 && (e.ctrlKey || e.metaKey)){
+         //Ctrl + V / Cmd + V
+          e.preventDefault();
+          navigator.clipboard.readText().then((value)=>{
+          try{var copiedmsre = JSON.parse(value)}
+          catch(err){alert("Oops.. Make sure you are trying to paste a drum pattern");return}
+
+            if(copiedmsre[0] == 0 && copiedmsre[1] != sessiondrums[playbackMeasure]){
+              sessiondrums[playbackMeasure] = copiedmsre[1];
+              updateSequencerElements();
+              updateMsreScroreTiles();
+            }
+          })
+
+        }
 
       }
-      if (e.keyCode == 86 && (e.ctrlKey || e.metaKey)){
-       //Ctrl + V / Cmd + V
-        e.preventDefault();
-        navigator.clipboard.readText().then((value)=>{
-        try{var copiedmsre = JSON.parse(value)}
-        catch(err){alert("Oops.. Make sure you are trying to paste a drum pattern");return}
-          
-          if(copiedmsre[0] == 0 && copiedmsre[1] != sessiondrums[playbackMeasure]){
-            sessiondrums[playbackMeasure] = copiedmsre[1];
-            updateSequencerElements();
-            updateMsreScroreTiles();
-          }
-        })
-        
-      }
-
     }
     
   });

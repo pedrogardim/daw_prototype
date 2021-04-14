@@ -27,13 +27,6 @@
             <span class="title" id="logo">MUSA LOOPS</span>
             <span class="title" id="sessiontitle"></span>
             <div id="tabnav">
-                <a class="tabitem" id="sessionsettings">
-                    <span class="material-icons">settings</span>
-                    <div class="flex-col" id="ss-window">
-                        <span>Session Settings</span>
-
-                    </div>
-                </a>
                 <a class="tabitem" data-nav="1" title="Circle View">
                     <span class="material-icons">donut_large</span>
                 </a>
@@ -41,14 +34,41 @@
                     <span class="material-icons">grid_on</span>
                 </a>
                 <a class="tabitem" data-nav="3" title="Chord Editor">
-                    <span class="material-icons">piano</span>
+                    <span class="material-icons ">music_note</span>
                 </a>
                 <a class="tabitem" data-nav="4" title="Melodies (Coming Soon)">
-                    <span class="material-icons disabled">music_note</span>
+                    <span class="material-icons disabled rotated">piano</span>
                 </a>
-                <a class="tabitem" data-nav="5" title="Mix (Coming Soon)">
-                    <span class="material-icons disabled">tune</span>
+                <a class="tabitem" data-nav="5" title="Mixer (Coming Soon)">
+                    <span class="material-icons disabled rotated">tune</span>
                 </a>
+                <a class="tabitem" id="sessionsettings">
+                    <span class="material-icons" id="stticon">settings</span>
+                </a>
+                <div id="ss-window">
+                    <span style="width:100%;text-align: center;">Session Settings</span>
+                    <div class=flex-break></div>
+                    <span class="optlbl">BPM</span>
+                    <input type="text" id="ss-bpminput">
+                    <div class=flex-break></div>
+                    <span class="optlbl">Time Signature</span>
+                    <select id="ss-timesig">
+                        <option value="1">4/4</option>
+                        <option value="0.5">2/4</option>
+                        <option value="0.75">3/4</option>
+                        <option value="1.25">5/4</option>
+                        <option value="0.875">7/8</option>
+                        <option value="1.5">12/8</option>
+                    </select>
+                    ​<input type="checkbox" class="textcheckbox" id="ss-timesigcb"/><label class="textcheckboxlbl" for="ss-timesigcb">auto</label>​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
+                    <div class=flex-break></div>
+                    <span class="optlbl" title="In Measures">Loop Size</span>
+                    <input type="text" id="ss-lpsizeinput">
+                    ​<input type="checkbox" class="textcheckbox" id="ss-sizecb"/><label class="textcheckboxlbl" for="ss-sizecb">auto</label>​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
+                    <div class=flex-break></div>
+                  
+
+                </div>
             </div>
         </header>
         
@@ -93,10 +113,11 @@
                     <a id="downloadloopbtn">DONWLOAD LOOP</a>
                 </div>
             </div>
-            <!--mix view-->
+            <!--mix view
             <div id="mixpage" class="page hidden">
                 <div id="mixcont"></div>
             </div>
+            -->
             
             <!--Drumstudio-->
             <div id="drumseqpage" class="page hidden">
@@ -137,7 +158,7 @@
             </div>  
 
 
-            <!--MELODY-->
+            <!--MELODY
             <div id="melodyeditor" class="page hidden">
                 <div id="melodylist" class="column"></div>
                 <div id="melodyeditcont" class="column hidden">
@@ -202,12 +223,14 @@
                 <div id="ie-amp" class="ie-cont">
                     <span class="ie-title">Output</span>
                 </div>
+                
 
 
 
 
             </div>
         </div>
+        -->
         <!-- 
         <a href="#" id="openedit" class="float">
             <i class="fa fa-plus my-float material-icons">settings</i>

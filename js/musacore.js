@@ -174,6 +174,8 @@ var drumSounds = [];
 
 function onModifySession(){
 
+  //console.log("mod")
+
   var oldsessionData = JSON.parse(JSON.stringify(sessionData));
 
   modhistory.push(oldsessionData);
@@ -185,8 +187,6 @@ function onModifySession(){
   sessionData = JSON.parse(JSON.stringify(tempData));
   downloadprepared = false;
   
-  console.log("Mod")
-
 }
 
 $("html").keydown(function (e) {
@@ -198,8 +198,6 @@ $("html").keydown(function (e) {
     if(modhistory.length == 0){alert("No changes to undo"); return;}
 
     sessionData = JSON.parse(JSON.stringify(modhistory.pop()));
-
-    console.log(sessionData.drumpatterns[0][0]);
 
     tempData = JSON.parse(JSON.stringify(sessionData));
 

@@ -58,7 +58,7 @@ function openIntrumentEditor(instrument){
         console.log(osctype,oscwave,oscpartials);
 
         $('#ie-mainosc-type option[value="'+osctype+'"]').prop('selected', true);
-        $('#ie-mainosc-type option[value="'+oscwave+'"]').prop('selected', true);
+        $('#ie-mainosc-wave option[value="'+oscwave+'"]').prop('selected', true);
 
         $('#ie-mainosc-type').change((e)=>{
             osctype = $('#ie-mainosc-type').val();

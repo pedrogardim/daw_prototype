@@ -390,7 +390,7 @@ $("html").keydown(function (e) {
     //ONLY TRIGGER WHEN PAGE LOADED
     if(appMode == 3){
       //1-9
-      if (e.keyCode >= 49 && e.keyCode <= 57 && isPlayingChord == false && changingnamechord == null) {
+      if (e.keyCode >= 49 && e.keyCode <= 57 && isPlayingChord == false && changingnamechord == null && checkForSelInput()) {
         playChord(e.keyCode - 49);
       }
       if(e.keyCode == 8){
