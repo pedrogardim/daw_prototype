@@ -1,7 +1,7 @@
 //////////////////////////
 //PLAYBACK
 
-var playbackChord = playbackMeasure = playbackBeat = playbackChord = beatsOnChord = 0;
+var playbackMeasure = playbackBeat = playbackChord = chordsOnMeasure = beatsOnChord = 0;
 var editmode = false;
 var isPlaying = false;
 var isChordPlaying = false;
@@ -28,8 +28,8 @@ Tone.Transport.loopEnd = "4m";
 
 function startPlayback() {
   
-  playbackMeasure = playbackBeat = playbackChord = chordsOnMeasure = elementtoanimate = beatsOnChord = 0;
-  
+  playbackBeat = 0;
+
   isChordPlaying = false;
   drawCircleElements();
   unselectChord();
@@ -38,6 +38,23 @@ function startPlayback() {
   isPlaying = true; //set variable to playing
 
   //playMelodies();
+
+  for(var x=0; x< sessionchords.length; x++){
+    if((sessionchords[x][2])-1 == playbackMeasure) {
+      playbackChord = x;
+      break;
+    }
+  }
+
+  if (playbackChord != 0){
+    beatsOnChord = sessionchords[playbackChord-1][1]*sessionsubdivision;
+
+  }
+
+  console.log(playbackChord)
+
+  chordsOnMeasure = 0;
+
 
   var playbacksubdivision = Tone.Time("1m").toSeconds() / sessionsubdivision;
 
@@ -116,11 +133,14 @@ function startPlayback() {
   
   Tone.Transport.start();//start loop
 
+  /*
   melodyCursorLoop = 
   setInterval(function (){
     var cursorposition = 50 + ($("#prrow1").width()*Tone.Transport.progress);
     $("#prcursor").css("left",cursorposition);
   }, 16);
+
+  */
 
 }
 //===============================
@@ -129,7 +149,9 @@ function stopPlayback() {
   Tone.Transport.stop(); //stop the loop
   Tone.Transport.cancel(); //stop the loop
 
-  playbackMeasure = playbackBeat = playbackChord = elementtoanimate = beatsOnChord = 0;
+  
+
+  playbackBeat = beatsOnChord = 0;
   drawRhythm();
 
   //playbackChord --; 
@@ -199,7 +221,7 @@ function scheduleChordRhythm(chord,timetostart) {
   });
 
   if (playbackChord < sessionchords.length){ 
-    playbackChord++;chordsOnMeasure++;
+    playbackChord++; chordsOnMeasure++;
     chord = sessionchords[playbackChord-1];
     $(".chord").css("color","var(--darkest-color)");
     $("#chord"+(playbackChord)).css("color","var(--medium-color)");

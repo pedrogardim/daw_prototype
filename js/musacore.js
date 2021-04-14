@@ -174,7 +174,7 @@ var drumSounds = [];
 
 function onModifySession(){
 
-  //console.log("mod")
+  console.log("mod")
 
   var oldsessionData = JSON.parse(JSON.stringify(sessionData));
 

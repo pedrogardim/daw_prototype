@@ -131,36 +131,28 @@ function drawCircleMelodies(){
 
 //ANIMATE CIRCLE ELEMENTS ON BEAT
 
-var elementtoanimate = 0;
-
 function animateCircleOnBeat() {
 
   
-  //if (playbackBeat == sessiondrums[playbackMeasure.length-1]){
-  //  elementtoanimate = 0;
+  //if ((playbackBeat-1) == sessiondrums[playbackMeasure.length-1]){
+  //  (playbackBeat-1) = 0;
   //}
   //else{
-  //  elementtoanimate = playbackBeat-1
+  //  (playbackBeat-1) = (playbackBeat-1)-1
   //}
-  var actualwidth = $("#ce" + elementtoanimate).width();
-  var actualheight = $("#ce" + elementtoanimate).height();
+  var actualwidth = $("#ce" + (playbackBeat-1)).width();
+  var actualheight = $("#ce" + (playbackBeat-1)).height();
 
-  $("#ce" + elementtoanimate).css({
+  $("#ce" + (playbackBeat-1)).css({
     width: actualwidth + 10,
     height: actualheight + 10,
   });
-  $("#ce" + elementtoanimate).animate(
+  $("#ce" + (playbackBeat-1)).animate(
     { width: actualwidth, height: actualheight },
     50
   );
 
-  elementtoanimate ++;
-  if(sessiondrums[playbackMeasure] == undefined){
-    elementtoanimate = 0; 
-  }
-  else if(elementtoanimate == sessiondrums[playbackMeasure].length){
-    elementtoanimate = 0;
-  }
+  //console.log(playbackBeat-1);
   
 }
 

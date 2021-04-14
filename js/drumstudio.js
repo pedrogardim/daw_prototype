@@ -243,7 +243,7 @@ sessiondrums.forEach((msre,msreindex)=>{
         //works if gdc = new sessionsubdivision
 
         for(var x = 0; x < drumseq.length; x++){
-          if (x % (drumseq.length/gdc) !== 0){
+          if (x % (drumseq.length/gdc) == 0){
             newsubdivarray.push(drumseq[x]);
           }
         }

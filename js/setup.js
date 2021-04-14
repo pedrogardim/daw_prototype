@@ -501,9 +501,10 @@ function updateAll(){
   updateSequencerElements();
 
   adaptDrumSeqtoSubdiv();
-  updateMelodyPreview();
+  //updateMelodyPreview();
   drawScore();
-  adjustNotesPos();
+  drawRhythm();
+  //adjustNotesPos();
   if(selectedchord != null){
     $('#chordpiano').klavier('setSelectedValues', noteArraytoMidi(sessionchords[selectedchord][0]))
   }

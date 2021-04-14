@@ -383,6 +383,7 @@ $("#floatinginput").change(function(e){
     $("#chord"+(changingnamechord+1)).html(chordNotestoName(sessionchords[changingnamechord][0]));
     $("#floatinginput").removeClass("visible").addClass("hidden").css({top: "-999px" ,left:"-999px"});;
     changingnamechord = null;
+    onModifySession();
 
 });
 
@@ -416,6 +417,7 @@ $("html").keydown(function (e) {
           sessionchords[selectedchord][3] = copiedchord[1][3];
           playChord();
           updateChordsOnScore();
+          $('#chordpiano').klavier('setSelectedValues', noteArraytoMidi(sessionchords[selectedchord][0]));
         }
         
         })
