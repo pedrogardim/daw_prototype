@@ -14,7 +14,7 @@ $("#downloadloopbtn").mouseenter(function () {
 
 function prepareOffline(){
 
-    var mastervol = -12;
+    var mastervol = -10;
 
 
     var exportdur = looprepeats * (60/sessionbpm) * 4 * sessionlength;

@@ -1,7 +1,6 @@
 var stepvalues = [4,8,12,16,24,32,48];
 var stepselec;
 var dragtileselect = false;
-var selectedonthisdrag = [];
 var drumview = 0;
 var seldrumkit = drumkits[selecteddrums];
 
@@ -313,39 +312,48 @@ sessiondrums.forEach((msre,msreindex)=>{
   
   //SEQ TILE CLICK
   
-  $(document).on('click','.seqtile',function (e) {
-    //selectedonthisdrag = [];
-
-    $(e.target).toggleClass("selectedTile");
-  
-    var thisid = $(e.target).attr("id");
-    thisid = thisid.replace("seqTile-", "");
-    thisid = thisid.split("-");
-    var thisstep = parseInt(thisid[0]);
-    var thisintrument = parseInt(thisid[1]) + 1;
-  
-    registerNoteToSequencer(thisintrument, thisstep);
-  });
+  //$(document).on('click','.seqtile',function (e) {
+//
+  //  $(e.target).toggleClass("selectedTile");
+  //
+  //  var thisid = $(e.target).attr("id");
+  //  thisid = thisid.replace("seqTile-", "");
+  //  thisid = thisid.split("-");
+  //  var thisstep = parseInt(thisid[0]);
+  //  var thisintrument = parseInt(thisid[1]) + 1;
+  //
+  //  registerNoteToSequencer(thisintrument, thisstep);
+  //});
 
   //SEQTILE Drag Select
 
    $(document).on('mousedown','.seqtile',function () {
 
+    var targetid = $(this).attr("id");
+
     dragtileselect = true;
     ($(this).hasClass("selectedTile"))?(dtsmode = "remove"):(dtsmode = "add");
+    $(this).toggleClass("selectedTile");
+      
+      var thisid = $(this).attr("id");
+      thisid = thisid.replace("seqTile-", "");
+      thisid = thisid.split("-");
+      var thisstep = parseInt(thisid[0]);
+      var thisintrument = parseInt(thisid[1]) + 1;
+      
+      registerNoteToSequencer(thisintrument, thisstep);
 
   });
   $(document).on('mouseup',function () {
 
     dragtileselect = false;
-    selectedonthisdrag = [];
   });
 
   $(document).on('mousemove','.seqtile',function (e) {
 
     var targetid = $(this).attr("id");
 
-    if(dragtileselect && selectedonthisdrag.indexOf(targetid) == -1){
+    if(dragtileselect){
 
       if(($(this).hasClass("selectedTile") && dtsmode == "remove")||($(this).hasClass("selectedTile") == false && dtsmode == "add")){
 
@@ -358,7 +366,6 @@ sessiondrums.forEach((msre,msreindex)=>{
       var thisintrument = parseInt(thisid[1]) + 1;
       
       registerNoteToSequencer(thisintrument, thisstep);
-      selectedonthisdrag.push(targetid)
 
       }
 
