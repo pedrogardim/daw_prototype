@@ -14,6 +14,8 @@ $("#downloadloopbtn").mouseenter(function () {
 
 function prepareOffline(){
 
+    var mastervol = -12;
+
 
     var exportdur = looprepeats * (60/sessionbpm) * 4 * sessionlength;
 
@@ -27,7 +29,10 @@ function prepareOffline(){
 
       for (var x = 0; x < drumSounds.length; x++) {
         offlineDrumSounds.push(new Tone.Player(drumsamplesbuffer[x]).toDestination());
+        offlineDrumSounds[x].volume.value = mastervol;
       }
+
+      chordinst.volume.value = mastervol;
 
       //DRUMS
      
@@ -78,7 +83,9 @@ function prepareOffline(){
         });
       });
 
+
       transport.start();
+
 
 
 
