@@ -37,7 +37,7 @@ function startPlayback() {
   $("#drummeasure"+(playbackMeasure+1)).css("filter","brightness(1.2)");
   isPlaying = true; //set variable to playing
 
-  playMelodies();
+  //playMelodies();
 
   var playbacksubdivision = Tone.Time("1m").toSeconds() / sessionsubdivision;
 

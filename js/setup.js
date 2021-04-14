@@ -467,7 +467,6 @@ $(function() {
   //showMelodyList();
   //loadMelodyInstruments()
 
-
   loadDrums("808");
 
   drawDrumKeys();
@@ -477,7 +476,7 @@ $(function() {
   $("#sessiontitle").html(sessionName);
   $('#chordpiano').klavier({ startKey: 21, endKey: 108});
   
-  navTo(3);
+  navTo(2);
 
   drawSequencer();
 

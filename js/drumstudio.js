@@ -58,7 +58,6 @@ function drawDrumKeys(){
   $("#drumkeyscont").html(drumkeys)
 }
 
-
 function playDrumSound(keycodetoindex){
 
   if(keycodetoindex < drumSounds.length){
@@ -142,15 +141,11 @@ sessiondrums.forEach((msre,msreindex)=>{
 });
 };
 
-
-  
   ///////////////////////////
   //SEQUENCER INPUT
   //////////////////////////
   
   function registerNoteToSequencer(note, beat) {
-
-    console.log(note,beat)
 
       ///WITHOUT STEP INPUT MODE  
       if (sessiondrums[playbackMeasure][beat].includes(note) == true) {
@@ -173,6 +168,7 @@ sessiondrums.forEach((msre,msreindex)=>{
     sessiondrums.forEach((drumseq,index)=>{
 
       var difference = sessionsubdivision / drumseq.length;
+      var gdc = gcd_two_numbers(sessionsubdivision, drumseq.length)
 
       var newsubdivarray = [];
 
@@ -181,6 +177,9 @@ sessiondrums.forEach((msre,msreindex)=>{
       //no difference
       
       if (difference == 1) return;
+
+      /*
+      
 
       //difference is greater than double, insert silences between beats
 
@@ -206,30 +205,60 @@ sessiondrums.forEach((msre,msreindex)=>{
         }
       }
 
-      else if (difference < 1){ 
+      
+
+      else if (difference < 1 && ((1/difference) % 2 == 0 || (1/difference) % 3 == 0)){ 
 
         for(var x = 0; x < sessionsubdivision; x++){
             newsubdivarray.push(drumseq[x/difference]);
         }
+      } 
+
+      */
+
+      
+
+      //apply GCD
+
+      if(difference > 1){
+
+        console.log("gdccase+",gdc,drumseq.length)
+        
+        for(var x = 0; x < drumseq.length; x++){
+          newsubdivarray.push(drumseq[x]);
+          console.log(((x+1) % (drumseq.length/gdc)));
+
+          if(((x+1) % (drumseq.length/gdc)) == 0){
+            for(var y = 0; y < difference-1; y++){
+              newsubdivarray.push([]);
+            }
+          }
+        }
       }
 
-      sessiondrums[index] = newsubdivarray;
-      return;
-    
-    
-      
-      //var dif = sessionsubdivision/(sessionsubdivision-drumseq.length);
-      //console.log(dif)
-      
-      for(var x = 0; x < sessionsubdivision; x++){
+      else if(difference < 1){
 
-        newsubdivarray[x] = drumseq[x%drumseq.length];
-      
+        console.log("gdc case -",gdc)
+        
+        //works if gdc = new sessionsubdivision
+
+        for(var x = 0; x < drumseq.length; x++){
+          if (x % (drumseq.length/gdc) !== 0){
+            newsubdivarray.push(drumseq[x]);
+          }
+        }
+        /*
+        for(var x = 0; x < drumseq.length; x++){
+          if (x % (drumseq.length/gdc) == 0){
+            newsubdivarray.push(drumseq[x]);
+          }
+        }
+        */
       }
 
-      sessiondrums[index] = newsubdivarray;
+      else if (gdc == 1){}
 
-      //console.log(sessionsubdivision,sessiondrums[index].length,difference)
+      sessiondrums[index] = newsubdivarray;
 
     });
 
@@ -240,7 +269,7 @@ sessiondrums.forEach((msre,msreindex)=>{
   }
 
   function updateSteps(input){
-    sessionsubdivision = tempData.steps = input;
+    sessionsubdivision = tempData.steps = parseInt(input);
     adaptDrumSeqtoSubdiv();
 
 
@@ -264,10 +293,6 @@ sessiondrums.forEach((msre,msreindex)=>{
   });
 
 
-
-
-
-  
   ///////////////////////////
   //UPDATE ELEMENTS
   //////////////////////////
@@ -309,23 +334,8 @@ sessiondrums.forEach((msre,msreindex)=>{
   //EVENTS
   //////////////////////////
   
-  
-  //SEQ TILE CLICK
-  
-  //$(document).on('click','.seqtile',function (e) {
-//
-  //  $(e.target).toggleClass("selectedTile");
-  //
-  //  var thisid = $(e.target).attr("id");
-  //  thisid = thisid.replace("seqTile-", "");
-  //  thisid = thisid.split("-");
-  //  var thisstep = parseInt(thisid[0]);
-  //  var thisintrument = parseInt(thisid[1]) + 1;
-  //
-  //  registerNoteToSequencer(thisintrument, thisstep);
-  //});
 
-  //SEQTILE Drag Select
+  //SEQTILE Select
 
    $(document).on('mousedown','.seqtile',function () {
 
