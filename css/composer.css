@@ -107,13 +107,13 @@
   outline: solid 1px var(--darkest-color);
   margin: 0;
   transition: 0.1s;
-  background-color: var(--brightest-color);
+  background-color: var(--bright-color);
   flex: 1 1 1px;
   
 }
 
 .re-tile:hover{
-  background-color: var(--bright-color);
+  filter:brightness(1.2) contrast(0.8);
 
 }
 

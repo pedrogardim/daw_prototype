@@ -110,6 +110,7 @@ function startPlayback() {
 
     $("#statuscursor").css("transform","rotate(" +((playbackMeasure * sessionsubdivision + playbackBeat) /(sessionsubdivision * sessionlength)) * 360 +"deg)");
 
+    
     $(".chord").removeClass("activechord")
     $("#chord"+(playbackChord+1)).addClass("activechord")
 
@@ -118,8 +119,10 @@ function startPlayback() {
 
     if(beatsOnChord == (sessionsubdivision * sessionchords[playbackChord][1])){
 
+
       playbackChord ++;
       beatsOnChord = 0;
+
       
     }
    
@@ -205,9 +208,13 @@ function playChordRhythm(thischord,thismeasure,thisbeat,time){
   
   if(thisrhythm == 1){
     rhythminstrument.triggerAttackRelease(thisnotes,Tone.Time("1m").toSeconds()/sessionsubdivision,time);
+    $('#chordpiano').klavier('setSelectedValues', noteArraytoMidi(sessionchords[thischord][0]))
+
   }
   if(thisrhythm == 0){
     rhythminstrument.releaseAll(time);
+    $('#chordpiano').klavier('setSelectedValues', [])
+
   }
 
 

@@ -342,6 +342,16 @@ function drawRhythm(){
         var thistile = '<div class="re-tile" id="rt-' + x+ '"></div>'
         $("#rhythmeditor").append(thistile); 
     }
+
+    var measurechords = sessionchords.filter(chord => chord[2] == playbackMeasure+1);
+    
+    measurechords.forEach((chord,chordindex)=>{
+        var rechordlbl = 
+        '<span id="re-chname'+chordindex+'" class="re-chname">'+chordNotestoName(chord[0])+'</span>'+
+        $("#rhythmeditor").append(rechordlbl);
+        
+    })
+
     updateRhythm();
 }
 
