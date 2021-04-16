@@ -11,7 +11,6 @@ var drumSounds = [];
 var rhythminstrument = instrumentContructor(rhythmpatch);
 var melodyinstruments = [];
 
-
 var looponfirstdrum = false;
 
 var playingmelodies = [];
@@ -149,7 +148,7 @@ function stopPlayback() {
   Tone.Transport.stop(); //stop the loop
   Tone.Transport.cancel(); //stop the loop
 
-  
+  rhythminstrument.releaseAll();
 
   playbackBeat = beatsOnChord = 0;
   drawRhythm();

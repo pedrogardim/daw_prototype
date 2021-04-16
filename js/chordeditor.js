@@ -23,13 +23,18 @@ function selectChord(chord){
 
     console.log("select")
 
+    rhythminstrument.releaseAll();
+
+
     if(selectedchord == chord){
         unselectChord();
+
     }
     else{
         unselectChord();
         selectedchord = chord;
         playChord();
+        console.log(rhythminstrument)
         $('#chordpiano').klavier('setSelectedValues', noteArraytoMidi(sessionchords[chord][0]));
         $("#chord"+(chord+1)).addClass("selectedchord");
     }
@@ -262,12 +267,14 @@ function rhythmInstrSelector(){
 
 function setRhythmInstrument(){
 
+
+    (isPlaying)?(stopPlayback()):("");
+
     $("#chord-instr-input").val(rhythmpatch);
     if(instruments[rhythmpatch].base == "Sampler"){
         if(rhythminstrumentbuffers != null) rhythminstrumentbuffers.dispose();
         rhythminstrumentbuffers = new Tone.Buffers(instruments[rhythmpatch].urls,instruments[rhythmpatch].options);
     }
-    rhythminstrument.dispose();
     rhythminstrument = instrumentContructor(rhythmpatch);
     onModifySession();
 

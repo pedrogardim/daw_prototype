@@ -65,15 +65,13 @@ const instruments = [
 		
 	},
 	{
-		name: "MonoDemo",
+		name: "Organ",
 		base: "Synth",
 		type: 2,
-		gain: -12,
+		gain: -18,
 		options:{
 			"oscillator": {
-				"sourceType":"oscillator",
-				"baseType": "sine",
-				"partialCount":8
+				"type":"sine6",
 			},
 			"envelope": {
 				"attack": 0.01,
@@ -81,18 +79,8 @@ const instruments = [
 				"sustain": 1,
 				"release": 0.01
 			},
-			"filter" : {
-				"frequency" : 1000,
-				"gain": 0
-			},
-			"filterEnvelope" : {
-				"attack": 0,
-				"decay": 0,
-				"sustain": 1,
-				"release": 0
-			},
-			"portamento":0,
-		}
+		},
+		fx:[["vib",6,0.05],["trem",2,0.2]]
 	},
 	{
 		name: "Grand Piano",
@@ -115,6 +103,7 @@ const instruments = [
 			
 			"baseUrl": "assets/samples/instruments/piano1/",
 		},
+		fx:[["dly","16n",0.6,0.2]],
 		asdr:[0,0]
 	},
 
@@ -125,6 +114,7 @@ function instrumentContructor(input){
 	
 	var instr;
 	var patch = instruments[input];
+	var instrfx = [];
 
 	if(patch.base == "Sampler"){
 
@@ -138,16 +128,49 @@ function instrumentContructor(input){
 
 	}
 	if(patch.base == "FM"){
-		instr = new Tone.PolySynth(Tone.FMSynth,patch.options).toDestination()
+		instr = new Tone.PolySynth(Tone.FMSynth,patch.options);
 	}
 	if(patch.base == "AM"){
-		instr = new Tone.PolySynth(Tone.AMSynth,patch.options).toDestination();
+		instr = new Tone.PolySynth(Tone.AMSynth,patch.options);
+	}
+	if(patch.base == "Mono"){
+		instr = new Tone.PolySynth(Tone.MonoSynth,patch.options);
 	}
 	if(patch.base == "Synth"){
-		instr = new Tone.PolySynth(Tone.MonoSynth,patch.options).toDestination();
+		instr = new Tone.PolySynth(Tone.Synth,patch.options);
 	}
 
 	instr.volume.value = patch.gain;
+
+	if("fx" in patch){
+
+		patch.fx.forEach((e,i)=>{
+			if(e[0] == "vib"){
+				instrfx[i] = new Tone.Vibrato(e[1],e[2]);
+			}
+			if(e[0] == "stwid"){
+				instrfx[i] = new Tone.StereoWidener(e[1]);
+			}
+			if(e[0] == "trem"){
+				instrfx[i] = new Tone.Tremolo(e[1],e[2]).start();
+			}
+			if(e[0] == "phsr"){
+				instrfx[i] = new Tone.Phaser(e[1],e[2],e[3]);
+			}
+			if(e[0] == "rvb"){
+				instrfx[i] = new Tone.Reverb({decay:e[1],wet:e[2],predelay:[3]});
+			}
+			if(e[0] == "dly"){
+				instrfx[i] = new Tone.FeedbackDelay({delayTime:e[1],feedback:e[2],wet:e[3]});
+			}
+			instr.connect(instrfx[i]);
+
+			(i == patch.fx.length-1)?(instrfx[i].toDestination()):("")
+		})
+	}
+	else{
+		instr.toDestination();
+	}
 
 	return instr;
 
