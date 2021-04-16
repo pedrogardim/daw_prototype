@@ -204,6 +204,7 @@ function drawScore() {
   });
     
   });
+  rhythmInstrSelector();
 }
 
 function drumScore() {
@@ -504,6 +505,8 @@ function updateAll(){
   //updateMelodyPreview();
   drawScore();
   drawRhythm();
+  setRhythmInstrument()
+
   //adjustNotesPos();
   if(selectedchord != null){
     $('#chordpiano').klavier('setSelectedValues', noteArraytoMidi(sessionchords[selectedchord][0]))

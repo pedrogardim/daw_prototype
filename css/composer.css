@@ -80,8 +80,10 @@
 
 #chord-instr-input{
   top:calc(40% - 30px);
-  left:calc(20% - 100px);
+  left:calc(20% - 120px);
   position:absolute;
+  width:92px;
+  height:42px;
   
 }
 

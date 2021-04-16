@@ -16,14 +16,13 @@ function prepareOffline(){
 
     var mastervol = -10;
 
-
     var exportdur = looprepeats * (60/sessionbpm) * 4 * sessionlength;
 
     Tone.Offline(({ transport }) => {
 
       transport.bpm.value = sessionbpm;
 
-      var chordinst = instrumentContructor(0);
+      var chordinst = instrumentContructor(rhythmpatch);
 
       var offlineDrumSounds = [];
 

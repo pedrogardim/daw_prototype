@@ -1,99 +1,8 @@
-const instrPiano1 = new Tone.Sampler({
-	urls: {
-		"Ab4": "Ab4.wav",
-        "Eb3": "Eb3.wav",
-		"Eb5": "Eb5.wav",
-		"G2": "G2.wav",
-		"Db6": "Db6.wav",
-		"C2": "C2.wav",
-		"B4": "B4.wav",
-		"Gb3": "Gb3.wav",
-		"D4": "D4.wav",
-        "E2": "E2.wav"
+//in case the instrument is sampled, for offline
 
-
-	},
-	baseUrl: "assets/samples/instruments/piano1/",
-	onload: () => {
-	}
-}).toDestination();
-
-instrPiano1.volume.value = -12;
-instrPiano1.release = 0.4;
+var rhythminstrumentbuffers;
 
 //==============================================
-
-
-//const instrOrgan1 = new Tone.Sampler({
-//	urls: {
-//		"C1": "C1.wav",
-//        "C2": "C2.wav",
-//		"C3": "C3.wav",
-//		"C4": "C4.wav",
-//		"C5": "C5.wav",
-//		"C6": "C6.wav",
-//		"C7": "C7.wav",
-//	},
-//	baseUrl: "assets/samples/instruments/organ1/",
-//	onload: () => {
-//	}
-//}).toDestination();
-//
-//instrOrgan1.volume.value = -12;
-//
-////==============================================
-//
-//
-//const instrEp1 = new Tone.Sampler({
-//	urls: {
-//		"C1": "C1.wav",
-//        "C2": "C2.wav",
-//		"C3": "C3.wav",
-//		"C4": "C4.wav",
-//		"C5": "C5.wav",
-//		"C6": "C6.wav",
-//		"C7": "C7.wav",
-//	},
-//	baseUrl: "assets/samples/instruments/ep1/",
-//	onload: () => {
-//	}
-//}).toDestination();
-//
-//instrEp1.volume.value = -12;
-
-const instrmusaepiano = new Tone.PolySynth(Tone.FMSynth,
-	{
-	"harmonicity":50,
-	"modulationIndex": 20,
-	"oscillator" : {
-		"type": "sine2"
-	},
-	"envelope": {
-		"attack": 0.001,
-		"decay": 2,
-		"sustain": 0.0,
-		"release": 0.2,
-	},
-	"modulation" : {
-		"type" : "sine"
-	},
-	"modulationEnvelope" : {
-		"attack": 0.001,
-		"decay": 0.5,
-		"sustain": 0,
-		"release": 0.0,
-	}
-} ).toDestination();
-
-instrmusaepiano.volume.value = -6;
-
-const tremolo = new Tone.Tremolo(4, 0.7).toDestination().start();
-instrmusaepiano.connect(tremolo);
-
-//instrmusaepiano.connect(phaser);
-
-
-
 
 const instrcategories = ["Drums", "Keys", "Synth"];
 
@@ -163,29 +72,51 @@ const instruments = [
 		options:{
 			"oscillator": {
 				"sourceType":"oscillator",
-				"baseType": "square",
-				"partialCount":10
+				"baseType": "sine",
+				"partialCount":8
 			},
 			"envelope": {
-				"attack": 0.03,
-				"decay": 0.3,
-				"sustain": 0.7,
-				"release": 0.1
+				"attack": 0.01,
+				"decay": 0.0,
+				"sustain": 1,
+				"release": 0.01
 			},
 			"filter" : {
-				  "frequency" : 1000,
+				"frequency" : 1000,
 				"gain": 0
 			},
 			"filterEnvelope" : {
 				"attack": 0,
-				"decay": 3,
-				"sustain": 0.8,
-				"release": 0.1
+				"decay": 0,
+				"sustain": 1,
+				"release": 0
 			},
-			"portamento":0.4,
+			"portamento":0,
 		}
-		
+	},
+	{
+		name: "Grand Piano",
+		base: "Sampler",
+		type: 2,
+		gain: -18,
+		urls: {
+			"68": "Ab4.wav",
+			"51": "Eb3.wav",
+			"75": "Eb5.wav",
+			"43": "G2.wav",
+			"85": "Db6.wav",
+			"32": "C2.wav",
+			"71": "B4.wav",
+			"54": "Gb3.wav",
+			"62": "D4.wav",
+			"40": "E2.wav"
 		},
+		options:{
+			
+			"baseUrl": "assets/samples/instruments/piano1/",
+		},
+		asdr:[0,0]
+	},
 
 ];
 
@@ -195,7 +126,17 @@ function instrumentContructor(input){
 	var instr;
 	var patch = instruments[input];
 
-	
+	if(patch.base == "Sampler"){
+
+				
+		instr = new Tone.Sampler().toDestination()
+		instr._buffers = rhythminstrumentbuffers;
+
+		//instr = new Tone.Sampler(patch.urls,patch.options).toDestination()
+		instr.attack = patch.asdr[0];
+		instr.release = patch.asdr[1];
+
+	}
 	if(patch.base == "FM"){
 		instr = new Tone.PolySynth(Tone.FMSynth,patch.options).toDestination()
 	}

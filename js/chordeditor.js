@@ -16,6 +16,9 @@ var oldpianoselection;
 
 var maxchordspermeasure = 4;
 
+
+
+
 function selectChord(chord){
 
     console.log("select")
@@ -248,9 +251,27 @@ function unselectChord(){
 //Intrument SELECTOR
 ////////////////////////////////
 
-$("#chord-instr-input").click((e)=>{
-    openIntrumentEditor(rhythminstrument);
-})
+function rhythmInstrSelector(){
+    var cont = "";
+    instruments.forEach((e,i)=>{
+
+        cont +='<option value="'+i+'">'+e.name+'</option>'
+    })
+    $("#chord-instr-input").html(cont);
+}
+
+function setRhythmInstrument(){
+
+    $("#chord-instr-input").val(rhythmpatch);
+    if(instruments[rhythmpatch].base == "Sampler"){
+        if(rhythminstrumentbuffers != null) rhythminstrumentbuffers.dispose();
+        rhythminstrumentbuffers = new Tone.Buffers(instruments[rhythmpatch].urls,instruments[rhythmpatch].options);
+    }
+    rhythminstrument.dispose();
+    rhythminstrument = instrumentContructor(rhythmpatch);
+    onModifySession();
+
+}
 
 ////////////////////////////////
 //RHYTHM EDITOR
@@ -466,6 +487,12 @@ $('#chordpiano').click((e)=>{
 
     setNotes($('#chordpiano').klavier('getSelectedValues'));
 });
+
+$("#chord-instr-input").change((e)=>{
+
+    rhythmpatch = tempData.rhythmpatch = $(e.target).val();
+    setRhythmInstrument()
+})
 
 $(".chordbtn").draggable({
     revert: true,
