@@ -338,3 +338,5 @@ $("html").keydown(function (e) {
     return;
   }
 });
+
+$("#logo").click((e)=>(isPlaying)?(stopPlayback()):(startPlayback()))
