@@ -21,7 +21,8 @@ var maxchordspermeasure = 4;
 
 function selectChord(chord){
 
-    console.log("select")
+    stopPlayback();
+    playbackMeasure = sessionchords[chord][2]-1;
 
     rhythminstrument.releaseAll();
 
@@ -34,7 +35,6 @@ function selectChord(chord){
         unselectChord();
         selectedchord = chord;
         playChord();
-        console.log(rhythminstrument)
         $('#chordpiano').klavier('setSelectedValues', noteArraytoMidi(sessionchords[chord][0]));
         $("#chord"+(chord+1)).addClass("selectedchord");
     }
@@ -284,6 +284,8 @@ function setRhythmInstrument(){
 //RHYTHM EDITOR
 ////////////////////////////////
 
+/*
+
 function drawRhythm(inputmeasure){
 
     $(".re-chord").remove();
@@ -326,6 +328,27 @@ function drawRhythm(inputmeasure){
             }
         })
     })
+}
+
+*/
+
+function drawRhythm(){
+
+    $("#rhythmeditor").html("");
+    for (var x = 0; x < sessionsubdivision; x++) {
+        var thistile = '<div class="re-tile" id="rt-' + x+ '"></div>'
+        $("#rhythmeditor").append(thistile); 
+    }
+    updateRhythm();
+}
+
+function updateRhythm(){
+
+    var thisrhythm = sessionrhythm[playbackMeasure];
+    for (var x = 0; x < thisrhythm.length; x++) {
+
+       (thisrhythm[x]==1)?($('#rt-' + x).addClass("selectedTile")):("");
+    }
 }
 
 function editRhythm(chord,add_delete){

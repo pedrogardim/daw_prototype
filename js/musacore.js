@@ -20,6 +20,12 @@ var sessionData = {
         [["A4", "C4", "E4"],1,3,[2,2,2,2]],
         [["C4", "E4", "G4", "B4"],1,4,[2,2]],
     ],
+    "chordrhythm":[
+      [1,1,1,1,1,1,1,1],
+      [1,0,1,0,1,0,1,0],
+      [1,1,1,1,1,1,1,1],
+      [1,0,1,0,1,0,1,0]
+    ],
     "chloop":1,
     "melodies":[{
         name:"Bass",
@@ -159,6 +165,7 @@ var tempData = JSON.parse(JSON.stringify(sessionData));
 var sessionName = tempData.name;
 var sessionlength = tempData.length;
 var sessionchords = tempData.chords;
+var sessionrhythm = tempData.chordrhythm;
 var sessionbpm = tempData.bpm;
 var selecteddrums = tempData.selecteddrums;
 var rhythmpatch = tempData.rhythmpatch;
@@ -207,6 +214,7 @@ $("html").keydown(function (e) {
     sessionName = tempData.name;
     sessionlength = tempData.length;
     sessionchords = tempData.chords;
+    sessionrhythm = tempData.chordrhythm;
     sessionbpm = tempData.bpm;
     sessiondrums = tempData.drumpatterns;
     rhythmpatch = tempData.rhythmpatch;

@@ -248,16 +248,6 @@ function drumScore() {
 
   })
 
-  
-  //sessionchords.forEach(function (el, ind) {
-  //    
-  //  var chord = '<div class="ghostchord" id="ghostchord' + (ind+1) + '">' + chordNotestoName(el[0]) + '</div>';
-  //  $("#drummeasure" + el[2]).append(chord);
-  //  $("#chord" + (ind+1),"#bottomscore").width(el[1] * 100 + "%");
-  //});
-
-  
-
 }
 
 function chordNametoNotes(arg) {
@@ -462,6 +452,8 @@ $(function() {
   drawChordsCircle();
   drumScore();
   drawScore();
+  
+  drawRhythm();
   //drawPianoRoll();
 
   getChordsFromScale();

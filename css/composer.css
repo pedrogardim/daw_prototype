@@ -94,15 +94,33 @@
   top:60%;
   height:calc(20% - 16px);
   margin-left: calc(-1 * 60% / 2);
+  display: flex;
+  flex-direction:row;
+  flex-wrap:nowrap;
+  align-items: center;
 
 }
 
-#re-centralline{
-  height:0;
-  border-top:1px solid var(--darkest-color);
-  top:50%;
-  position:absolute;
-  width:100%;
+.re-tile{
+
+  height: 48px;
+  outline: solid 1px var(--dark-color);
+  margin: 0;
+  transition: 0.1s;
+  background-color: var(--medium-color);
+  flex: 1 1 1px;
+  
+}
+
+.re-tile:hover{
+  background-color: var(--bright-color);
+
+}
+
+.re-cursor{
+  filter:brightness(1.2);
+
+
 }
 
 .re-chord{
@@ -115,21 +133,7 @@
   float: left;
 }
 
-.re-strike{
-  height:30px;
-  width:3px;
-  transform:rotate(45deg);
-  background:var(--darkest-color);
-}
 
-.re-silence{
-  background:none;
-  height:5px;
-  width:20px;
-  transform:rotate(0deg);
-  outline:solid 1px var(--darkest-color);
-
-}
 
 .re-chordlbl{
   position:absolute;

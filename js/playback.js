@@ -34,6 +34,8 @@ function startPlayback() {
   unselectChord();
 
   $("#drummeasure"+(playbackMeasure+1)).css("filter","brightness(1.2)");
+  $("#chord"+(playbackChord+1)).addClass("activechord")
+
   isPlaying = true; //set variable to playing
 
   //playMelodies();
@@ -45,19 +47,19 @@ function startPlayback() {
     }
   }
 
-  if (playbackChord != 0){
-    beatsOnChord = sessionchords[playbackChord-1][1]*sessionsubdivision;
+ /*  if (playbackChord != 0){
+    beatsOnChord = sessionchords[playbackChord][1]*sessionsubdivision;
 
-  }
-
-  console.log(playbackChord)
+  } */
 
   chordsOnMeasure = 0;
-
 
   var playbacksubdivision = Tone.Time("1m").toSeconds() / sessionsubdivision;
 
   Tone.Transport.scheduleRepeat((time) => {
+
+    console.log(playbackBeat,beatsOnChord,playbackMeasure,playbackChord)
+
     
     if (playbackMeasure == sessionlength) {
       playbackMeasure = beatsOnChord = playbackChord = 0;
@@ -85,13 +87,17 @@ function startPlayback() {
       }, time);
     //}
 
+    playChordRhythm(playbackChord,playbackMeasure,playbackBeat,time);
+
     updateSequencerElements();
 
     //================
     //CHORD RHYTHM
     //================
-
+    
     //Play the first chord of the loop
+
+    /*
     if (playbackChord == 0){
       scheduleChordRhythm(thischord, Tone.Time(Tone.Transport.position).quantize("8n"));
     }
@@ -101,31 +107,41 @@ function startPlayback() {
       beatsOnChord = 0;
     }
 
-    $("#statuscursor").css(
-      "transform",
-      "rotate(" +
-        ((playbackMeasure * sessionsubdivision + playbackBeat) /
-          (sessionsubdivision * sessionlength)) *
-          360 +
-        "deg)"
-    );
+    */
+
+    $("#statuscursor").css("transform","rotate(" +((playbackMeasure * sessionsubdivision + playbackBeat) /(sessionsubdivision * sessionlength)) * 360 +"deg)");
+
+    $(".chord").removeClass("activechord")
+      $("#chord"+(playbackChord+1)).addClass("activechord")
 
     playbackBeat++;
     beatsOnChord++;
 
-    if (playbackBeat == sessionsubdivision) {
-      playbackBeat = 0;
+    if(beatsOnChord == (sessionsubdivision * sessionchords[playbackChord][1])){
 
-      if (looponfirstdrum == false) {
-        playbackMeasure++;
-        chordsOnMeasure = 0;
-        Tone.Draw.schedule(function () {
-          updateSequencerElements();
-          drawCircleElements();
-        }, time + playbacksubdivision);
-
-      }
+      playbackChord ++;
+      beatsOnChord = 0;
+      
     }
+    
+   
+    if (playbackBeat == sessionsubdivision) {
+      playbackBeat = beatsOnChord = 0;
+
+      playbackMeasure++;
+      chordsOnMeasure = 0;
+      updateRhythm();
+
+      Tone.Draw.schedule(function () {
+        updateSequencerElements();
+        drawCircleElements();
+      }, time + playbacksubdivision);
+
+
+    }
+
+    if(playbackMeasure == sessionlength) playbackMeasure = playbackChord = 0;
+
 
   }, playbacksubdivision);
   
@@ -145,6 +161,7 @@ function startPlayback() {
 //===============================
 
 function stopPlayback() {
+
   Tone.Transport.stop(); //stop the loop
   Tone.Transport.cancel(); //stop the loop
 
@@ -155,7 +172,7 @@ function stopPlayback() {
 
   //playbackChord --; 
 
-  $(".chord").css("color","var(--darkest-color)");
+  $(".chord").removeClass("activechord")
 
   drawCircleElements();
   $("#statuscursor").css(
@@ -168,6 +185,7 @@ function stopPlayback() {
   );
 
   updateSequencerElements();
+  updateRhythm()
   unselectChord();
 
   clearInterval(melodyCursorLoop);
@@ -181,6 +199,21 @@ function stopPlayback() {
     (x) => $("#pauseInd").toggleClass("hidden").removeClass("visible"),
     200
   );
+}
+
+function playChordRhythm(thischord,thismeasure,thisbeat,time){
+
+  var thisnotes = sessionchords[thischord][0];
+  var thisrhythm = sessionrhythm[thismeasure][thisbeat];
+  
+  if(thisrhythm == 1){
+    rhythminstrument.triggerAttackRelease(thisnotes,Tone.Time("1m").toSeconds()/sessionsubdivision,time);
+  }
+  if(thisrhythm == 0){
+    rhythminstrument.releaseAll(time);
+  }
+
+
 }
 
 function scheduleChordRhythm(chord,timetostart) {

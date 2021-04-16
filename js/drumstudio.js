@@ -271,6 +271,8 @@ sessiondrums.forEach((msre,msreindex)=>{
   function updateSteps(input){
     sessionsubdivision = tempData.steps = parseInt(input);
     adaptDrumSeqtoSubdiv();
+    drawRhythm();
+
 
 
   }
@@ -285,9 +287,9 @@ sessiondrums.forEach((msre,msreindex)=>{
     var goal = $(this).val();
     var closest = stepvalues.reduce((prev, curr) => {return (Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev)});
     stepselec = stepvalues.indexOf(closest);
-    
     updateSteps(goal);
     $(this).val(goal);
+
     onModifySession();
 
   });
@@ -301,10 +303,14 @@ sessiondrums.forEach((msre,msreindex)=>{
     //update cursor, changing the class on the current bear tile column
   
     $(".seqtile").removeClass("seqcursor");
+    $(".re-tile").removeClass("seqcursor");
+
+    $("#rt-" + (playbackBeat)).toggleClass("seqcursor");
   
     for (var y = 0; y < drumSounds.length; y++) {
       $("#seqTile-" + (playbackBeat) + "-" + y).toggleClass("seqcursor");
     }
+
   }
   
   function updateTiles() {
