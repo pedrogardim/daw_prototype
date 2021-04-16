@@ -58,8 +58,7 @@ function startPlayback() {
 
   Tone.Transport.scheduleRepeat((time) => {
 
-    console.log(playbackBeat,beatsOnChord,playbackMeasure,playbackChord)
-
+    //console.log(playbackBeat,beatsOnChord,playbackMeasure,playbackChord)
     
     if (playbackMeasure == sessionlength) {
       playbackMeasure = beatsOnChord = playbackChord = 0;
@@ -112,12 +111,10 @@ function startPlayback() {
     $("#statuscursor").css("transform","rotate(" +((playbackMeasure * sessionsubdivision + playbackBeat) /(sessionsubdivision * sessionlength)) * 360 +"deg)");
 
     $(".chord").removeClass("activechord")
-      $("#chord"+(playbackChord+1)).addClass("activechord")
+    $("#chord"+(playbackChord+1)).addClass("activechord")
 
     playbackBeat++;
     beatsOnChord++;
-
-
 
     if(beatsOnChord == (sessionsubdivision * sessionchords[playbackChord][1])){
 
@@ -132,14 +129,12 @@ function startPlayback() {
       playbackMeasure++;
       chordsOnMeasure = 0;
 
-
       Tone.Draw.schedule(function () {
-        updateRhythm();
+        updateRhythm(); 
         updateSequencerElements();
         drawCircleElements();
 
       }, time + playbacksubdivision);
-
 
     }
 

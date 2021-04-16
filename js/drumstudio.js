@@ -163,104 +163,16 @@ sessiondrums.forEach((msre,msreindex)=>{
       onModifySession();
   }
 
-  function adaptDrumSeqtoSubdiv(){
 
-    sessiondrums.forEach((drumseq,index)=>{
+  function adaptSessiontoSubdiv(){
 
-      var difference = sessionsubdivision / drumseq.length;
-      var gdc = gcd_two_numbers(sessionsubdivision, drumseq.length)
+    sessiondrums = sessiondrums.map((e)=>{
+      return adaptSequencetoSubdiv(e);
+    })
 
-      var newsubdivarray = [];
-
-      //POSSIBLE SCENARIOS:
-
-      //no difference
-      
-      if (difference == 1) return;
-
-      /*
-      
-
-      //difference is greater than double, insert silences between beats
-
-      else if (difference % 2 == 0 || difference % 3 == 0){ 
-
-        for(var x = 0; x < drumseq.length; x++){
-          newsubdivarray.push(drumseq[x]);
-          for(var y = 0; y < (difference-1); y++){
-            newsubdivarray.push([]);
-          }
-        }
-      }
-
-      //difference is positive, but less than double, insert silences in some intervals
-
-      else if (difference > 1 && difference < 2){ 
-
-        for(var x = 0; x < drumseq.length; x++){
-            newsubdivarray.push(drumseq[x]);
-            if(x%((difference*2)-1) == 1){
-              newsubdivarray.push([]);
-            }
-        }
-      }
-
-      
-
-      else if (difference < 1 && ((1/difference) % 2 == 0 || (1/difference) % 3 == 0)){ 
-
-        for(var x = 0; x < sessionsubdivision; x++){
-            newsubdivarray.push(drumseq[x/difference]);
-        }
-      } 
-
-      */
-
-      
-
-      //apply GCD
-
-      if(difference > 1){
-
-        console.log("gdccase+",gdc,drumseq.length)
-        
-        for(var x = 0; x < drumseq.length; x++){
-          newsubdivarray.push(drumseq[x]);
-          console.log(((x+1) % (drumseq.length/gdc)));
-
-          if(((x+1) % (drumseq.length/gdc)) == 0){
-            for(var y = 0; y < difference-1; y++){
-              newsubdivarray.push([]);
-            }
-          }
-        }
-      }
-
-      else if(difference < 1){
-
-        console.log("gdc case -",gdc)
-        
-        //works if gdc = new sessionsubdivision
-
-        for(var x = 0; x < drumseq.length; x++){
-          if (x % (drumseq.length/gdc) == 0){
-            newsubdivarray.push(drumseq[x]);
-          }
-        }
-        /*
-        for(var x = 0; x < drumseq.length; x++){
-          if (x % (drumseq.length/gdc) == 0){
-            newsubdivarray.push(drumseq[x]);
-          }
-        }
-        */
-      }
-
-      else if (gdc == 1){}
-
-      sessiondrums[index] = newsubdivarray;
-
-    });
+    sessionrhythm = sessionrhythm.map((e)=>{
+      return adaptSequencetoSubdiv(e);
+    })
 
     updateMsreScroreTiles();
     drawSequencer();
@@ -270,10 +182,9 @@ sessiondrums.forEach((msre,msreindex)=>{
 
   function updateSteps(input){
     sessionsubdivision = tempData.steps = parseInt(input);
-    adaptDrumSeqtoSubdiv();
+
+    adaptSessiontoSubdiv();
     drawRhythm();
-
-
 
   }
   ///////////////////////////

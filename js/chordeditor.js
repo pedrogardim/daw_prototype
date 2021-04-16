@@ -106,6 +106,9 @@ function getChordsFromScale(){
             thischord.push(scales[selectedscale][0][noteindex]);
         }
         scalechords.push(Tone.Frequency(chordsroot+"4").harmonize(thischord));
+        scalechords[x] = scalechords[x].map((e)=>{
+            return Tone.Frequency(e).toNote();
+        })
     }
 
     scalechords.forEach((e,i)=>{
@@ -345,9 +348,9 @@ function drawRhythm(){
 function updateRhythm(){
 
     var thisrhythm = sessionrhythm[playbackMeasure];
-    $('.re-tile').removeClass(["selectedTile"]);
+    $('.re-tile').removeClass("re-selected");
     for (var x = 0; x < thisrhythm.length; x++) {
-        (thisrhythm[x]==1)?($('#rt-' + x).addClass("selectedTile")):("");
+        (thisrhythm[x]==1)?($('#rt-' + x).addClass("re-selected")):("");
     }
 }
 
@@ -462,7 +465,6 @@ $("html").keydown(function (e) {
           
         if(newchord[0] == 1 && newchord[1] != sessionchords[selectedchord]){
           sessionchords[selectedchord][0] = newchord[1][0];
-          sessionchords[selectedchord][3] = newchord[1][3];
           playChord();
           updateChordsOnScore();
           $('#chordpiano').klavier('setSelectedValues', noteArraytoMidi(sessionchords[selectedchord][0]));

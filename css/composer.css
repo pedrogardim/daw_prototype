@@ -104,10 +104,10 @@
 .re-tile{
 
   height: 48px;
-  outline: solid 1px var(--dark-color);
+  outline: solid 1px var(--darkest-color);
   margin: 0;
   transition: 0.1s;
-  background-color: var(--medium-color);
+  background-color: var(--brightest-color);
   flex: 1 1 1px;
   
 }
@@ -117,8 +117,13 @@
 
 }
 
+.re-selected{
+  background-color: var(--dark-color);
+
+}
+
 .re-cursor{
-  filter:brightness(1.2);
+  filter:brightness(1.2) contrast(0.8);
 
 
 }
