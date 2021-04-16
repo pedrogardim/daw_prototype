@@ -171,6 +171,8 @@ var chloop = tempData.chloop;
 
 var drumSounds = [];
 
+var clipboard;
+
 
 function onModifySession(){
 

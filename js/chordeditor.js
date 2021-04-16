@@ -400,27 +400,25 @@ $("html").keydown(function (e) {
       if (e.keyCode == 67 && (e.ctrlKey || e.metaKey)){
         //Ctrl + C / Cmd + C
         e.preventDefault();
-        navigator.clipboard.writeText(JSON.stringify([1,sessionchords[selectedchord]]));
+        clipboard = JSON.stringify([1,sessionchords[selectedchord]]);
 
       }
       if (e.keyCode == 86 && (e.ctrlKey || e.metaKey)){
        //Ctrl + V / Cmd + V
         e.preventDefault();
-        navigator.clipboard.readText().then((value)=>{
-        try{var copiedchord = JSON.parse(value)}
-        catch(err){alert("Oops.. Make sure you are trying to paste a chord");return}
-
         //Paste only notes and rhythm, not durantion and index 
+
+        var newchord = JSON.parse(clipboard)
           
-        if(copiedchord[0] == 1 && copiedchord[1] != sessionchords[selectedchord]){
-          sessionchords[selectedchord][0] = copiedchord[1][0];
-          sessionchords[selectedchord][3] = copiedchord[1][3];
+        if(newchord[0] == 1 && newchord[1] != sessionchords[selectedchord]){
+          sessionchords[selectedchord][0] = newchord[1][0];
+          sessionchords[selectedchord][3] = newchord[1][3];
           playChord();
           updateChordsOnScore();
           $('#chordpiano').klavier('setSelectedValues', noteArraytoMidi(sessionchords[selectedchord][0]));
         }
         
-        })
+        
       }
 
     }
