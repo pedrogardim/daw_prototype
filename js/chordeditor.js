@@ -345,9 +345,9 @@ function drawRhythm(){
 function updateRhythm(){
 
     var thisrhythm = sessionrhythm[playbackMeasure];
+    $('.re-tile').removeClass(["selectedTile"]);
     for (var x = 0; x < thisrhythm.length; x++) {
-
-       (thisrhythm[x]==1)?($('#rt-' + x).addClass("selectedTile")):("");
+        (thisrhythm[x]==1)?($('#rt-' + x).addClass("selectedTile")):("");
     }
 }
 
@@ -366,7 +366,6 @@ function editRhythm(chord,add_delete){
     }
     drawRhythm()
     onModifySession();
-
 }
 
 
@@ -560,3 +559,9 @@ $(".chordbtn").draggable({
     }
 });
 
+$(document).on("click",".re-tile",(e)=>{
+    var index = parseInt(e.target.id.replace("rt-",""));
+    sessionrhythm[playbackMeasure][index] = (sessionrhythm[playbackMeasure][index]==0)?(1):(0);
+    updateRhythm();
+
+})

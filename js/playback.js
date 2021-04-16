@@ -117,24 +117,27 @@ function startPlayback() {
     playbackBeat++;
     beatsOnChord++;
 
+
+
     if(beatsOnChord == (sessionsubdivision * sessionchords[playbackChord][1])){
 
       playbackChord ++;
       beatsOnChord = 0;
       
     }
-    
    
     if (playbackBeat == sessionsubdivision) {
       playbackBeat = beatsOnChord = 0;
 
       playbackMeasure++;
       chordsOnMeasure = 0;
-      updateRhythm();
+
 
       Tone.Draw.schedule(function () {
+        updateRhythm();
         updateSequencerElements();
         drawCircleElements();
+
       }, time + playbacksubdivision);
 
 
@@ -168,7 +171,6 @@ function stopPlayback() {
   rhythminstrument.releaseAll();
 
   playbackBeat = beatsOnChord = 0;
-  drawRhythm();
 
   //playbackChord --; 
 
@@ -215,6 +217,8 @@ function playChordRhythm(thischord,thismeasure,thisbeat,time){
 
 
 }
+
+//Dep
 
 function scheduleChordRhythm(chord,timetostart) {
 

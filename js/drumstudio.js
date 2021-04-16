@@ -83,8 +83,8 @@ function drawSequencer() {
     
     for (var y = 0; y < drumSounds.length; y++) {
 
-      var thistile = '<div class="seqrow" id="seqrow'+ y + '"></div>'
-      $("#stepseq").append(thistile)
+      var thisrow = '<div class="seqrow" id="seqrow'+ y + '"></div>'
+      $("#stepseq").append(thisrow)
 
       for (var x = 0; x < sessionsubdivision; x++) {
 
@@ -303,9 +303,9 @@ sessiondrums.forEach((msre,msreindex)=>{
     //update cursor, changing the class on the current bear tile column
   
     $(".seqtile").removeClass("seqcursor");
-    $(".re-tile").removeClass("seqcursor");
+    $(".re-tile").removeClass("re-cursor");
 
-    $("#rt-" + (playbackBeat)).toggleClass("seqcursor");
+    $("#rt-" + (playbackBeat)).toggleClass("re-cursor");
   
     for (var y = 0; y < drumSounds.length; y++) {
       $("#seqTile-" + (playbackBeat) + "-" + y).toggleClass("seqcursor");

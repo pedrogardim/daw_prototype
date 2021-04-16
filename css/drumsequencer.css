@@ -148,7 +148,7 @@
 }
 
 .seqcursor {
-  filter:brightness(1.2);
+  background: var(--bright-color);
 }
 
 .seqrow {
