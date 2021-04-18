@@ -93,7 +93,7 @@ const instruments = [
 			"75": "Eb5.wav",
 			"43": "G2.wav",
 			"85": "Db6.wav",
-			"32": "C2.wav",
+			"36": "C2.wav",
 			"71": "B4.wav",
 			"54": "Gb3.wav",
 			"62": "D4.wav",
@@ -104,7 +104,7 @@ const instruments = [
 			"baseUrl": "assets/samples/instruments/piano1/",
 		},
 		fx:[["dly","16n",0.6,0.2]],
-		asdr:[0,0]
+		asdr:[0,0.5]
 	},
 
 ];
