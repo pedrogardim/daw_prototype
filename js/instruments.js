@@ -90,7 +90,7 @@ const instruments = [
 		urls: {
 			"68": "Ab4.wav",
 			"51": "Eb3.wav",
-			"75": "Eb5.wav",
+			"80": "Ab5.wav",
 			"43": "G2.wav",
 			"85": "Db6.wav",
 			"36": "C2.wav",
