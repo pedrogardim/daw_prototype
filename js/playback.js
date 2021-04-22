@@ -205,12 +205,19 @@ function playChordRhythm(thischord,thismeasure,thisbeat,time){
 
   var thisnotes = sessionchords[thischord][0];
   var thisrhythm = sessionrhythm[thismeasure][thisbeat];
-  
+  //chordstrike
   if(thisrhythm == 1){
-    rhythminstrument.triggerAttackRelease(thisnotes,Tone.Time("1m").toSeconds()/sessionsubdivision,time);
+    rhythminstrument.releaseAll(time);
+    rhythminstrument.triggerAttack(thisnotes,time);
     $('#chordpiano').klavier('setSelectedValues', noteArraytoMidi(sessionchords[thischord][0]))
 
   }
+  //hold anterior
+  if(thisrhythm == null){
+   
+
+  }
+  //silence
   if(thisrhythm == 0){
     rhythminstrument.releaseAll(time);
     $('#chordpiano').klavier('setSelectedValues', [])

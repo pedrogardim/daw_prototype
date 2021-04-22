@@ -101,10 +101,17 @@
 
 }
 
+/*
+#rhythmeditor:hover > .re-tile{
+  border-left: solid 1px var(--darkest-color);
+}
+*/
+
 .re-tile{
 
   height: 48px;
-  outline: solid 1px var(--darkest-color);
+  border: solid 1px var(--darkest-color);
+  border-right:none;
   margin: 0;
   transition: 0.1s;
   background-color: var(--bright-color);
@@ -124,6 +131,13 @@
 
 .re-cursor{
   filter:brightness(1.2) contrast(0.8);
+
+
+}
+
+.re-hold{
+  border-left:solid 1px var(--dark-color);
+  background-color: var(--dark-color);
 
 
 }

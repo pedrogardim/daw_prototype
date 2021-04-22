@@ -16,6 +16,10 @@ var oldpianoselection;
 
 var maxchordspermeasure = 4;
 
+var clickedtile = null;
+var clickedtiletype = null;
+
+
 
 
 
@@ -350,7 +354,9 @@ function drawRhythm(){
         '<span id="re-chname'+chordindex+'" class="re-chname">'+chordNotestoName(chord[0])+'</span>'+
         $("#rhythmeditor").append(rechordlbl);
         
-    })
+    });
+
+    $('#rt-'+(sessionsubdivision-1)).css( "border-right", "solid 1px var(--darkest-color)");
 
     updateRhythm();
 }
@@ -359,9 +365,15 @@ function updateRhythm(){
 
     var thisrhythm = sessionrhythm[playbackMeasure];
     $('.re-tile').removeClass("re-selected");
+    $('.re-tile').removeClass("re-hold");
+
     for (var x = 0; x < thisrhythm.length; x++) {
         (thisrhythm[x]==1)?($('#rt-' + x).addClass("re-selected")):("");
+        (thisrhythm[x]==null)?($('#rt-' + x).addClass("re-hold")):("");
+
     }
+
+
 }
 
 function editRhythm(chord,add_delete){
@@ -574,6 +586,42 @@ $(".chordbtn").draggable({
 $(document).on("click",".re-tile",(e)=>{
     var index = parseInt(e.target.id.replace("rt-",""));
     sessionrhythm[playbackMeasure][index] = (sessionrhythm[playbackMeasure][index]==0)?(1):(0);
+    (sessionrhythm[playbackMeasure][index+1] == null && index+1 < sessionsubdivision)?(sessionrhythm[playbackMeasure][index+1] = 1):("")
     updateRhythm();
+
+})
+
+
+$("#rhythmeditor").on("mouseenter",".re-tile",(e)=>{
+var index = parseInt(e.target.id.replace("rt-",""));
+  if(clickedtiletype != 0 && clickedtile != null){
+    sessionrhythm[playbackMeasure][index] = null;    //$(e.target).css("border-left","solid 1px var(--dark-color)")
+    updateRhythm();
+    
+    console.log(sessionrhythm[playbackMeasure][clickedtile]);
+  }
+})
+
+$("#rhythmeditor").on("mouseleave",(e)=>{
+  clickedtile = null;
+  console.log("out")
+  updateRhythm();
+
+})
+
+$("#rhythmeditor").on("mousedown",".re-tile",(e)=>{
+  e.preventDefault();
+  var index = parseInt(e.target.id.replace("rt-",""));
+  clickedtiletype = sessionrhythm[playbackMeasure][index];
+
+  clickedtile = e.target.id.replace("rt-","");
+  updateRhythm();
+
+})
+
+$("#rhythmeditor").on("mouseup",(e)=>{
+  clickedtile = null;
+  console.log("out")
+  updateRhythm();
 
 })
