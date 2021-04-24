@@ -113,55 +113,54 @@ function prepareOffline(){
   ///////////////////////////
   ///////////////////////////
 
-  function playOFFChordRhythm(thischord,thismeasure,thisbeat,thisinstrument,time){
+function playOFFChordRhythm(thischord,thismeasure,thisbeat,thisinstrument,time){
+  var thisnotes = sessionchords[thischord][0];
+  var thisrhythm = sessionrhythm[thismeasure][thisbeat];
+  //chordstrike
+  if(thisrhythm == 1){
+    thisinstrument.releaseAll(time);
+    thisinstrument.triggerAttack(thisnotes,time);
+    $('#chordpiano').klavier('setSelectedValues', noteArraytoMidi(sessionchords[thischord][0]))
 
-    var thisnotes = sessionchords[thischord][0];
-    var thisrhythm = sessionrhythm[thismeasure][thisbeat];
-    //chordstrike
-    if(thisrhythm == 1){
-      thisinstrument.releaseAll(time);
-      thisinstrument.triggerAttack(thisnotes,time);
-      $('#chordpiano').klavier('setSelectedValues', noteArraytoMidi(sessionchords[thischord][0]))
-  
-    }
-    //hold anterior
-    if(thisrhythm == null){
-     
-  
-    }
-    //silence
-    if(thisrhythm == 0){
-      thisinstrument.releaseAll(time);
-      $('#chordpiano').klavier('setSelectedValues', [])
-  
-    }
-  
-  
+  }
+  //hold anterior
+  if(thisrhythm == null){
+   
+
+  }
+  //silence
+  if(thisrhythm == 0){
+    thisinstrument.releaseAll(time);
+    $('#chordpiano').klavier('setSelectedValues', [])
+
   }
 
-  async function audioBufferToWaveBlob(audioBuffer) {
 
-    return new Promise(function(resolve, reject) {
-  
-      var worker = new Worker('./libs/waveWorker.js');
-  
-      worker.onmessage = function( e ) {
-        var blob = new Blob([e.data.buffer], {type:"audio/wav"});
-        resolve(blob);
-      };
-  
-      let pcmArrays = [];
-      for(let i = 0; i < audioBuffer.numberOfChannels; i++) {
-        pcmArrays.push(audioBuffer.getChannelData(i));
-      }
-  
-      worker.postMessage({
-        pcmArrays,
-        config: {sampleRate: audioBuffer.sampleRate}
-      });
-  
+}
+
+async function audioBufferToWaveBlob(audioBuffer) {
+
+  return new Promise(function(resolve, reject) {
+
+    var worker = new Worker('./libs/waveWorker.js');
+
+    worker.onmessage = function( e ) {
+      var blob = new Blob([e.data.buffer], {type:"audio/wav"});
+      resolve(blob);
+    };
+
+    let pcmArrays = [];
+    for(let i = 0; i < audioBuffer.numberOfChannels; i++) {
+      pcmArrays.push(audioBuffer.getChannelData(i));
+    }
+
+    worker.postMessage({
+      pcmArrays,
+      config: {sampleRate: audioBuffer.sampleRate}
     });
-  
-  }
+
+  });
+
+}
 
 
