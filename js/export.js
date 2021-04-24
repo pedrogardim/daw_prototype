@@ -35,58 +35,56 @@ function prepareOffline(){
 
       //DRUMS
      
+      var OFFplaybackMeasure = OFFplaybackBeat = OFFplaybackChord = OFFchordsOnMeasure = OFFbeatsOnChord = 0;
+
       var playbacksubdivision = Tone.Time("1m").toSeconds() / sessionsubdivision;
 
-      var OFFplaybackMeasure = OFFplaybackBeat = 0;
-
       transport.scheduleRepeat((time) => {
+
+        console.log(OFFplaybackMeasure,OFFplaybackBeat,OFFplaybackChord,OFFchordsOnMeasure)
+
+    //console.log(playbackBeat,beatsOnChord,playbackMeasure,playbackChord)
+    
+         if (OFFplaybackMeasure == sessionlength) {
+           OFFplaybackMeasure = OFFbeatsOnChord = OFFplaybackChord = 0;
+         }
         
-        var thisdrumpattern = sessiondrums[OFFplaybackMeasure];
-            
-          thisdrumpattern[OFFplaybackBeat].forEach((element) =>{
-            offlineDrumSounds[element-1].start(time);
-          });
-      
-        OFFplaybackBeat++;
-      
-        if (OFFplaybackBeat == sessionsubdivision) {
-          OFFplaybackBeat = 0;
-          OFFplaybackMeasure++;
-        }
+         var thischord = sessionchords[OFFplaybackChord];
+         var thisdrumpattern = sessiondrums[OFFplaybackMeasure];
+        
+         thisdrumpattern[OFFplaybackBeat].forEach((element) =>
+          offlineDrumSounds[element - 1].start(time)
+         );
+         
+         playOFFChordRhythm(OFFplaybackChord,OFFplaybackMeasure,OFFplaybackBeat,chordinst,time);
+         
+         
+         OFFplaybackBeat++;
+         OFFbeatsOnChord++;
+        
+         if(OFFbeatsOnChord == (sessionsubdivision * sessionchords[OFFplaybackChord][1])){
+          
+         
+           OFFplaybackChord ++;
+           OFFbeatsOnChord = 0;
+
+         }
+        
+         if (OFFplaybackBeat == sessionsubdivision) {
+           OFFplaybackBeat = OFFbeatsOnChord = 0;
+         
+           OFFplaybackMeasure++;
+           OFFchordsOnMeasure = 0;
+
+         }
+        
+         if(OFFplaybackMeasure == sessionlength) OFFplaybackMeasure = OFFplaybackChord = 0;
       
       }, playbacksubdivision);
 
       //RHYTHM
 
-      var rhythmtime = 0;
-
-      sessionchords.forEach((chord,chordindex)=>{
-
-        chord[3].forEach((rhythm,rhythmindex)=>{
-
-          var chordhitdur = (chord[1] * Tone.Time("1m").toSeconds()) / chord[3].length;
-
-          transport.scheduleOnce((schedulerhythmtime)=>{
-            if(rhythm==0){}
-
-            if(rhythm==1){
-              chordinst.triggerAttackRelease(Tone.Frequency(chord[0][0]).toFrequency()/2,chordhitdur,schedulerhythmtime);
-            }
-            if(rhythm==2){
-              chordinst.triggerAttackRelease(chord[0],chordhitdur,schedulerhythmtime);
-            }
-          },rhythmtime);
-
-          rhythmtime += chordhitdur;
-
-        });
-      });
-
-
       transport.start();
-
-
-
 
     }, exportdur).then((e) => {
       // do something with the output buffer
@@ -115,7 +113,31 @@ function prepareOffline(){
   ///////////////////////////
   ///////////////////////////
 
+  function playOFFChordRhythm(thischord,thismeasure,thisbeat,thisinstrument,time){
 
+    var thisnotes = sessionchords[thischord][0];
+    var thisrhythm = sessionrhythm[thismeasure][thisbeat];
+    //chordstrike
+    if(thisrhythm == 1){
+      thisinstrument.releaseAll(time);
+      thisinstrument.triggerAttack(thisnotes,time);
+      $('#chordpiano').klavier('setSelectedValues', noteArraytoMidi(sessionchords[thischord][0]))
+  
+    }
+    //hold anterior
+    if(thisrhythm == null){
+     
+  
+    }
+    //silence
+    if(thisrhythm == 0){
+      thisinstrument.releaseAll(time);
+      $('#chordpiano').klavier('setSelectedValues', [])
+  
+    }
+  
+  
+  }
 
   async function audioBufferToWaveBlob(audioBuffer) {
 

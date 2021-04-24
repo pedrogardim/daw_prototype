@@ -588,6 +588,8 @@ $(document).on("click",".re-tile",(e)=>{
     sessionrhythm[playbackMeasure][index] = (sessionrhythm[playbackMeasure][index]==0)?(1):(0);
     (sessionrhythm[playbackMeasure][index+1] == null && index+1 < sessionsubdivision)?(sessionrhythm[playbackMeasure][index+1] = 1):("")
     updateRhythm();
+    onModifySession();
+
 
 })
 
@@ -597,6 +599,7 @@ var index = parseInt(e.target.id.replace("rt-",""));
   if(clickedtiletype != 0 && clickedtile != null){
     sessionrhythm[playbackMeasure][index] = null;    //$(e.target).css("border-left","solid 1px var(--dark-color)")
     updateRhythm();
+    onModifySession();
     
     console.log(sessionrhythm[playbackMeasure][clickedtile]);
   }
@@ -606,6 +609,8 @@ $("#rhythmeditor").on("mouseleave",(e)=>{
   clickedtile = null;
   console.log("out")
   updateRhythm();
+  onModifySession();
+
 
 })
 
@@ -615,12 +620,15 @@ $("#rhythmeditor").on("mousedown",".re-tile",(e)=>{
   clickedtiletype = sessionrhythm[playbackMeasure][index];
 
   clickedtile = e.target.id.replace("rt-","");
+  onModifySession();
   updateRhythm();
 
 })
 
 $("#rhythmeditor").on("mouseup",(e)=>{
   clickedtile = null;
+  onModifySession();
+
   console.log("out")
   updateRhythm();
 
