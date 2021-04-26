@@ -64,14 +64,16 @@ var chordextentions = ["","♭9","9","#9","#9","11","#11","","♭13","13","♭7"
 var musicalintervals = [1.0595,1.1225,1.1892,1.2599,1.3348,1.4142,1.4983,1.5874,1.6818,1.7818,1.8877,2];
 
 var scales = [
-  [[0,1,2,3,4,5,6,7,8,9,10,11],"Chromatic"],
+  //[[0,1,2,3,4,5,6,7,8,9,10,11],"Chromatic"],
   [[0,2,4,5,7,9,11],"Major"],
   [[0,2,3,5,7,8,10],"Minor"],
-  [[0,2,4,7,9],"Major Pentatonic"],
-  [[0,3,5,7,10],"Minor Pentatonic"],
-  [[0,2,3,5,7,9,10],"Dorian Mode"],
-  [[0,1,3,5,7,8,10],"Phrygian"],
-  [[0,1,3,5,7,8,10],"Lydian"],
+  [[0,2,3,5,7,8,11],"Harm Minor"],
+
+  //[[0,2,4,7,9],"Major Pentatonic"],
+  //[[0,3,5,7,10],"Minor Pentatonic"],
+  //[[0,2,3,5,7,9,10],"Dorian Mode"],
+  //[[0,1,3,5,7,8,10],"Phrygian"],
+  //[[0,1,3,5,7,8,10],"Lydian"],
 
 
 
@@ -609,6 +611,7 @@ function initializeSettingsInputs(){
   $("#ss-bpminput").val(sessionbpm);
   $("#ss-lpsizeinput").val(sessionlength);
   $('#ss-timesig option[value="'+(sessiontimesignature[0]/sessiontimesignature[1])+'"]').prop('selected', true);
+  setupHarmonySelectors();
 
 }
 

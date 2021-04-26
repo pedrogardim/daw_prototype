@@ -1,8 +1,8 @@
 var scalechords = [];
 var chordcomplexity = 3;
 
-var selectedscale = 1;
-var chordsroot = "C";
+var selectedscale = 0;
+var chordsroot = 0;
 var isPlayingChord = false;
 
 var changingnamechord, hoveredchord, hoveredside, isChordHovered;
@@ -88,7 +88,7 @@ function releaseChords(input){
         easing: 'easeOutElastic(1, .8)',
     });
     scalechords.forEach((e)=>rhythminstrument.triggerRelease(e));
-    console.log("release",selectedchord)
+    //console.log("release",selectedchord)
     isPlayingChord = false;
     $('#chordpiano').klavier('setSelectedValues',[]);
     input = null;
@@ -109,7 +109,7 @@ function getChordsFromScale(){
             }
             thischord.push(scales[selectedscale][0][noteindex]);
         }
-        scalechords.push(Tone.Frequency(chordsroot+"4").harmonize(thischord));
+        scalechords.push(Tone.Frequency((notes[chordsroot].split("/")[0])+"4").harmonize(thischord));
         scalechords[x] = scalechords[x].map((e)=>{
             return Tone.Frequency(e).toNote();
         })
@@ -270,6 +270,7 @@ function rhythmInstrSelector(){
         cont +='<option value="'+i+'">'+e.name+'</option>'
     })
     $("#chord-instr-input").html(cont);
+    $("#chord-instr-input").val(rhythmpatch)
 }
 
 function setRhythmInstrument(){
@@ -290,54 +291,6 @@ function setRhythmInstrument(){
 ////////////////////////////////
 //RHYTHM EDITOR
 ////////////////////////////////
-
-/*
-
-function drawRhythm(inputmeasure){
-
-    $(".re-chord").remove();
-
-    var measuretodraw;
-
-    if(inputmeasure !== undefined){
-        measuretodraw = inputmeasure;
-
-    }
-    else if(selectedchord == null && inputmeasure === undefined){
-        return;
-
-    }
-    else{
-        measuretodraw = sessionchords[selectedchord][2];
-    }
-
-    var measurechords = sessionchords.filter(chord => chord[2] == measuretodraw);
-    
-    measurechords.forEach((chord,chordindex)=>{
-        var rechordcont = '<div class="re-chord" id="re-chord'+chordindex+'" style="width:'+chord[1]*100+'%"></div>'
-        var rechordlbl = 
-        '<a class="re-chordlbl">'+
-        '<span class="material-icons" onclick="editRhythm('+chordindex+',false)">remove_circle</span>'+
-        '<span id="re-chname'+chordindex+'" class="re-chname">'+chordNotestoName(chord[0])+'</span>'+
-        '<span class="material-icons" onclick="editRhythm('+chordindex+',true)">add_circle</span>'+
-        '</a>';
-
-        $("#rhythmeditor").append(rechordcont);
-        $("#re-chord"+chordindex).append(rechordlbl);
-
-        chord[3].forEach((strike,strikeindex)=>{
-
-            var chordstrikeind = '<div class="re-strike" id="re-strike-'+chordindex+'-'+strikeindex+'"></div>';
-            $("#re-chord"+chordindex).append(chordstrikeind);
-
-            if(strike==0){
-                $("#re-strike-"+chordindex+"-"+strikeindex).addClass("re-silence");
-            }
-        })
-    })
-}
-
-*/
 
 function drawRhythm(){
 
@@ -393,9 +346,6 @@ function editRhythm(chord,add_delete){
     onModifySession();
 }
 
-
-
-
 ////////////////////////////////
 //BOTTOM PIANO
 ////////////////////////////////
@@ -415,9 +365,6 @@ function resizeKlavier(){
         $('#chordpiano').klavier('setSelectedValues', noteArraytoMidi(sessionchords[selectedchord][0]));
     }
 }
-
-
-
 
 ////////////////////////////////
 //EVENTS
@@ -442,7 +389,6 @@ $(document).on("dblclick",".chord",function(e){
     $("#floatinginput").removeClass("hidden").addClass("visible");
 
 });
-
 
 $("#floatinginput").blur(function(e){
 
@@ -563,7 +509,7 @@ $(".chordbtn").draggable({
             hoveredside = (innerposition<($("#chord"+hoveredchord).width()/2)-27)?(0):(1);
 
             if(sessionchords[hoveredchord-1][1] > 1/maxchordspermeasure){
-                console.log(hoveredchord,hoveredside);
+                //console.log(hoveredchord,hoveredside);
                 $("#addchordhelper").show(0).css({
                     top:$("#chord"+hoveredchord).offset().top,
                     left:$("#chord"+hoveredchord).offset().left+((hoveredside==0)?(0):($("#chord"+hoveredchord).width()/2)),
@@ -583,6 +529,19 @@ $(".chordbtn").draggable({
     }
 });
 
+$("#ce-root").change((e)=>{
+
+    chordsroot = $(e.target).val();
+    getChordsFromScale()
+})
+
+$("#ce-scale").change((e)=>{
+
+    selectedscale = $(e.target).val();
+    getChordsFromScale()
+})
+
+
 $(document).on("click",".re-tile",(e)=>{
     var index = parseInt(e.target.id.replace("rt-",""));
     sessionrhythm[playbackMeasure][index] = (sessionrhythm[playbackMeasure][index]==0)?(1):(0);
@@ -599,17 +558,19 @@ var index = parseInt(e.target.id.replace("rt-",""));
   if(clickedtiletype != 0 && clickedtile != null){
     sessionrhythm[playbackMeasure][index] = null;    //$(e.target).css("border-left","solid 1px var(--dark-color)")
     updateRhythm();
-    onModifySession();
     
-    console.log(sessionrhythm[playbackMeasure][clickedtile]);
+    //console.log(sessionrhythm[playbackMeasure][clickedtile]);
   }
 })
 
 $("#rhythmeditor").on("mouseleave",(e)=>{
-  clickedtile = null;
-  console.log("out")
-  updateRhythm();
-  onModifySession();
+
+    if(clickedtile != null){
+        clickedtile = null;
+        //console.log("out")
+        updateRhythm();
+        onModifySession();
+    }
 
 
 })
@@ -629,7 +590,24 @@ $("#rhythmeditor").on("mouseup",(e)=>{
   clickedtile = null;
   onModifySession();
 
-  console.log("out")
+  //console.log("out")
   updateRhythm();
 
 })
+
+function setupHarmonySelectors(){
+    notes.forEach((e,i)=>{
+        var thisopt = '<option value="'+i+'">'+e+'</option>'
+        $("#ce-root").append(thisopt)
+    })
+    scales.forEach((e,i)=>{
+        var thisopt = '<option value="'+i+'">'+e[1]+'</option>'
+        $("#ce-scale").append(thisopt)
+    })
+    $("#ce-root").val(chordsroot);
+    $("#ce-scale").val(selectedscale);
+
+
+
+}
+

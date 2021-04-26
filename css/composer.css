@@ -274,6 +274,7 @@
   width:0;
 }
 
+
 .chord:hover > .addchordbtn{
   color:var(--dark-color);
   transition:0.3s;
@@ -295,6 +296,24 @@
   position:absolute;
   top:20px;
   color:transparent;
+}
+
+#ce-scale{
+  position:absolute;
+  left:-83px;
+  width:55px;
+  height:42px;
+  top:calc(50% - 21px)
+
+}
+
+#ce-root{
+  position:absolute;
+  left:-120px;
+  width:38px;
+  height:42px;
+  top:calc(50% - 21px)
+
 }
 
 .acbl{

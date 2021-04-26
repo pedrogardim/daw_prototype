@@ -25,8 +25,8 @@ var sessionData = {
 
     ],
     "chordrhythm":[
-      //[1,0,0,1,0,0,1,0,0,1,1,0,1,1,0,1],
-      [1,,,,1,,,,1,,,,1,,,,],
+      [1,0,0,1,0,0,1,0,0,1,1,0,1,1,0,1],
+      //[1,,,,1,,,,1,,,,1,,,,],
       [1,0,0,1,0,0,0,1,1,0,1,0,0,1,1,0],
       [1,0,0,1,0,0,1,0,0,1,1,0,1,1,0,1],
       [0,1,0,1,0,1,0,1,0,1,1,1,0,1,0,1],
@@ -189,7 +189,7 @@ var clipboard;
 
 function onModifySession(){
 
-  console.log("mod")
+  console.log("mod");
 
   var oldsessionData = JSON.parse(JSON.stringify(sessionData));
 

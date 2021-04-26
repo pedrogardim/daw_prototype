@@ -41,44 +41,39 @@ function prepareOffline(){
 
       transport.scheduleRepeat((time) => {
 
-        console.log(OFFplaybackMeasure,OFFplaybackBeat,OFFplaybackChord,OFFchordsOnMeasure)
-
-    //console.log(playbackBeat,beatsOnChord,playbackMeasure,playbackChord)
+        //console.log(OFFplaybackMeasure,OFFplaybackBeat,OFFplaybackChord,OFFchordsOnMeasure)
     
-         if (OFFplaybackMeasure == sessionlength) {
-           OFFplaybackMeasure = OFFbeatsOnChord = OFFplaybackChord = 0;
-         }
+        if (OFFplaybackMeasure == sessionlength) {
+          OFFplaybackMeasure = OFFbeatsOnChord = OFFplaybackChord = 0;
+        }
+      
+        var thisdrumpattern = sessiondrums[OFFplaybackMeasure];
+      
+        thisdrumpattern[OFFplaybackBeat].forEach((element) =>
+         offlineDrumSounds[element - 1].start(time)
+        );
         
-         var thischord = sessionchords[OFFplaybackChord];
-         var thisdrumpattern = sessiondrums[OFFplaybackMeasure];
+        playOFFChordRhythm(OFFplaybackChord,OFFplaybackMeasure,OFFplaybackBeat,chordinst,time);
         
-         thisdrumpattern[OFFplaybackBeat].forEach((element) =>
-          offlineDrumSounds[element - 1].start(time)
-         );
-         
-         playOFFChordRhythm(OFFplaybackChord,OFFplaybackMeasure,OFFplaybackBeat,chordinst,time);
-         
-         
-         OFFplaybackBeat++;
-         OFFbeatsOnChord++;
         
-         if(OFFbeatsOnChord == (sessionsubdivision * sessionchords[OFFplaybackChord][1])){
-          
+        OFFplaybackBeat++;
+        OFFbeatsOnChord++;
+      
+        if(OFFbeatsOnChord == (sessionsubdivision * sessionchords[OFFplaybackChord][1])){
          
-           OFFplaybackChord ++;
-           OFFbeatsOnChord = 0;
-
-         }
         
-         if (OFFplaybackBeat == sessionsubdivision) {
-           OFFplaybackBeat = OFFbeatsOnChord = 0;
-         
-           OFFplaybackMeasure++;
-           OFFchordsOnMeasure = 0;
-
-         }
+          OFFplaybackChord ++;
+          OFFbeatsOnChord = 0;
+        }
+      
+        if (OFFplaybackBeat == sessionsubdivision) {
+          OFFplaybackBeat = OFFbeatsOnChord = 0;
         
-         if(OFFplaybackMeasure == sessionlength) OFFplaybackMeasure = OFFplaybackChord = 0;
+          OFFplaybackMeasure++;
+          OFFchordsOnMeasure = 0;
+        }
+      
+        if(OFFplaybackMeasure == sessionlength) OFFplaybackMeasure = OFFplaybackChord = 0;
       
       }, playbacksubdivision);
 
