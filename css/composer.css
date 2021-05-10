@@ -325,7 +325,7 @@
 }
 
 .activechord{
-  color: var(--medium-color);
+  background-color: var(--medium-color);
 }
 
 .hightlightedmeasure{

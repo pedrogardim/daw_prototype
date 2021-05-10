@@ -83,6 +83,24 @@ const instruments = [
 		fx:[["vib",6,0.05],["trem",2,0.2]]
 	},
 	{
+		name: "String Pad",
+		base: "Synth",
+		type: 2,
+		gain: -18,
+		options:{
+			"oscillator": {
+				"type":"fatsawtooth2",
+			},
+			"envelope": {
+				"attack": 0.4,
+				"decay": 0.0,
+				"sustain": 1,
+				"release": 0.5
+			},
+		},
+		fx:[["vib",5,0.1]]
+	},
+	{
 		name: "Grand Piano",
 		base: "Sampler",
 		type: 2,
@@ -104,6 +122,31 @@ const instruments = [
 			"baseUrl": "assets/samples/instruments/piano1/",
 		},
 		fx:[["dly","16n",0.6,0.2]],
+		asdr:[0,0.5]
+	},
+	{
+		name: "Pizzicato",
+		base: "Sampler",
+		type: 2,
+		gain: -18,
+		urls: {
+			"47": "B2.wav",
+			"54": "Gb3.wav",
+			"64": "E4.wav",
+			"43": "G2.wav",
+			"74": "D5.wav",
+			"60": "C4.wav",
+			"45": "A2.wav",
+			"71": "B4.wav",
+			"57": "A3.wav",
+			"67": "G4.wav",
+			"50": "D3.wav"
+
+		},
+		options:{
+			
+			"baseUrl": "assets/samples/instruments/vlnpzz/",
+		},
 		asdr:[0,0.5]
 	},
 

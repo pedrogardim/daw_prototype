@@ -5,20 +5,31 @@
 
 :root {
 
-   /* --brightest-color: white; */
+  
   --brightest-color: #edf5e1; 
   --bright-color: #8ee4af;
   --medium-color: #5cdb95;
   --dark-color: #379683;
   --darkest-color: #05386b;  
   --contrast-color: #e85a4f;
+   
   /*
-  --brightest-color: #379683;
-  --bright-color: #05386b;
-  --medium-color: #379683;
-  --dark-color: #5cdb95;
-  --darkest-color: #edf5e1;
-  --contrast-color: #e85a4f; */
+  --brightest-color: #edf5e1; 
+  --bright-color: #8ee4af;
+  --medium-color: #5cdb95;
+  --dark-color: #379683;
+  --darkest-color: #05386b;  
+  --contrast-color: #e85a4f;
+   
+  */
+  /* 
+  --brightest-color: #FEFFFF;
+  --bright-color: #D2624C;
+  --medium-color: #C44931;
+  --dark-color: #B4432C;
+  --darkest-color: #333;
+  --contrast-color: #e85a4f;
+   */
 }
 
 html {
@@ -47,7 +58,7 @@ header{
   align-items: center;
   justify-content:flex-start;
   z-index:99;
-  color:var(--darkest-color);
+  /* color:var(--darkest-color); */
   /*border-bottom: 1px solid var(--dark-color);*/
 
 }
@@ -262,9 +273,9 @@ body {
 	position:fixed;
 	width:60px;
 	height:60px;
-	bottom:40px;
+	bottom:96px;
 	right:40px;
-	background-color:var(--dark-color);
+	background-color:var(--darkest-color);
 	color:#FFF;
 	border-radius:50px;
 	text-align:center;
@@ -273,8 +284,8 @@ body {
   z-index: 99;
 }
 
-.my-float{
-	margin-top:22px;
+.float > i{
+	line-height:60px;
 }
 
  /* 

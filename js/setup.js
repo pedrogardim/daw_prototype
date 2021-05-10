@@ -81,18 +81,7 @@ var scales = [
 
 ];
 
-var drumlabels = [
-  "Kick",
-  "Snare",
-  "Clap",
-  "C.HiHat",
-  "O.HiHat",
-  "Lo Tom",
-  "Mid Tom",
-  "Hi Tom",
-  "Crash",
-  "Perc",
-];
+
 
 var colors = [
   "var(--darkest-color)",

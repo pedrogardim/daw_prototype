@@ -117,8 +117,10 @@ function getChordsFromScale(){
 
     scalechords.forEach((e,i)=>{
 
-        var btncontent = "";
-        btncontent += chordNotestoName(e);
+        var btncontent = chordNotestoName(e);
+
+        //if(btncontent[0] == chordNotestoName(scalechords[i+1])[0]){btncontent.replac}
+
         $("#chordbtn"+i).html(btncontent);
 
     });
@@ -258,6 +260,69 @@ function unselectChord(){
     $('#chordpiano').klavier('setSelectedValues', []);
 
 }   
+
+function generateRandomProgression(){
+
+    sessionchords = [];
+
+    for(var z = 0; z < sessionlength; z++){
+        var chordsinthismeasure = 2 ** Math.floor(Math.random() * 2);
+        
+        for(var x = 0; x < chordsinthismeasure; x++){
+
+            var thischordnotes = [];
+            var thischordcomplexity = Math.floor(Math.random() * 2) + 2;
+            var chordgrade = Math.floor(Math.random() * 6);
+            var chordduration = 1/chordsinthismeasure;
+
+            
+            //add bassnote
+
+            thischordnotes.push((scales[selectedscale][0][chordgrade]-12));
+            thischordnotes.push((scales[selectedscale][0][chordgrade]-24));
+
+
+            //add notes
+
+            for(var y = 0; y < thischordcomplexity; y++){
+                var noteindex = chordgrade + (y*2);
+                if(noteindex > (scales[selectedscale][0].length)-1){
+                    noteindex = noteindex - (scales[selectedscale][0].length);
+                }
+                thischordnotes.push(scales[selectedscale][0][noteindex]);
+            }
+
+            thischordnotes = Tone.Frequency((notes[chordsroot].split("/")[0])+"4").harmonize(thischordnotes);
+            thischordnotes = thischordnotes.map((e)=>{
+                return Tone.Frequency(e).toNote();
+            })
+            
+            sessionchords.push([thischordnotes,chordduration,z+1])
+        
+        }
+    }
+
+    drawScore();
+    onModifySession();
+}
+
+function setupHarmonySelectors(){
+    notes.forEach((e,i)=>{
+        var thisopt = '<option value="'+i+'">'+e+'</option>'
+        $("#ce-root").append(thisopt)
+    })
+    scales.forEach((e,i)=>{
+        var thisopt = '<option value="'+i+'">'+e[1]+'</option>'
+        $("#ce-scale").append(thisopt)
+    })
+    $("#ce-root").val(chordsroot);
+    $("#ce-scale").val(selectedscale);
+
+
+
+}
+
+
 
 ////////////////////////////////
 //Intrument SELECTOR
@@ -595,19 +660,5 @@ $("#rhythmeditor").on("mouseup",(e)=>{
 
 })
 
-function setupHarmonySelectors(){
-    notes.forEach((e,i)=>{
-        var thisopt = '<option value="'+i+'">'+e+'</option>'
-        $("#ce-root").append(thisopt)
-    })
-    scales.forEach((e,i)=>{
-        var thisopt = '<option value="'+i+'">'+e[1]+'</option>'
-        $("#ce-scale").append(thisopt)
-    })
-    $("#ce-root").val(chordsroot);
-    $("#ce-scale").val(selectedscale);
-
-
-
-}
+$("#ce-random").click((e)=>generateRandomProgression())
 
