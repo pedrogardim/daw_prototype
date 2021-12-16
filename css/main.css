@@ -120,14 +120,6 @@ body {
   font-size: 36px;
 }
 
-#betatag{
-  position: absolute;
-  font-size:10px;
-  /* transform: rotate(45deg); */
-  transform-origin: 50% 50%;
-  color:var(--dark-color)
-}
-
 #tabnav{
   flex-grow: 1;
   height:72px;
