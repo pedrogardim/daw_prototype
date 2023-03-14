@@ -1,94 +1,113 @@
 //================================================
 //MUSIC DATA
 //================================================
-var notes = ["C","C#/D♭","D","D#/E♭","E","F","F#/G♭","G","G#/A♭","A","A#/B♭","B"];
-
-var chordnamepossibilities=[
-  ["4","4th"],
-  ["5","5th"],
-  ["","maj","major","maior","mayor","M"],
-  ["m","min","minor","menor","-"],
-  ["sus2","2"],
-  ["sus4","4"],
-  ["dim","°"],
-  ["aug","+","+5"],
-  
-  ["6","maj6","M6","major6"],
-  ["maj7","M7","major7"],
-  ["maj7#5","M7#5","aug7"],
-
-  ["9","add9","major9","maj9"],
-  
-  ["m6","-6","minor6"],
-  ["m7","-7","minor7","min7"],
-  ["m9","-9","minor9","min9"],
-  
-  ["7"],
-  ["mmaj7","-maj7"],
-  ["°7","dim7"],
-  ["ø7","m7♭5"],
-
+var notes = [
+  'C',
+  'C#/D♭',
+  'D',
+  'D#/E♭',
+  'E',
+  'F',
+  'F#/G♭',
+  'G',
+  'G#/A♭',
+  'A',
+  'A#/B♭',
+  'B',
 ];
 
-var chordtypes =[
+var chordnamepossibilities = [
+  ['4', '4th'],
+  ['5', '5th'],
+  ['', 'maj', 'major', 'maior', 'mayor', 'M'],
+  ['m', 'min', 'minor', 'menor', '-'],
+  ['sus2', '2'],
+  ['sus4', '4'],
+  ['dim', '°'],
+  ['aug', '+', '+5'],
 
-  [0,5],
-  [0,7],
-  [0,4,7],
-  [0,3,7],
-  [0,2,7],
-  [0,5,7],
-  [0,3,6],
-  [0,4,8],
-  
-  [0,4,7,9],
-  [0,4,7,11],
-  [0,4,8,11],
+  ['6', 'maj6', 'M6', 'major6'],
+  ['maj7', 'M7', 'major7'],
+  ['maj7#5', 'M7#5', 'aug7'],
 
-  [0,4,7,11,14],
-  
-  [0,3,7,8],
-  [0,3,7,10],
-  [0,3,7,10,14],
-  
-  [0,4,7,10],
-  [0,3,7,11],
-  [0,3,6,10],
-  [0,3,6,9],
+  ['9', 'add9', 'major9', 'maj9'],
 
+  ['m6', '-6', 'minor6'],
+  ['m7', '-7', 'minor7', 'min7'],
+  ['m9', '-9', 'minor9', 'min9'],
+
+  ['7'],
+  ['mmaj7', '-maj7'],
+  ['°7', 'dim7'],
+  ['ø7', 'm7♭5'],
 ];
 
-var chordextentions = ["","♭9","9","#9","#9","11","#11","","♭13","13","♭7","7"]
+var chordtypes = [
+  [0, 5],
+  [0, 7],
+  [0, 4, 7],
+  [0, 3, 7],
+  [0, 2, 7],
+  [0, 5, 7],
+  [0, 3, 6],
+  [0, 4, 8],
+
+  [0, 4, 7, 9],
+  [0, 4, 7, 11],
+  [0, 4, 8, 11],
+
+  [0, 4, 7, 11, 14],
+
+  [0, 3, 7, 8],
+  [0, 3, 7, 10],
+  [0, 3, 7, 10, 14],
+
+  [0, 4, 7, 10],
+  [0, 3, 7, 11],
+  [0, 3, 6, 10],
+  [0, 3, 6, 9],
+];
+
+var chordextentions = [
+  '',
+  '♭9',
+  '9',
+  '#9',
+  '#9',
+  '11',
+  '#11',
+  '',
+  '♭13',
+  '13',
+  '♭7',
+  '7',
+];
 ///////////////77777/ ["","m2","2","m3","M3","4"," #4","5", "m6", "6","m7","7"]
 
-var musicalintervals = [1.0595,1.1225,1.1892,1.2599,1.3348,1.4142,1.4983,1.5874,1.6818,1.7818,1.8877,2];
+var musicalintervals = [
+  1.0595, 1.1225, 1.1892, 1.2599, 1.3348, 1.4142, 1.4983, 1.5874, 1.6818,
+  1.7818, 1.8877, 2,
+];
 
 var scales = [
   //[[0,1,2,3,4,5,6,7,8,9,10,11],"Chromatic"],
-  [[0,2,4,5,7,9,11],"Major"],
-  [[0,2,3,5,7,8,10],"Minor"],
-  [[0,2,3,5,7,8,11],"Harm Minor"],
+  [[0, 2, 4, 5, 7, 9, 11], 'Major'],
+  [[0, 2, 3, 5, 7, 8, 10], 'Minor'],
+  [[0, 2, 3, 5, 7, 8, 11], 'Harm Minor'],
 
   //[[0,2,4,7,9],"Major Pentatonic"],
   //[[0,3,5,7,10],"Minor Pentatonic"],
   //[[0,2,3,5,7,9,10],"Dorian Mode"],
   //[[0,1,3,5,7,8,10],"Phrygian"],
   //[[0,1,3,5,7,8,10],"Lydian"],
-
-
-
-
-
 ];
 
-
-
 var colors = [
-  "var(--darkest-color)",
-  "var(--dark-color)",
-  "var(--medium-color)",
-  "var(--bright-color)",
-]
+  'var(--darkest-color)',
+  'var(--dark-color)',
+  'var(--medium-color)',
+  'var(--bright-color)',
+];
 
 //var colors = [
 //  "blue",
@@ -98,7 +117,6 @@ var colors = [
 //]
 //================================================
 //================================================
-
 
 //METER ================================================
 
@@ -113,151 +131,155 @@ Tone.Master.connect(meter);
 
 $(document).tooltip({
   track: false,
-  show:50,
-  hide:50,
+  show: 50,
+  hide: 50,
   classes: {
-    "ui-tooltip": "customtooltip",
+    'ui-tooltip': 'customtooltip',
   },
   position: {
-    my: "center bottom-20",
-    at: "center top",
+    my: 'center bottom-20',
+    at: 'center top',
     using: function (position, feedback) {
       $(this).css(position);
     },
   },
 });
 
-$( ".sidemenuitem" ).tooltip({
-  position: { my: "left+15 center", at: "right center" }
+$('.sidemenuitem').tooltip({
+  position: { my: 'left+15 center', at: 'right center' },
 });
 
 ////////////////////////////////
 //LOAD SCREEN ================================================
 ////////////////////////////////
 
-function closeLoadingScreen(){
-  $(".loadingscreen").addClass("hidden").css("z-index",-99999);
-
+function closeLoadingScreen() {
+  $('.loadingscreen').addClass('hidden').css('z-index', -99999);
 }
-
 
 ////////////////////////////////
 
-
 function drawScore() {
+  $('#centerscore').html('');
 
-  $("#centerscore").html("");
-  
-  var measures=[];
-    sessionchords.forEach((e,i)=>{measures.push(e[2])})
-    measures = [...new Set(measures)];
-    measures.forEach((e,i)=>{
-      var measure = '<div class="measure" id="measure' + e + '"></div>';
-      $("#centerscore").append(measure);
-    })
-  
+  var measures = [];
+  sessionchords.forEach((e, i) => {
+    measures.push(e[2]);
+  });
+  measures = [...new Set(measures)];
+  measures.forEach((e, i) => {
+    var measure = '<div class="measure" id="measure' + e + '"></div>';
+    $('#centerscore').append(measure);
+  });
+
   sessionchords.forEach(function (el, ind) {
+    var chord =
+      '<div class="chord" id="chord' +
+      (ind + 1) +
+      '">' +
+      //'<span class="material-icons addchordbtn acbl">add_circle</span>' +
+      chordNotestoName(el[0]) +
+      //'<span class="material-icons addchordbtn acbr">add_circle</span>' +
+      '</div>';
 
-    var chord = '<div class="chord" id="chord' + (ind+1) + '">' +
-                //'<span class="material-icons addchordbtn acbl">add_circle</span>' +
-                chordNotestoName(el[0]) + 
-                //'<span class="material-icons addchordbtn acbr">add_circle</span>' +
-                '</div>';
+    $('#measure' + el[2]).append(chord);
+    $('#chord' + (ind + 1), '#centerscore').width(el[1] * 100 + '%');
+    $('#chord' + (ind + 1)).droppable({
+      accept: '.chordbtn',
+      hoverClass: '.drop-hover',
+      over: function (event, ui) {
+        $('#addchordhelper').show(0);
 
-    $("#measure" + el[2]).append(chord);
-    $("#chord" + (ind+1),"#centerscore").width( el[1] * 100 + "%");
-    $("#chord" + (ind+1)).droppable({
-      accept:".chordbtn",
-      hoverClass: ".drop-hover",
-      over: function( event, ui ) {
-        $("#addchordhelper").show(0);
-
-        hoveredchord = event.target.id.replace("chord","");
+        hoveredchord = event.target.id.replace('chord', '');
         isChordHovered = true;
       },
-      out: function( event, ui ) {
+      out: function (event, ui) {
         //$("#chord"+hoveredchord).css("outline","");
         //console.log("hoverout");
         //$("#addchordhelper").hide(0);
         //isChordHovered = false;
-
       },
-      drop: function( event, ui ) {
-        var chordnum = $(ui.draggable).attr("id").replace("chordbtn","");
-        addChord(scalechords[chordnum],hoveredchord-1,hoveredside);
+      drop: function (event, ui) {
+        var chordnum = $(ui.draggable).attr('id').replace('chordbtn', '');
+        addChord(scalechords[chordnum], hoveredchord - 1, hoveredside);
         isChordHovered = false;
-        $("#addchordhelper").hide(0);
-
-
-
-      }
-  
-  });
-    
+        $('#addchordhelper').hide(0);
+      },
+    });
   });
   rhythmInstrSelector();
 }
 
 function drumScore() {
-  
   var existentnotesonsession = [];
 
-  sessiondrums.forEach((msre,msreindex)=>{
-   msre.forEach((a)=>{a.forEach((b)=>{if(existentnotesonsession.indexOf(b) == -1){existentnotesonsession.push(b)}})});
+  sessiondrums.forEach((msre, msreindex) => {
+    msre.forEach((a) => {
+      a.forEach((b) => {
+        if (existentnotesonsession.indexOf(b) == -1) {
+          existentnotesonsession.push(b);
+        }
+      });
+    });
   });
 
   existentnotesonsession.sort((a, b) => a - b);
-  
-  sessiondrums.forEach((msre,msreindex)=>{
-  
-    var measure = '<div class="measure drummeasure" id="drummeasure' + (msreindex+1) + '"></div>';
-    $("#bottomscore").append(measure);
+
+  sessiondrums.forEach((msre, msreindex) => {
+    var measure =
+      '<div class="measure drummeasure" id="drummeasure' +
+      (msreindex + 1) +
+      '"></div>';
+    $('#bottomscore').append(measure);
     //draw the measure tiles
 
-    var tileh = 60/existentnotesonsession.length;
-    var tilew = $('#drummeasure'+(msreindex+1)).width()/msre.length;
-    
-    existentnotesonsession.forEach((note,noteindex)=>{
+    var tileh = 60 / existentnotesonsession.length;
+    var tilew = $('#drummeasure' + (msreindex + 1)).width() / msre.length;
 
+    existentnotesonsession.forEach((note, noteindex) => {
+      msre.forEach((beat, beatindex) => {
+        var tile =
+          '<div class="measuretile" id="mt' +
+          msreindex +
+          '-' +
+          beatindex +
+          '-' +
+          noteindex +
+          '"></div>';
+        $('#drummeasure' + (msreindex + 1)).append(tile);
 
-    msre.forEach((beat,beatindex)=>{
-        
-        var tile = '<div class="measuretile" id="mt'+msreindex+'-'+beatindex+'-'+noteindex+'"></div>';
-        $('#drummeasure'+(msreindex+1)).append(tile);
-
-        $("#mt"+msreindex+'-'+beatindex+'-'+noteindex).css({
-          "height":tileh+"px",
-          "width":tilew+"px",
+        $('#mt' + msreindex + '-' + beatindex + '-' + noteindex).css({
+          height: tileh + 'px',
+          width: tilew + 'px',
         });
-        
-        if(beat.indexOf(note)!=-1){
-          $("#mt"+msreindex+'-'+beatindex+'-'+noteindex).addClass("activetile");
-        }
 
+        if (beat.indexOf(note) != -1) {
+          $('#mt' + msreindex + '-' + beatindex + '-' + noteindex).addClass(
+            'activetile'
+          );
+        }
       });
     });
-
-  })
-
+  });
 }
 
 function chordNametoNotes(arg) {
   var chordroot,
     chordtype,
     chordbass = null;
-  var chordinput = arg.replace(" ", "");
+  var chordinput = arg.replace(' ', '');
 
-  if (chordinput.indexOf("/") != -1) {
-    chordbass = chordinput.split("/")[1];
-    chordinput = chordinput.split("/")[0];
-  } else if (chordinput[1] == "b") {
-    var includecomma = chordinput.replace("b", "b,");
-    var rootandtypearray = includecomma.split(",");
+  if (chordinput.indexOf('/') != -1) {
+    chordbass = chordinput.split('/')[1];
+    chordinput = chordinput.split('/')[0];
+  } else if (chordinput[1] == 'b') {
+    var includecomma = chordinput.replace('b', 'b,');
+    var rootandtypearray = includecomma.split(',');
     chordroot = rootandtypearray[0];
     chordtype = rootandtypearray[1];
   } else {
     chordroot = chordinput[0];
-    chordtype = chordinput.replace(chordroot, "");
+    chordtype = chordinput.replace(chordroot, '');
   }
 
   chordnamepossibilities.forEach(function (element, index) {
@@ -269,25 +291,27 @@ function chordNametoNotes(arg) {
   if (chordbass !== null) {
     //append bass
   }
-  
-  var harmonizedchord =  Tone.Frequency(chordroot + "3").harmonize(chordtypes[chordtype]);
+
+  var harmonizedchord = Tone.Frequency(chordroot + '3').harmonize(
+    chordtypes[chordtype]
+  );
   var finishedchord = [];
-  harmonizedchord.forEach((e)=>finishedchord.push(Tone.Frequency(e).toNote()));
+  harmonizedchord.forEach((e) =>
+    finishedchord.push(Tone.Frequency(e).toNote())
+  );
 
   return finishedchord;
-
 }
 
 function chordNotestoName(arg) {
-
-  if(arg.length == 0){
-    return "N.C";
-  };
+  if (arg.length == 0) {
+    return 'N.C';
+  }
 
   var chordroot = Tone.Frequency(arg[0]).toFrequency();
-  var chordtype = "...";
+  var chordtype = '...';
   var additionalnotes = [];
-  var additionalnotesstring = "";
+  var additionalnotesstring = '';
 
   var chordintervals = [0];
 
@@ -352,54 +376,51 @@ function chordNotestoName(arg) {
     return chordtypes[typechosen].indexOf(val) == -1;
   });
 
-
-    additionalnotes.forEach(function (element, index) {
-      if (additionalnotes.length == 1 && element != 12) {
-        additionalnotesstring = "(" + chordextentions[element] + ")";
-         
-      } 
-      else if(element == 12){
-        additionalnotesstring="";
+  additionalnotes.forEach(function (element, index) {
+    if (additionalnotes.length == 1 && element != 12) {
+      additionalnotesstring = '(' + chordextentions[element] + ')';
+    } else if (element == 12) {
+      additionalnotesstring = '';
+    } else {
+      if (index == 0) {
+        additionalnotesstring = chordextentions[element];
+      } else if (element != 12) {
+        additionalnotesstring += '/';
+        additionalnotesstring += chordextentions[element];
       }
-      
-      else {
-        if (index == 0) {
-          additionalnotesstring = chordextentions[element];
-        } else if(element != 12){
-          additionalnotesstring += "/";
-          additionalnotesstring += chordextentions[element];
-        }
-      }
-    });
- 
+    }
+  });
 
   //Convert the root note from chord to  ;
 
-  chordroot = Tone.Frequency(chordroot).toNote().replace(/[0-9]/g, "");
+  chordroot = Tone.Frequency(chordroot).toNote().replace(/[0-9]/g, '');
 
   //return everything
 
   return chordroot + chordtype + additionalnotesstring;
 }
 
-function noteArraytoMidi(arg){
-  var newarray = []
-  arg.forEach((e)=>{newarray.push(Tone.Frequency(e).toMidi())});
+function noteArraytoMidi(arg) {
+  var newarray = [];
+  arg.forEach((e) => {
+    newarray.push(Tone.Frequency(e).toMidi());
+  });
   return newarray;
 }
 
-function midiArraytoNote(arg){
-  var newarray = []
-  arg.forEach((e)=>{newarray.push(Tone.Frequency(e,"midi").toNote())});
+function midiArraytoNote(arg) {
+  var newarray = [];
+  arg.forEach((e) => {
+    newarray.push(Tone.Frequency(e, 'midi').toNote());
+  });
   return newarray;
 }
 
 function gcd_two_numbers(x, y) {
-  if ((typeof x !== 'number') || (typeof y !== 'number')) 
-    return false;
+  if (typeof x !== 'number' || typeof y !== 'number') return false;
   x = Math.abs(x);
   y = Math.abs(y);
-  while(y) {
+  while (y) {
     var t = y;
     y = x % y;
     x = t;
@@ -407,17 +428,16 @@ function gcd_two_numbers(x, y) {
   return x;
 }
 
-function adaptSequencetoSubdiv(oldarray){
-      
+function adaptSequencetoSubdiv(oldarray) {
   var difference = sessionsubdivision / oldarray.length;
-  var gdc = gcd_two_numbers(sessionsubdivision, oldarray.length)
+  var gdc = gcd_two_numbers(sessionsubdivision, oldarray.length);
 
   var newsubdivarray = [];
 
   //POSSIBLE SCENARIOS:
 
   //no difference
-  
+
   if (difference == 1) return oldarray;
 
   /*
@@ -459,30 +479,26 @@ function adaptSequencetoSubdiv(oldarray){
 
   //apply GCD
 
-  if(difference > 1){
+  if (difference > 1) {
+    console.log('gdccase+', gdc, oldarray.length);
 
-    console.log("gdccase+",gdc,oldarray.length)
-    
-    for(var x = 0; x < oldarray.length; x++){
+    for (var x = 0; x < oldarray.length; x++) {
       newsubdivarray.push(oldarray[x]);
-      console.log(((x+1) % (oldarray.length/gdc)));
+      console.log((x + 1) % (oldarray.length / gdc));
 
-      if(((x+1) % (oldarray.length/gdc)) == 0){
-        for(var y = 0; y < difference-1; y++){
+      if ((x + 1) % (oldarray.length / gdc) == 0) {
+        for (var y = 0; y < difference - 1; y++) {
           newsubdivarray.push([]);
         }
       }
     }
-  }
+  } else if (difference < 1) {
+    console.log('gdc case -', gdc);
 
-  else if(difference < 1){
-
-    console.log("gdc case -",gdc)
-    
     //works if gdc = new sessionsubdivision
 
-    for(var x = 0; x < oldarray.length; x++){
-      if (x % (oldarray.length/gdc) == 0){
+    for (var x = 0; x < oldarray.length; x++) {
+      if (x % (oldarray.length / gdc) == 0) {
         newsubdivarray.push(oldarray[x]);
       }
     }
@@ -493,16 +509,14 @@ function adaptSequencetoSubdiv(oldarray){
       }
     }
     */
+  } else if (gdc == 1) {
   }
 
-  else if (gdc == 1){}
-
   return newsubdivarray;
-
 }
 
-function checkForSelInput(){
-  return ($(document.activeElement)[0].tagName == "INPUT")?(false):(true)
+function checkForSelInput() {
+  return $(document.activeElement)[0].tagName == 'INPUT' ? false : true;
 }
 
 //ANIMATED CUBE
@@ -530,14 +544,13 @@ function draw() {
 }
  */
 //all necesaries functions to load sequencer page
-$(function() {
-
+$(function () {
   //onModifySession();
   drawCircleElements();
   drawChordsCircle();
   drumScore();
   drawScore();
-  
+
   drawRhythm();
   //drawPianoRoll();
 
@@ -545,20 +558,20 @@ $(function() {
   //showMelodyList();
   //loadMelodyInstruments()
 
-  loadDrums("808");
+  loadDrums('808');
 
   drawDrumKeys();
   updateMsreScroreTiles();
   adaptSessiontoSubdiv();
 
-  $("#sessiontitle").html(sessionName);
-  $('#chordpiano').klavier({ startKey: 21, endKey: 108});
-  
-  navTo(3);
+  $('#sessiontitle').html(sessionName);
+  $('#chordpiano').klavier({ startKey: 21, endKey: 108 });
+
+  navTo(1);
 
   drawSequencer();
 
-  $("#sessiontitle").html(sessionName);
+  $('#sessiontitle').html(sessionName);
   initializeSettingsInputs();
 
   closeLoadingScreen();
@@ -568,13 +581,9 @@ $(window).resize(function () {
   //updateMelodyPreview();
   //adjustNotesPos();
   resizeKlavier();
-  
-
-
 });
 
-function updateAll(){
-  
+function updateAll() {
   updateMsreScroreTiles();
   updateSequencerElements();
 
@@ -582,52 +591,46 @@ function updateAll(){
   //updateMelodyPreview();
   drawScore();
   drawRhythm();
-  setRhythmInstrument()
+  setRhythmInstrument();
 
   //adjustNotesPos();
-  if(selectedchord != null){
-    $('#chordpiano').klavier('setSelectedValues', noteArraytoMidi(sessionchords[selectedchord][0]))
+  if (selectedchord != null) {
+    $('#chordpiano').klavier(
+      'setSelectedValues',
+      noteArraytoMidi(sessionchords[selectedchord][0])
+    );
   }
 }
-
 
 //////////////////////////////////
 ///EVENTS
 //////////////////////////////////
 
-function initializeSettingsInputs(){
-
-  $("#ss-bpminput").val(sessionbpm);
-  $("#ss-lpsizeinput").val(sessionlength);
-  $('#ss-timesig option[value="'+(sessiontimesignature[0]/sessiontimesignature[1])+'"]').prop('selected', true);
+function initializeSettingsInputs() {
+  $('#ss-bpminput').val(sessionbpm);
+  $('#ss-lpsizeinput').val(sessionlength);
+  $(
+    '#ss-timesig option[value="' +
+      sessiontimesignature[0] / sessiontimesignature[1] +
+      '"]'
+  ).prop('selected', true);
   setupHarmonySelectors();
-
 }
 
-$("#ss-bpminput").change((e)=>{
-
+$('#ss-bpminput').change((e) => {
   var newbpm = parseInt($(e.target).val());
-  if (newbpm > 60 && newbpm < 300){
+  if (newbpm > 60 && newbpm < 300) {
     Tone.Transport.bpm.rampTo(newbpm, 0.5);
     sessionbpm = tempData.bpm = newbpm;
-  }
-  else if(newbpm < 60){
-    $("#ss-bpminput").val(60);
+  } else if (newbpm < 60) {
+    $('#ss-bpminput').val(60);
     Tone.Transport.bpm.rampTo(60, 0.5);
     sessionbpm = tempData.bpm = 60;
-
-  }
-  else if(newbpm > 300){
-    $("#ss-bpminput").val(300);
+  } else if (newbpm > 300) {
+    $('#ss-bpminput').val(300);
     Tone.Transport.bpm.rampTo(300, 0.5);
-    sessionbpm = tempData.bpm = 300; 
+    sessionbpm = tempData.bpm = 300;
   }
 
-  onModifySession()
-
-})
-
-
-
-
-
+  onModifySession();
+});
