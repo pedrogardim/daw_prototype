@@ -1,271 +1,304 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Musa Loops</title>
-        <!--libs-->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <head>
+    <title>Musa Loops</title>
+    <!--libs-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
 
-        <meta name='viewport' content='width=device-width, initial-scale=0.7, maximum-scale=0.7, user-scalable=0' >
-        <!--pages-->
-        <link rel="stylesheet" href="css/main.css">
-        <link rel="stylesheet" href="libs/jqueryui/jquery-ui.css">
-        <link rel="stylesheet" href="css/drumsequencer.css">
-        <link rel="stylesheet" href="css/composer.css">
-        <link rel="stylesheet" href="css/timeline.css">
-        <link rel="stylesheet" href="css/melodyeditor.css">
-        <link rel="stylesheet" href="css/mixer.css">
-
-
-    </head>
-    <body>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=0.7, maximum-scale=0.7, user-scalable=0"
+    />
+    <!--pages-->
+    <link
+      rel="stylesheet"
+      href="css/main.css"
+    />
+    <link
+      rel="stylesheet"
+      href="libs/jqueryui/jquery-ui.css"
+    />
+    <link
+      rel="stylesheet"
+      href="css/drumsequencer.css"
+    />
+    <link
+      rel="stylesheet"
+      href="css/composer.css"
+    />
+    <link
+      rel="stylesheet"
+      href="css/timeline.css"
+    />
+    <link
+      rel="stylesheet"
+      href="css/melodyeditor.css"
+    />
+    <link
+      rel="stylesheet"
+      href="css/mixer.css"
+    />
+  </head>
+  <body>
     <!--
         <span id="pauseInd" class="material-icons stateIndicator hidden">pause</span>
         <span id="playInd" class="material-icons stateIndicator hidden">play_arrow</span>
     -->
-        <div class="loadingscreen"><i class="fa fa-circle-o-notch fa-spin"></i></div>
-        <header>
-            <span class="title" id="logo">MUSA LOOPS</span>
-            <span class="title" id="sessiontitle"></span>
-            <div id="tabnav">
-                <a class="tabitem" data-nav="1" title="Circle View">
-                    <span class="material-icons">donut_large</span>
-                </a>
-                <a class="tabitem" data-nav="2" title="Drum Sequencer">
-                    <span class="material-icons">grid_on</span>
-                </a>
-                <a class="tabitem" data-nav="3" title="Chord Editor">
-                    <span class="material-icons ">music_note</span>
-                </a>
-                <a class="tabitem" id="sessionsettings">
-                    <span class="material-icons" id="stticon">settings</span>
-                </a>
-                <div id="ss-window">
-                    <span style="width:100%;text-align: center;">Session Settings</span>
-                    <div class=flex-break></div>
-                    <span class="optlbl">BPM</span>
-                    <input type="text" id="ss-bpminput">
-                    <div class=flex-break></div>
-                    <span class="optlbl">Time Signature</span>
-                    <select id="ss-timesig">
-                        <option value="1">4/4</option>
-                        <option value="0.5">2/4</option>
-                        <option value="0.75">3/4</option>
-                        <option value="1.25">5/4</option>
-                        <option value="0.875">7/8</option>
-                        <option value="1.5">12/8</option>
-                    </select>
-                    ​<input type="checkbox" class="textcheckbox" id="ss-timesigcb"/><label class="textcheckboxlbl" for="ss-timesigcb">auto</label>​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
-                    <div class=flex-break></div>
-                    <span class="optlbl" title="In Measures">Loop Size</span>
-                    <input type="text" id="ss-lpsizeinput">
-                    ​<input type="checkbox" class="textcheckbox" id="ss-sizecb"/><label class="textcheckboxlbl" for="ss-sizecb">auto</label>​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
-                    <div class=flex-break></div>
-                  
-
-                </div>
-            </div>
-        </header>
-        
-        <!--<div id="navbar"></div>
-        <div id="optionscolumn" class="">
-            <div class="optionrow">
-                <span>SESSION SETTINGS</span>
-            </div>
-            <div class="optionrow">
-                <span>BPM</span>
-                <input type="number" min="40" max="300">
-            </div>
-            <div class="optionrow">
-                <span>TIME SIG</span>
-                <span>4/4</span>
-            </div>
-            <div class="optionrow">
-                <span>SIZE</span>
-                <input type="number" min="1" max="16">
-
-            </div>
-            <div class="optionrow">
-                <span>SWING</span>
-                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-            </div>
-            <hr>
-            <div class="optionrow"></div>
+    <div class="loadingscreen">
+      <i class="fa fa-circle-o-notch fa-spin"></i>
+    </div>
+    <header>
+      <span
+        class="title"
+        id="logo"
+        >MUSA LOOPS</span
+      >
+      <span
+        class="title"
+        id="sessiontitle"
+      ></span>
+      <div id="tabnav">
+        <a
+          class="tabitem"
+          data-nav="1"
+          title="Circle View"
+        >
+          <span class="material-icons">donut_large</span>
+        </a>
+        <a
+          class="tabitem"
+          data-nav="2"
+          title="Drum Sequencer"
+        >
+          <span class="material-icons">grid_on</span>
+        </a>
+        <a
+          class="tabitem"
+          data-nav="3"
+          title="Chord Editor"
+        >
+          <span class="material-icons">music_note</span>
+        </a>
+        <a
+          class="tabitem"
+          id="sessionsettings"
+        >
+          <span
+            class="material-icons"
+            id="stticon"
+            >settings</span
+          >
+        </a>
+        <div id="ss-window">
+          <span style="width: 100%; text-align: center">Session Settings</span>
+          <div class="flex-break"></div>
+          <span class="optlbl">BPM</span>
+          <input
+            type="text"
+            id="ss-bpminput"
+          />
+          <div class="flex-break"></div>
+          <span class="optlbl">Time Signature</span>
+          <select id="ss-timesig">
+            <option value="1">4/4</option>
+            <option value="0.5">2/4</option>
+            <option value="0.75">3/4</option>
+            <option value="1.25">5/4</option>
+            <option value="0.875">7/8</option>
+            <option value="1.5">12/8</option>
+          </select>
+          ​<input
+            type="checkbox"
+            class="textcheckbox"
+            id="ss-timesigcb"
+          /><label
+            class="textcheckboxlbl"
+            for="ss-timesigcb"
+            >auto</label
+          >​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
+          <div class="flex-break"></div>
+          <span
+            class="optlbl"
+            title="In Measures"
+            >Loop Size</span
+          >
+          <input
+            type="text"
+            id="ss-lpsizeinput"
+          />
+          ​<input
+            type="checkbox"
+            class="textcheckbox"
+            id="ss-sizecb"
+          /><label
+            class="textcheckboxlbl"
+            for="ss-sizecb"
+            >auto</label
+          >​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
+          <div class="flex-break"></div>
         </div>
-        -->
+      </div>
+    </header>
 
-        <div id="workspace">
-            <div id="circlescont">
-                <div id="rhythmcircle" class="visible"></div>
-                <div id="chordcircle"></div>
-                <div id="chordcirclecenter"></div>
-                <div id="statuscursor" class="statuscursor"><div></div></div>
-            </div>
-
-            <!--home view-->
-            <div id="homepage" class="page">
-                <div class="bottomcont column">
-                    <a id="downloadloopbtn">DONWLOAD LOOP</a>
-                </div>
-            </div>
-            <!--mix view
-            <div id="mixpage" class="page hidden">
-                <div id="mixcont"></div>
-            </div>
-            -->
-            
-            <!--Drumstudio-->
-            <div id="drumseqpage" class="page hidden">
-                <div id="stepseq"></div>
-                <div id="bottomscore" class="score"></div>
-                <div id="seq-params" class="bottommenu">
-                    <span>STEPS (SUBDVISION)</span>
-                    <select id="seq-steps-input"></select>
-                </div>
-            </div>  
-            <div id="drumpage" class="page hidden">
-                <div id="drumkeyscont" class="column"></div>
-                <span id="toggleseq" class="material-icons">arrow_forward_ios</span>
-
-            </div>
-
-            <!--Chords-->
-            <div id="chordeditor" class="page hidden">
-                <input id="floatinginput" type="text" class="hidden">
-                <div id="addchordhelper"></div>
-                
-                <div id="centerscore" class="score"></div>
-                <!--<button id="chord-instr-input">Instr</button>-->
-                <select id="chord-instr-input">
-                    
-                </select>
-
-
-                <div id="rhythmeditor">
-                    <div id="re-centralline"></div>
-                </div>
-                <div id="chordbuttoncontainer">
-                    <select id="ce-root"></select>
-                    <select id="ce-scale"></select>
-                    <div class="chordbtn" id="chordbtn0" title="Chords fitted to the scale"></div>
-                    <div class="chordbtn" id="chordbtn1" title="Chords fitted to the scale"></div>
-                    <div class="chordbtn" id="chordbtn2" title="Chords fitted to the scale"></div>
-                    <div class="chordbtn" id="chordbtn3" title="Chords fitted to the scale"></div>
-                    <div class="chordbtn" id="chordbtn4" title="Chords fitted to the scale"></div>
-                    <div class="chordbtn" id="chordbtn5" title="Chords fitted to the scale"></div>
-                    <div class="chordbtn" id="chordbtn6" title="Chords fitted to the scale"></div>
-                </div>
-                <div id="chordpiano"></div>
-                <a href="#" id="ce-random" class="float"><i class="material-icons">casino</i></a>  
-
-            </div>  
-
-
-            <!--MELODY
-            <div id="melodyeditor" class="page hidden">
-                <div id="melodylist" class="column"></div>
-                <div id="melodyeditcont" class="column hidden">
-                    <div id="pianoroll" class="">
-                        <span id="pr-close" class="material-icons">keyboard_arrow_left</span>
-                        <div id="prcursor"></div>
-                        <div id="prheader">
-                            <div id="headerkey" class="prkey"></div>
-                        </div>
-                        <div id="prcont">
-                            <div id="pianorollgrid"></div>
-                            <div id="pianorollkeys"></div>
-                        </div>
-                    </div>
-                    <div id="melody-params" class="bottommenu">
-                        <span>Melody Size</span>
-                        <button class="addstep">+</button>
-                        <input type="text" id="">
-                        <button class="subtractstep">-</button>
-                    </div>
-                </div>
-            </div>  
-
-            <div id="intrument-editor" class="column hidden">
-                <span id="ie-close" class="material-icons">keyboard_arrow_left</span>
-                <div id="instr-tabs">
-                    <div class="instr-tabs-item" data-type="0">Synth</div>
-                    <div class="instr-tabs-item" data-type="1">AM</div>
-                    <div class="instr-tabs-item" data-type="2">FM</div>
-                    <div class="instr-tabs-item" data-type="3">Sampler</div>
-                </div>
-                <div id="ie-osc" class="ie-cont">
-                    <span class="ie-title">Oscillators</span>
-                    <div class="ie-subcont" id="ie-mainosc">
-                        <svg width="128px" height="64px" viewBow="0 0 128 64" id="ie-mainosc-wave"></svg>
-                        <div class="flex-row">
-                            <select id="ie-mainosc-type" class="ie-select">
-                                <option value="oscillator">Simple</option>
-                                <option value="am">AM</option>
-                                <option value="fm">FM</option>
-                                <option value="pulse">Pulse</option>
-                                <option value="pwm">PWM</option>
-                                <option value="fat">Analog</option>
-                            </select>
-                            <select id="ie-mainosc-wavetype" class="ie-select">
-                                <option value="sine">Sine</option>
-                                <option value="square">Square</option>
-                                <option value="sawtooth">Sawtooth</option>
-                                <option value="triangle">Triangle</option>
-                            </select>
-                        </div>
-                        <div class="ie-slider-cont" id="ie-mainosc-params"></div>
-
-                    </div>
-                </div>
-                <div id="ie-flt" class="ie-cont">
-                    <span class="ie-title">Filters</span>
-                </div>
-                <div id="ie-adsr" class="ie-cont">
-                    <span class="ie-title">Envelopes</span>
-                </div>
-                <div id="ie-amp" class="ie-cont">
-                    <span class="ie-title">Output</span>
-                </div>
-                
-
-
-
-
-            </div>
+    <div id="workspace">
+      <div id="circlescont">
+        <div
+          id="rhythmcircle"
+          class="visible"
+        ></div>
+        <div id="chordcircle"></div>
+        <div id="chordcirclecenter"></div>
+        <div
+          id="statuscursor"
+          class="statuscursor"
+        >
+          <div></div>
         </div>
-        -->
-        
-        
+      </div>
 
-        <!--Core-->
+      <!--home view-->
+      <div
+        id="homepage"
+        class="page"
+      >
+        <div class="bottomcont column">
+          <a id="downloadloopbtn">DONWLOAD LOOP</a>
+        </div>
+      </div>
+      <!--Drumstudio-->
+      <div
+        id="drumseqpage"
+        class="page hidden"
+      >
+        <div id="stepseq"></div>
+        <div
+          id="bottomscore"
+          class="score"
+        ></div>
+        <div
+          id="seq-params"
+          class="bottommenu"
+        >
+          <span>STEPS (SUBDVISION)</span>
+          <select id="seq-steps-input"></select>
+        </div>
+      </div>
+      <div
+        id="drumpage"
+        class="page hidden"
+      >
+        <div
+          id="drumkeyscont"
+          class="column"
+        ></div>
+        <span
+          id="toggleseq"
+          class="material-icons"
+          >arrow_forward_ios</span
+        >
+      </div>
 
-        <script src="libs/jquery-3.5.1.min.js"></script>
-        <script src="libs/Tone.js"></script>
-        <script src="libs/anime.min.js"></script>
-        <script src="libs/lodash.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-Knob/1.2.13/jquery.knob.min.js"></script>
-        <script src="libs/jqueryui/jquery-ui.js"></script>
-        <script src="libs/jquery.klavier.min.js"></script>
-        <script src="libs/audiobuffertowave.js"></script>
-        
-        <script src="js/instruments.js"></script>
-        <script src="js/drumkits.js"></script>
+      <!--Chords-->
+      <div
+        id="chordeditor"
+        class="page hidden"
+      >
+        <input
+          id="floatinginput"
+          type="text"
+          class="hidden"
+        />
+        <div id="addchordhelper"></div>
 
-        <script src="js/musacore.js"></script>
-        <script src="js/setup.js"></script>
+        <div
+          id="centerscore"
+          class="score"
+        ></div>
+        <!--<button id="chord-instr-input">Instr</button>-->
+        <select id="chord-instr-input"></select>
 
-        <script src="js/stepsequencer.js"></script>
-        <script src="js/drumstudio.js"></script>
-        <script src="js/playback.js"></script>
-        <script src="js/circleview.js"></script>
-        <script src="js/mixer.js"></script>
+        <div id="rhythmeditor">
+          <div id="re-centralline"></div>
+        </div>
+        <div id="chordbuttoncontainer">
+          <select id="ce-root"></select>
+          <select id="ce-scale"></select>
+          <div
+            class="chordbtn"
+            id="chordbtn0"
+            title="Chords fitted to the scale"
+          ></div>
+          <div
+            class="chordbtn"
+            id="chordbtn1"
+            title="Chords fitted to the scale"
+          ></div>
+          <div
+            class="chordbtn"
+            id="chordbtn2"
+            title="Chords fitted to the scale"
+          ></div>
+          <div
+            class="chordbtn"
+            id="chordbtn3"
+            title="Chords fitted to the scale"
+          ></div>
+          <div
+            class="chordbtn"
+            id="chordbtn4"
+            title="Chords fitted to the scale"
+          ></div>
+          <div
+            class="chordbtn"
+            id="chordbtn5"
+            title="Chords fitted to the scale"
+          ></div>
+          <div
+            class="chordbtn"
+            id="chordbtn6"
+            title="Chords fitted to the scale"
+          ></div>
+        </div>
+        <div id="chordpiano"></div>
+        <a
+          href="#"
+          id="ce-random"
+          class="float"
+          ><i class="material-icons">casino</i></a
+        >
+      </div>
 
-        <script src="js/instrumenteditor.js"></script>
-        <script src="js/chordeditor.js"></script>
-        <script src="js/melodyeditor.js"></script>
+    <!--Core-->
 
-        <script src="js/nav.js"></script>
-        <script src="js/export.js"></script>
+    <script src="libs/jquery-3.5.1.min.js"></script>
+    <script src="libs/Tone.js"></script>
+    <script src="libs/anime.min.js"></script>
+    <script src="libs/lodash.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-Knob/1.2.13/jquery.knob.min.js"></script>
+    <script src="libs/jqueryui/jquery-ui.js"></script>
+    <script src="libs/jquery.klavier.min.js"></script>
+    <script src="libs/audiobuffertowave.js"></script>
 
+    <script src="js/instruments.js"></script>
+    <script src="js/drumkits.js"></script>
 
-    </body>
+    <script src="js/musacore.js"></script>
+    <script src="js/setup.js"></script>
+
+    <script src="js/stepsequencer.js"></script>
+    <script src="js/drumstudio.js"></script>
+    <script src="js/playback.js"></script>
+    <script src="js/circleview.js"></script>
+    <script src="js/mixer.js"></script>
+
+    <script src="js/instrumenteditor.js"></script>
+    <script src="js/chordeditor.js"></script>
+    <script src="js/melodyeditor.js"></script>
+
+    <script src="js/nav.js"></script>
+    <script src="js/export.js"></script>
+  </body>
 </html>
