@@ -3,7 +3,7 @@
 
 ![](https://user-images.githubusercontent.com/81443264/225010440-5b5af434-5340-4d4b-945b-e6960c50d7af.gif)
 
-[Try It!!!](https://pedrogardim.github.io/web_daw_prototype)
+[Try It!!!](https://pedrogardim.github.io/daw_prototype)
 
 #### About
 
